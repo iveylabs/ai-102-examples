@@ -1,0 +1,115 @@
+﻿
+@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<form method="post" asp-page-handler="ProcessInput">
+    <div class="form-group">
+        <label for="inputText">Enter text for analysis:</label>
+        <textarea class="form-control" id="inputText" name="InputText" rows="5" oninput="checkInput(); resizeTextarea()"></textarea>
+    </div>
+    <button type="submit" id="submitButton" class="btn btn-primary" disabled>Submit</button>
+</form>
+
+<!-- Orignal text -->
+@if (ViewData["OriginalText"] != null)
+{
+    <div class="alert alert-primary" role="alert">
+        <b>Original text:</b> <br> @ViewData["OriginalText"]
+    </div>
+}
+
+<!-- Detected language -->
+@if (ViewData["Language"] != null)
+{
+    <div class="alert alert-info" role="alert">
+        Detected language: <b>@ViewData["Language"]</b><br>
+        Language confidence score: <b>@ViewData["LanguageConfidence"]</b>
+    </div>
+}
+
+<!-- Sentiment -->
+@if (ViewData["Sentiment"] != null)
+{
+    string sentiment = ViewData["Sentiment"]?.ToString() ?? "NO SENTIMENT DETECTED";
+    string alertClass = "";
+
+    switch (sentiment)
+    {
+        case "Positive":
+            alertClass = "alert-success";
+            break;
+        case "Negative":
+            alertClass = "alert-danger";
+            break;
+        default:
+            alertClass = "alert-info";
+            break;
+    }
+
+    <div class="alert @alertClass" role="alert">
+        Sentiment: <b>@ViewData["Sentiment"]</b><br>
+        Positive score: <b>@ViewData["SentimentPositive"]</b><br>
+        Neutral score: <b>@ViewData["SentimentNeutral"]</b><br>
+        Negative score: <b>@ViewData["SentimentNegative"]</b><br>
+    </div>
+}
+
+<!-- Key phrases -->
+@if (ViewData["KeyPhrases"] != null)
+{
+    <div class="alert alert-info" role="alert">
+        Key phrases: <br><b>@ViewData["KeyPhrases"]</b>
+    </div>
+}
+
+<!-- Entities -->
+@if (ViewData["Entities"] != null)
+{
+    <div class="alert alert-info" role="alert">
+        Entities:
+        @if (ViewData["Entities"] is List<Azure.AI.TextAnalytics.CategorizedEntity> entities)
+        {
+            foreach (Azure.AI.TextAnalytics.CategorizedEntity entity in entities)
+            {
+                <div>Text: <b>@entity.Text</b>, Category: <b>@entity.Category</b>, Sub-category: <b>@entity.SubCategory</b>, Confidence score: <b>@entity.ConfidenceScore</b></div>
+            }
+        }
+    </div>
+}
+
+<!-- Linked entities -->
+@if (ViewData["LinkedEntities"] != null)
+{
+    <div class="alert alert-info" role="alert">
+        Linked entities:
+        @if (ViewData["LinkedEntities"] is List<Azure.AI.TextAnalytics.LinkedEntity> linkedEntities)
+        {
+            foreach (Azure.AI.TextAnalytics.LinkedEntity linkedEntity in linkedEntities)
+            {
+                <div>Name: <b>@linkedEntity.Name</b>, Url: <b><a href="@linkedEntity.Url">@linkedEntity.Url</a></b></div>
+            }
+        }
+    </div>
+}
+
+<script>
+    var inputTextElement = document.getElementById("inputText");
+    var submitButtonElement = document.getElementById("submitButton");
+    function checkInput() {
+        var inputText = inputTextElement.value;
+        if (inputText.trim().length > 0) {
+            submitButtonElement.disabled = false;
+        } else {
+            submitButtonElement.disabled = true;
+        }
+    }
+    function resizeTextarea() {
+        var inputText = inputTextElement.value;
+        var numLines = inputText.split(/\r*\n/).length;
+        inputTextElement.rows = (numLines > 5) ? numLines : 5;
+    }
+
+</script>
