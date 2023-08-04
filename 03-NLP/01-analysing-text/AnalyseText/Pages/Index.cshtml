@@ -74,7 +74,7 @@
         {
             foreach (Azure.AI.TextAnalytics.CategorizedEntity entity in entities)
             {
-                <div>Text: <b>@entity.Text</b>, Category: <b>@entity.Category</b>, Sub-category: <b>@entity.SubCategory</b>, Confidence score: <b>@entity.ConfidenceScore</b></div>
+                <div>Text: <b>@entity.Text</b>, Category: <b>@entity.Category</b>, Sub-category: <b>@(entity.SubCategory ?? "N/A")</b>, Confidence score: <b>@entity.ConfidenceScore</b></div>
             }
         }
     </div>
