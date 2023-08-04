@@ -1,10 +1,9 @@
-﻿
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Azure;
 using Azure.AI.TextAnalytics;
 
-namespace AnalyseText.Pages;
+namespace TranslateText.Pages;
 
 public class IndexModel : PageModel
 {

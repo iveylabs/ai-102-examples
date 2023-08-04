@@ -1,0 +1,102 @@
+﻿
+@page
+@model TranslateModel
+@{
+    ViewData["Title"] = "Translate";
+}
+
+<form method="post" asp-page-handler="ProcessInput">
+    <div class="form-group">
+        <label for="inputText">Enter text for translation:</label>
+        <textarea class="form-control" id="inputText" name="InputText" rows="5" oninput="checkInput(); resizeTextarea()"></textarea>
+    </div>
+    <div class="form-group">
+        <label asp-for="FromLanguage" class="control-label">From Language:</label>
+        <select asp-for="FromLanguage" asp-items="Model.Languages" class="form-control"></select>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ToLanguage" class="control-label">To Language:</label>
+        <select asp-for="ToLanguage" asp-items="Model.Languages" class="form-control"></select>
+    </div>
+
+    <div class="form-group">
+        <div class="form-check">
+            <input asp-for="MaskProfanity" class="form-check-input" />
+            <label asp-for="MaskProfanity" class="form-check-label">Mask Profanity</label>
+        </div>
+    </div>
+    <button type="submit" id="submitButton" class="btn btn-primary" disabled>Submit</button>
+</form>
+
+<!-- Orignal text -->
+@if (ViewData["OriginalText"] != null)
+{
+    <div class="alert alert-primary" role="alert">
+        <b>Original text:</b> <br> @ViewData["OriginalText"]
+    </div>
+}
+
+<!-- Detected language -->
+@if (ViewData["FromLanguage"] != null)
+{
+    <div class="alert alert-info" role="alert">
+        From language: <b>@ViewData["FromLanguage"]</b><br>
+    </div>
+}
+
+<!-- To language -->
+@if (ViewData["ToLanguage"] != null)
+{
+    <div class="alert alert-info" role="alert">
+        To language: <b>@ViewData["ToLanguage"]</b><br>
+    </div>
+}
+
+<!-- Translated text -->
+@if (ViewData["TranslatedText"] != null)
+{
+    <div class="alert alert-success" role="alert">
+        <b>Translated text:</b> <br> @ViewData["TranslatedText"]
+    </div>
+}
+
+<!-- Show request for language detection -->
+@if (ViewData["DetectMethod"] != null)
+{
+    <div class="alert alert-secondary" role="alert">
+        <b>Language detection request:</b> <br>
+        Method: <b>@ViewData["DetectMethod"]</b><br>
+        URI: <b>@ViewData["DetectUri"]</b><br>
+        Body: <b>@ViewData["DetectBody"]</b><br>
+    </div>
+}
+
+<!-- Show request for translation -->
+@if (ViewData["TranslateMethod"] != null)
+{
+    <div class="alert alert-secondary" role="alert">
+        <b>Translation request:</b> <br>
+        Method: <b>@ViewData["TranslateMethod"]</b><br>
+        URI: <b>@ViewData["TranslateUri"]</b><br>
+    </div>
+}
+
+<script>
+    var inputTextElement = document.getElementById("inputText");
+    var submitButtonElement = document.getElementById("submitButton");
+    function checkInput() {
+        var inputText = inputTextElement.value;
+        if (inputText.trim().length > 0) {
+            submitButtonElement.disabled = false;
+        } else {
+            submitButtonElement.disabled = true;
+        }
+    }
+    function resizeTextarea() {
+        var inputText = inputTextElement.value;
+        var numLines = inputText.split(/\r*\n/).length;
+        inputTextElement.rows = (numLines > 5) ? numLines : 5;
+    }
+
+</script>
