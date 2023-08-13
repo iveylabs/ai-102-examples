@@ -143,6 +143,7 @@ public class TranslateModel : PageModel
         
         ViewData["TranslateMethod"] = translateRequest.Method;
         ViewData["TranslateUri"] = translateRequest.RequestUri;
+        ViewData["TranslateBody"] = translateRequest.Content.ReadAsStringAsync().Result.ToString();;
 
         ViewData["OriginalText"] = originalText;
         ViewData["FromLanguage"] = FromLanguage;
