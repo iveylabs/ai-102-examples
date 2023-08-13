@@ -107,9 +107,9 @@
         }
     }
     function resizeTextarea() {
-        var inputText = inputTextElement.value;
-        var numLines = inputText.split(/\r*\n/).length;
-        inputTextElement.rows = (numLines > 5) ? numLines : 5;
+    const textarea = document.getElementById('inputText');
+    textarea.style.height = 'auto';
+    textarea.style.height = textarea.scrollHeight + 'px';
     }
 
 </script>
