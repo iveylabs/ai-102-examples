@@ -3,6 +3,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddHttpClient();
+builder.Services.AddSingleton(builder.Configuration);
+builder.Services.AddSingleton(builder.Configuration.GetValue<string>("CognitiveServiceKey")!);
 
 var app = builder.Build();
 
