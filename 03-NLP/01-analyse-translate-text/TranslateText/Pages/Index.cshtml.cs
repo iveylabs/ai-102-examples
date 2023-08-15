@@ -265,7 +265,7 @@ public class IndexModel : PageModel
         HttpResponseMessage response = await client.SendAsync(request).ConfigureAwait(false);
         string result = await response.Content.ReadAsStringAsync();
 
-        RestResponse restResponse = new RestResponse
+        RestResponse restResponse = new()
         {
             Result = result,
             Method = request.Method.ToString(),
