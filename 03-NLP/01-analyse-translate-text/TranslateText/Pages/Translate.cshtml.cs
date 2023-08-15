@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Azure;
-using Azure.AI.TextAnalytics;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text.Json;
@@ -139,11 +137,13 @@ public class TranslateModel : PageModel
         
         // Parse the JSON response and get the translated text
         JArray translateJson = JArray.Parse(translateResult);
+        JObject responseJson = JObject.Parse(translateJson[0].ToString());
         string translatedText = translateJson[0]["translations"][0]["text"].ToString();
         
         ViewData["TranslateMethod"] = translateRequest.Method;
         ViewData["TranslateUri"] = translateRequest.RequestUri;
         ViewData["TranslateBody"] = translateRequest.Content.ReadAsStringAsync().Result.ToString();;
+        ViewData["TranslateResponse"] = responseJson;
 
         ViewData["OriginalText"] = originalText;
         ViewData["FromLanguage"] = FromLanguage;

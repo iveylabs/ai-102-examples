@@ -9,6 +9,7 @@ using System.Text;
 using Microsoft.Extensions.ObjectPool;
 using System.Collections.Specialized;
 using System.Linq;
+using Newtonsoft.Json;
 
 namespace TranslateText.Pages;
 
@@ -29,7 +30,6 @@ public class IndexModel : PageModel
         string originalText = InputText;
 
         // Set the original text to output
-        Console.WriteLine($"Original text: \n{originalText}\n");
         ViewData["OriginalText"] = originalText;
 
         // Set up the Text Analytics client
@@ -122,6 +122,7 @@ public class IndexModel : PageModel
 
             // Parse the JSON response and get the language
             JObject json = JObject.Parse(result.Result);
+            
             string? language = json["documents"]?[0]?["detectedLanguage"]?["name"]?.ToString();
             string? languageConfidence = json["documents"]?[0]?["detectedLanguage"]?["confidenceScore"]?.ToString();
 
@@ -130,8 +131,8 @@ public class IndexModel : PageModel
             ViewData["LanguageConfidence"] = languageConfidence;
             ViewData["LanguageMethod"] = result.Method;
             ViewData["LanguageUri"] = result.Uri;
-            ViewData["LanguageBody"] = result.Body;
-
+            ViewData["LanguageBody"] = JToken.Parse(result.Body);
+            ViewData["LanguageResponse"] = json;
 
             // Get sentiment
             RestResponse sentimentResult = await RestRequest(sentimentEndpoint, originalText);
@@ -150,7 +151,8 @@ public class IndexModel : PageModel
             ViewData["SentimentNegative"] = sentimentNegative;
             ViewData["SentimentMethod"] = sentimentResult.Method;
             ViewData["SentimentUri"] = sentimentResult.Uri;
-            ViewData["SentimentBody"] = sentimentResult.Body;
+            ViewData["SentimentBody"] = JToken.Parse(sentimentResult.Body);
+            ViewData["SentimentResponse"] = sentimentJson;
 
             // Get key phrases
             RestResponse keyPhrasesResult = await RestRequest(keyPhrasesEndpoint, originalText);
@@ -169,7 +171,8 @@ public class IndexModel : PageModel
             ViewData["KeyPhrases"] = phrases;
             ViewData["keyPhrasesMethod"] = keyPhrasesResult.Method;
             ViewData["keyPhrasesUri"] = keyPhrasesResult.Uri;
-            ViewData["keyPhrasesBody"] = keyPhrasesResult.Body;
+            ViewData["keyPhrasesBody"] = JToken.Parse(keyPhrasesResult.Body);
+            ViewData["keyPhrasesResponse"] = keyPhrasesJson;
 
             // Get entities
             RestResponse entitiesResult = await RestRequest(entitiesEndpoint, originalText);
@@ -199,7 +202,8 @@ public class IndexModel : PageModel
             ViewData["Entities"] = entitiesList;
             ViewData["EntitiesMethod"] = entitiesResult.Method;
             ViewData["EntitiesUri"] = entitiesResult.Uri;
-            ViewData["EntitiesBody"] = entitiesResult.Body;
+            ViewData["EntitiesBody"] = JToken.Parse(entitiesResult.Body);
+            ViewData["EntitiesResponse"] = entitiesJson;
 
             // Get linked entities
             RestResponse linkedEntitiesResult = await RestRequest(linkedEntitiesEndpoint, originalText);
@@ -227,7 +231,8 @@ public class IndexModel : PageModel
             ViewData["LinkedEntities"] = linkedEntitiesList;
             ViewData["LinkedEntitiesMethod"] = linkedEntitiesResult.Method;
             ViewData["LinkedEntitiesUri"] = linkedEntitiesResult.Uri;
-            ViewData["LinkedEntitiesBody"] = linkedEntitiesResult.Body;
+            ViewData["LinkedEntitiesBody"] = JToken.Parse(linkedEntitiesResult.Body);
+            ViewData["LinkedEntitiesResponse"] = linkedEntitiesJson;
         }
 
         return Page();

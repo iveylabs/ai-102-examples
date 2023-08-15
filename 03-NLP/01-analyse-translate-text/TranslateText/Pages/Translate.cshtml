@@ -1,6 +1,7 @@
 ﻿
 @page
 @model TranslateModel
+@using Newtonsoft.Json
 @{
     ViewData["Title"] = "Translate";
 }
@@ -80,6 +81,17 @@
         Method: <b>@ViewData["TranslateMethod"]</b><br>
         URI: <b>@ViewData["TranslateUri"]</b><br>
         Body: <b>@ViewData["TranslateBody"]</b><br>
+    </div>
+}
+
+<!-- Show response for translation -->
+@if (ViewData["TranslateMethod"] != null)
+{
+    <div class="alert alert-secondary" role="alert">
+        <b>Translation response:</b> <br>
+        <pre>
+@Html.Raw(JsonConvert.SerializeObject(ViewData["TranslateResponse"], Formatting.Indented).TrimStart())
+        </pre>
     </div>
 }
 

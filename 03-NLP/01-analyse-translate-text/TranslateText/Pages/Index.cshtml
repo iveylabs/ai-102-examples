@@ -1,6 +1,7 @@
 ﻿
 @page
 @model IndexModel
+@using Newtonsoft.Json
 @{
     ViewData["Title"] = "Analyse";
 }
@@ -43,7 +44,20 @@
             <br><b>REST request details:</b><br>
             Method: <b>@ViewData["LanguageMethod"]</b><br>
             URI: <b>@ViewData["LanguageUri"]</b><br>
-            Body: <b>@ViewData["LanguageBody"]</b><br>
+            Body:
+            <b>
+            <pre>
+@Html.Raw(JsonConvert.SerializeObject(ViewData["LanguageBody"], Formatting.Indented).TrimStart())
+            </pre>
+            </b>
+        </div>
+        <br>
+        <button id="languageResponse" class="btn btn-primary" onclick="toggleDetails('languageResponse')">Show REST response details</button>
+        <div id="languageResponse-details" style="display: none;">
+            <br><b>REST response:</b><br>
+            <pre>
+@Html.Raw(JsonConvert.SerializeObject(ViewData["LanguageResponse"], Formatting.Indented).TrimStart())
+            </pre>
         </div>
     </div>
 }
@@ -107,7 +121,20 @@
             <br><b>REST request details:</b><br>
             Method: <b>@ViewData["SentimentMethod"]</b><br>
             URI: <b>@ViewData["SentimentUri"]</b><br>
-            Body: <b>@ViewData["SentimentBody"]</b><br>
+            Body:
+            <b>
+            <pre>
+@Html.Raw(JsonConvert.SerializeObject(ViewData["SentimentBody"], Formatting.Indented).TrimStart())
+            </pre>
+            </b>
+        </div>
+        <br>
+        <button id="sentimentResponse" class="btn btn-primary" onclick="toggleDetails('sentimentResponse')">Show REST response details</button>
+        <div id="sentimentResponse-details" style="display: none;">
+            <br><b>REST response:</b><br>
+            <pre>
+@Html.Raw(JsonConvert.SerializeObject(ViewData["SentimentResponse"], Formatting.Indented).TrimStart())
+            </pre>
         </div>
     </div>
 }
@@ -131,7 +158,20 @@
             <br><b>REST request details:</b><br>
             Method: <b>@ViewData["keyPhrasesMethod"]</b><br>
             URI: <b>@ViewData["keyPhrasesUri"]</b><br>
-            Body: <b>@ViewData["keyPhrasesBody"]</b><br>
+            Body:
+            <b>
+            <pre>
+@Html.Raw(JsonConvert.SerializeObject(ViewData["keyPhrasesBody"], Formatting.Indented).TrimStart())
+            </pre>
+            </b>
+        </div>
+        <br>
+        <button id="phrasesResponse" class="btn btn-primary" onclick="toggleDetails('phrasesResponse')">Show REST response details</button>
+        <div id="phrasesResponse-details" style="display: none;">
+            <br><b>REST response:</b><br>
+            <pre>
+@Html.Raw(JsonConvert.SerializeObject(ViewData["keyPhrasesResponse"], Formatting.Indented).TrimStart())
+            </pre>
         </div>
     </div>
 }
@@ -183,7 +223,20 @@
             <br><b>REST request details:</b><br>
             Method: <b>@ViewData["EntitiesMethod"]</b><br>
             URI: <b>@ViewData["EntitiesUri"]</b><br>
-            Body: <b>@ViewData["EntitiesBody"]</b><br>
+            Body:
+            <b>
+            <pre>
+@Html.Raw(JsonConvert.SerializeObject(ViewData["EntitiesBody"], Formatting.Indented).TrimStart())
+            </pre>
+            </b>
+        </div>
+        <br>
+        <button id="entitiesResponse" class="btn btn-primary" onclick="toggleDetails('entitiesResponse')">Show REST response details</button>
+        <div id="entitiesResponse-details" style="display: none;">
+            <br><b>REST response:</b><br>
+            <pre>
+@Html.Raw(JsonConvert.SerializeObject(ViewData["entitiesResponse"], Formatting.Indented).TrimStart())
+            </pre>
         </div>
     </div>
 }
@@ -230,12 +283,25 @@
             }
         }
         <br>
-        <button id="linkedentities" class="btn btn-primary" onclick="toggleDetails('linkedentities')">Show REST request details</button>
-        <div id="linkedentities-details" style="display: none;">
+        <button id="linkedEntities" class="btn btn-primary" onclick="toggleDetails('linkedEntities')">Show REST request details</button>
+        <div id="linkedEntities-details" style="display: none;">
             <br><b>REST request details:</b><br>
             Method: <b>@ViewData["LinkedEntitiesMethod"]</b><br>
             URI: <b>@ViewData["LinkedEntitiesUri"]</b><br>
-            Body: <b>@ViewData["LinkedEntitiesBody"]</b><br>
+            Body:
+            <b>
+            <pre>
+@Html.Raw(JsonConvert.SerializeObject(ViewData["LinkedEntitiesBody"], Formatting.Indented).TrimStart())
+            </pre>
+            </b>
+        </div>
+        <br>
+        <button id="linkedEntitiesResponse" class="btn btn-primary" onclick="toggleDetails('linkedEntitiesResponse')">Show REST response details</button>
+        <div id="linkedEntitiesResponse-details" style="display: none;">
+            <br><b>REST response:</b><br>
+            <pre>
+@Html.Raw(JsonConvert.SerializeObject(ViewData["linkedEntitiesResponse"], Formatting.Indented).TrimStart())
+            </pre>
         </div>
     </div>
 }
@@ -264,12 +330,13 @@
     function toggleDetails(buttonId) {
         var details = document.getElementById(buttonId + "-details");
         var button = document.getElementById(buttonId);
+        var reqOrResp = buttonId.toLowerCase().includes("response") ? "response" : "request";
         if (details.style.display === "none") {
             details.style.display = "block";
-            button.textContent = "Hide REST request details";
+            button.textContent = "Hide REST " + reqOrResp + " details";
         } else {
             details.style.display = "none";
-            button.textContent = "Show REST request details";
+            button.textContent = "Show REST " + reqOrResp + " details";
         }
     }
 
