@@ -11,10 +11,10 @@
         <textarea class="form-control" id="inputText" name="InputText" rows="5" oninput="checkInput(); resizeTextarea()"></textarea>
     </div>
     <button type="submit" name="submit" id="submitSDK" value="SDK" class="btn btn-primary" disabled>Submit</button>
-    @* <button type="submit" name="submit" id="submitREST" value="REST" class="btn btn-primary" disabled>Submit (REST)</button> *@
+    <button type="submit" name="submit" id="submitREST" value="REST" class="btn btn-primary" disabled>Submit (REST)</button>
 </form>
 
-<!-- Top intent -->
+<!-- Top intent  -->
 @if (ViewData["TopIntent"] != null)
 {
     <div class="alert alert-primary" role="alert">
@@ -23,7 +23,7 @@
 }
 
 <!-- Entity -->
-@if (ViewData["Entity"] != null)
+@if (ViewData["RESTMethod"] != null)
 {
     <div class="alert alert-primary" role="alert">
         Entity: <b>@ViewData["Entity"]</b>
@@ -38,7 +38,7 @@
     </div>
 }
 
-<!-- Date -->
+<!-- Weather -->
 @if (ViewData["Weather"] != null)
 {
     <div class="alert alert-info" role="alert">
@@ -51,6 +51,39 @@
 {
     <div class="alert alert-warning" role="alert">
         Try asking about the weather in a city, or about a date this week.
+    </div>
+}
+
+<!-- Request (REST) -->
+@if (ViewData["RESTMethod"] != null)
+{
+    <div class="alert alert-secondary" role="alert">
+        <button id="request" class="btn btn-primary" onclick="toggleDetails('request')">Show REST request details</button>
+        <div id="request-details" style="display: none;">
+            <br><b>REST request details:</b><br>
+            Method: <b>@ViewData["RESTMethod"]</b><br>
+            URI: <b>@ViewData["RESTUri"]</b><br>
+            Body:
+            <b>
+            <pre>
+@Html.Raw(JsonConvert.SerializeObject(ViewData["RESTBody"], Formatting.Indented).TrimStart())
+            </pre>
+            </b>
+        </div>
+    </div>
+}
+
+<!-- Response -->
+@if (ViewData["Response"] != null)
+{
+    <div class="alert alert-secondary" role="alert">
+        <button id="cluResponse" class="btn btn-primary" onclick="toggleDetails('cluResponse')">Show REST response details</button>
+        <div id="cluResponse-details" style="display: none;">
+            <br><b>Response:</b> <br/>  
+            <pre>
+@Html.Raw(JsonConvert.SerializeObject(ViewData["Response"], Formatting.Indented))
+            </pre>
+        </div>
     </div>
 }
 

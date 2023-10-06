@@ -39,6 +39,7 @@ public class TranslateModel : PageModel
 
         // Make a GET request to the Text Translation API to get a list of all supported languages
         string endpoint = $"{translatorEndpoint}/languages?api-version=3.0&scope=translation";
+        
         HttpResponseMessage response = await _httpClient.GetAsync(endpoint);
         response.EnsureSuccessStatusCode();
         string responseBody = await response.Content.ReadAsStringAsync();

@@ -1,12 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Text.Json;
+using System.IO;
 using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 using Azure.AI.Language.Conversations;
 using Newtonsoft.Json.Linq;
 using System.Text.Json.Nodes;
+using System.Text;
 
 namespace CLU.Pages;
 
@@ -30,15 +32,16 @@ public class IndexModel : PageModel
     {
         string inputText = InputText;
 
+        // SDK
         if (submit == "SDK")
         {
             // Set up the language client
-            Uri endpoint = new Uri(_languageEndpoint);
-            AzureKeyCredential credential = new AzureKeyCredential(_languageKey);
-            ConversationAnalysisClient client = new ConversationAnalysisClient(endpoint, credential);
+            Uri endpoint = new (_languageEndpoint);
+            AzureKeyCredential credential = new (_languageKey);
+            ConversationAnalysisClient client = new (endpoint, credential);
 
-            var projectName = "AI-102Demo";
-            var deploymentName = "production";
+            var projectName = "AI-102CLUDemo";
+            var deploymentName = "AI102CLUDemoDeployment";
 
             var data = new
             {
@@ -66,15 +69,19 @@ public class IndexModel : PageModel
             Response response = await client.AnalyzeConversationAsync(RequestContent.Create(data));
             dynamic conversationalTaskResult = response.Content.ToDynamicFromJson(JsonPropertyNames.CamelCase);
             dynamic conversationPrediction = conversationalTaskResult.Result.Prediction;
-            var options = new JsonSerializerOptions { WriteIndented = true };
             var topIntent = "";
+
             if (conversationPrediction.Intents[0].ConfidenceScore > 0.5)
             {
                 topIntent = conversationPrediction.TopIntent;
             }
 
-            Console.WriteLine($"Response: \n{JsonSerializer.Serialize(conversationalTaskResult, options)}");
+            Stream contentStream = response.ContentStream;
+            StreamReader reader = new (contentStream, Encoding.UTF8);
+            string content = reader.ReadToEnd();
+            JObject jsonObject = JObject.Parse(content);
 
+            ViewData["Response"] = jsonObject;
             ViewData["TopIntent"] = topIntent;
 
             switch(topIntent)
@@ -86,7 +93,7 @@ public class IndexModel : PageModel
                     {
                         if(entity.Category == "Weekday")
                         {
-                            day = entity.Text;
+                            day = entity.extraInformation[0].key;
                             ViewData["Entity"] = day;
                         }
                     }
@@ -113,6 +120,60 @@ public class IndexModel : PageModel
                     break;
             }
         }
+        
+        // REST
+        else if(submit == "REST")
+        {
+            string endpoint = $"{_languageEndpoint}language/:analyze-conversations?api-version=2022-10-01-preview";
+
+            // Query the model
+            RestResponse restResponse = await RestRequest(endpoint, inputText);
+
+            // Parse the JSON response
+            JObject json = JObject.Parse(restResponse.Result);
+
+            string? topIntent = json["result"]?["prediction"]?["topIntent"]?.ToString();
+
+            switch(topIntent)
+            {
+                case "GetDate":
+                    var day = DateTime.Now.DayOfWeek.ToString();
+                    // Check for a weekday entity
+                    if(json["result"]?["prediction"]?["entities"]?[0]?["category"]?.ToString() == "Weekday")
+                    {
+                        day = json["result"]?["prediction"]?["entities"]?[0]?["extraInformation"]?[0]?["key"]?.ToString();
+                        ViewData["Entity"] = day;
+                    }
+
+                    // Get the date
+                    ViewData["Date"] = GetDate(day);
+                    break;
+
+                case "GetWeather":
+                    string? location = "Cheltenham";
+                    // Check for a location entity
+
+                    if(json["result"]?["prediction"]?["entities"]?[0]?["category"]?.ToString() == "Location" )
+                    {
+                        location = json["result"]?["prediction"]?["entities"]?[0]?["text"]?.ToString();
+                    }
+
+                    // Get the weather
+                    ViewData["Weather"] = GetWeather(location).Result.Weather.ToString();
+                    ViewData["Entity"] = location;
+                    break;
+                default:
+                    // Some other intent (for example, "None") was predicted
+                    ViewData["None"] = "None";
+                    break;
+            }
+
+            ViewData["TopIntent"] = topIntent;
+            ViewData["RESTMethod"] = restResponse.Method;
+            ViewData["RESTUri"] = restResponse.Uri;
+            ViewData["RESTBody"] = JToken.Parse(restResponse.Body);
+            ViewData["Response"] = json;
+        }
         return Page();
     }
 
@@ -127,6 +188,10 @@ public class IndexModel : PageModel
             int todayNum = (int)DateTime.Today.DayOfWeek;
             int offset = weekDayNum - todayNum;
             date_string = DateTime.Today.AddDays(offset).ToShortDateString();
+            if(date_string.StartsWith("05/10/"))
+            {
+                date_string = $"{date_string} (your birthday!)";
+            }
         }
         return date_string;
     }
@@ -139,7 +204,6 @@ public class IndexModel : PageModel
 
         var content = await response.Content.ReadAsStringAsync();
         JObject json = JObject.Parse(content);
-        // string weather = $"The weather in {location} is {json["weather"]?[0]?["description"]} with a temperature of {json["main"]?["temp"]} degrees Celsius.";
         RestResponse restResponse = new()
         {
             Weather = $"{json["weather"]?[0]?["description"]} with a temperature of {json["main"]?["temp"]} degrees Celsius."
@@ -147,9 +211,61 @@ public class IndexModel : PageModel
         return restResponse;
 
     }
+
+    public async Task<RestResponse> RestRequest(string endpoint, string originalText)
+    {
+        JObject jsonBody = new()
+        {
+            ["kind"] = "Conversation",
+            ["analysisInput"] = new JObject
+            {
+                ["conversationItem"] = new JObject
+                {
+                    ["id"] = "1",
+                    ["participantId"] = "1",
+                    ["text"] = originalText
+                }
+            },
+            ["parameters"] = new JObject
+            {
+                ["projectName"] = "AI-102CLUDemo",
+                ["deploymentName"] = "AI102CLUDemoDeployment",
+                ["stringIndexType"] = "Utf16CodeUnit"
+            }
+
+        };
+
+        var client = new HttpClient();
+        var request = new HttpRequestMessage
+        {
+            Method = HttpMethod.Post,
+            RequestUri = new Uri(endpoint),
+            Content = new StringContent(jsonBody.ToString(), Encoding.UTF8, "application/json"),
+            Headers = {
+                { "Ocp-Apim-Subscription-Key", _languageKey },
+            },
+        };
+        // Send the request and get the response
+        HttpResponseMessage response = await client.SendAsync(request).ConfigureAwait(false);
+        string result = await response.Content.ReadAsStringAsync();
+
+        RestResponse restResponse = new()
+        {
+            Result = result,
+            Method = request.Method.ToString(),
+            Uri = request.RequestUri.ToString(),
+            Body = request.Content.ReadAsStringAsync().Result.ToString()
+        };
+
+        return restResponse;
+    }
 }
 
 public class RestResponse
 {
     public string Weather { get; set; }
+    public string Result { get; set; }
+    public string? Method { get; set; }
+    public string? Uri { get; set; }
+    public string? Body { get; set; }
 }

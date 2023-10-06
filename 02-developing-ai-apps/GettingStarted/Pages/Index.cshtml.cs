@@ -21,7 +21,8 @@ public class IndexModel : PageModel
     public async Task<IActionResult> OnPostProcessInputAsync(string InputText)
     {
         // Set up endpoint
-        string languageEndpoint = $"{_cognitiveServicesEndpoint}text/analytics/v3.0/languages";
+        // string languageEndpoint = $"{_cognitiveServicesEndpoint}text/analytics/v3.0/languages";
+        string languageEndpoint = $"{_cognitiveServicesEndpoint}language/:analyze-text?api-version=2023-04-01";
 
         // Process the input text
         string originalText =  InputText;
@@ -65,12 +66,28 @@ public class IndexModel : PageModel
     {
         JObject jsonBody = new()
         {
-            ["documents"] = new JArray
+            // ["documents"] = new JArray
+            // {
+            //     new JObject
+            //     {
+            //         ["id"] = 1,
+            //         ["text"] = originalText
+            //     }
+            // }
+            ["kind"] = "LanguageDetection",
+            ["parameters"] = new JObject
             {
-                new JObject
+                ["modelVersion"] = "latest"
+            },
+            ["analysisInput"] = new JObject
+            {
+                ["documents"] = new JArray
                 {
-                    ["id"] = 1,
-                    ["text"] = originalText
+                    new JObject
+                    {
+                        ["id"] = "1",
+                        ["text"] = originalText
+                    }
                 }
             }
         };

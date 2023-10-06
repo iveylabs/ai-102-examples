@@ -34,7 +34,6 @@ public class IndexModel : PageModel
 
         // Set up the Text Analytics client
         string cognitiveServicesEndpoint = _configuration.GetValue<string>("CognitiveServiceEndpoint") ?? "ENDPOINT NOT SET";
-        // string cognitiveServicesKey = _configuration.GetValue<string>("CognitiveServiceKey") ?? "KEY NOT SET";
 
         // SDK
         if(submit == "SDK")
@@ -111,20 +110,22 @@ public class IndexModel : PageModel
         // REST
         else if(submit == "REST")
         {
-            string languageEndpoint = $"{cognitiveServicesEndpoint}text/analytics/v3.0/languages";
-            string sentimentEndpoint = $"{cognitiveServicesEndpoint}text/analytics/v3.0/sentiment";
-            string keyPhrasesEndpoint = $"{cognitiveServicesEndpoint}text/analytics/v3.0/keyPhrases";
-            string entitiesEndpoint = $"{cognitiveServicesEndpoint}text/analytics/v3.0/entities/recognition/general";
-            string linkedEntitiesEndpoint = $"{cognitiveServicesEndpoint}text/analytics/v3.0/entities/linking";
+            // string languageEndpoint = $"{cognitiveServicesEndpoint}text/analytics/v3.0/languages";
+            // string sentimentEndpoint = $"{cognitiveServicesEndpoint}text/analytics/v3.0/sentiment";
+            // string keyPhrasesEndpoint = $"{cognitiveServicesEndpoint}text/analytics/v3.0/keyPhrases";
+            // string entitiesEndpoint = $"{cognitiveServicesEndpoint}text/analytics/v3.0/entities/recognition/general";
+            // string linkedEntitiesEndpoint = $"{cognitiveServicesEndpoint}text/analytics/v3.0/entities/linking";
+
+            string languageEndpoint = $"{cognitiveServicesEndpoint}language/:analyze-text?api-version=2023-04-01";
             
             // Get language
-            RestResponse result = await RestRequest(languageEndpoint, originalText);
+            RestResponse result = await RestRequest(languageEndpoint, originalText, "LanguageDetection");
 
             // Parse the JSON response and get the language
             JObject json = JObject.Parse(result.Result);
             
-            string? language = json["documents"]?[0]?["detectedLanguage"]?["name"]?.ToString();
-            string? languageConfidence = json["documents"]?[0]?["detectedLanguage"]?["confidenceScore"]?.ToString();
+            string? language = json["results"]?["documents"]?[0]?["detectedLanguage"]?["name"]?.ToString();
+            string? languageConfidence = json["results"]?["documents"]?[0]?["detectedLanguage"]?["confidenceScore"]?.ToString();
 
             // Set the language information to output
             ViewData["Language"] = language;
@@ -135,14 +136,14 @@ public class IndexModel : PageModel
             ViewData["LanguageResponse"] = json;
 
             // Get sentiment
-            RestResponse sentimentResult = await RestRequest(sentimentEndpoint, originalText);
+            RestResponse sentimentResult = await RestRequest(languageEndpoint, originalText, "SentimentAnalysis");
             
             // Parse the JSON response and get the sentiment
             JObject sentimentJson = JObject.Parse(sentimentResult.Result);
-            string? sentiment = sentimentJson["documents"]?[0]?["sentiment"]?.ToString();
-            string? sentimentPositive = sentimentJson["documents"]?[0]?["confidenceScores"]?["positive"]?.ToString();
-            string? sentimentNeutral = sentimentJson["documents"]?[0]?["confidenceScores"]?["neutral"]?.ToString();
-            string? sentimentNegative = sentimentJson["documents"]?[0]?["confidenceScores"]?["negative"]?.ToString();
+            string? sentiment = sentimentJson["results"]?["documents"]?[0]?["sentiment"]?.ToString();
+            string? sentimentPositive = sentimentJson["results"]?["documents"]?[0]?["confidenceScores"]?["positive"]?.ToString();
+            string? sentimentNeutral = sentimentJson["results"]?["documents"]?[0]?["confidenceScores"]?["neutral"]?.ToString();
+            string? sentimentNegative = sentimentJson["results"]?["documents"]?[0]?["confidenceScores"]?["negative"]?.ToString();
 
             // Set the sentiment information to output
             ViewData["Sentiment"] = sentiment;
@@ -155,14 +156,14 @@ public class IndexModel : PageModel
             ViewData["SentimentResponse"] = sentimentJson;
 
             // Get key phrases
-            RestResponse keyPhrasesResult = await RestRequest(keyPhrasesEndpoint, originalText);
+            RestResponse keyPhrasesResult = await RestRequest(languageEndpoint, originalText, "KeyPhraseExtraction");
 
             // Parse the JSON response and get the key phrases
             JObject keyPhrasesJson = JObject.Parse(keyPhrasesResult.Result);
             string? phrases = null;
-            if(keyPhrasesJson["documents"]?[0]?["keyPhrases"]?.Count() > 0)
+            if(keyPhrasesJson["results"]?["documents"]?[0]?["keyPhrases"]?.Count() > 0)
             {
-                phrases = string.Join(", ", keyPhrasesJson["documents"]?[0]?["keyPhrases"]);
+                phrases = string.Join(", ", keyPhrasesJson["results"]?["documents"]?[0]?["keyPhrases"]);
             }
             else
             {
@@ -175,15 +176,15 @@ public class IndexModel : PageModel
             ViewData["keyPhrasesResponse"] = keyPhrasesJson;
 
             // Get entities
-            RestResponse entitiesResult = await RestRequest(entitiesEndpoint, originalText);
+            RestResponse entitiesResult = await RestRequest(languageEndpoint, originalText, "EntityRecognition");
 
             // Parse the JSON response and get the entities
             JObject entitiesJson = JObject.Parse(entitiesResult.Result);
-            var entities = entitiesJson["documents"]?[0]?["entities"]?.ToString();
+            var entities = entitiesJson["results"]?["documents"]?[0]?["entities"]?.ToString();
             List<RestEntity> entitiesList = new();
-            if(entitiesJson["documents"]?[0]?["entities"]?.Count() > 0)
+            if(entitiesJson["results"]?["documents"]?[0]?["entities"]?.Count() > 0)
             {
-                entitiesList.AddRange(from JObject entity in entitiesJson["documents"]?[0]?["entities"]!
+                entitiesList.AddRange(from JObject entity in entitiesJson["results"]?["documents"]?[0]?["entities"]!
                                       let restEntity = new RestEntity
                                       {
                                           Text = entity["text"]?.ToString() ?? "N/A",
@@ -206,15 +207,15 @@ public class IndexModel : PageModel
             ViewData["EntitiesResponse"] = entitiesJson;
 
             // Get linked entities
-            RestResponse linkedEntitiesResult = await RestRequest(linkedEntitiesEndpoint, originalText);
+            RestResponse linkedEntitiesResult = await RestRequest(languageEndpoint, originalText, "EntityLinking");
 
             // Parse the JSON response and get the linked entities
             JObject linkedEntitiesJson = JObject.Parse(linkedEntitiesResult.Result);
-            var linkedEntities = linkedEntitiesJson["documents"]?[0]?["entities"]?.ToString();
+            var linkedEntities = linkedEntitiesJson["results"]?["documents"]?[0]?["entities"]?.ToString();
             List<LinkedRestEntity> linkedEntitiesList = new();
-            if(linkedEntitiesJson["documents"]?[0]?["entities"]?.Count() > 0)
+            if(linkedEntitiesJson["results"]?["documents"]?[0]?["entities"]?.Count() > 0)
             {
-                linkedEntitiesList.AddRange(from JObject linkedEntity in linkedEntitiesJson["documents"]?[0]?["entities"]!
+                linkedEntitiesList.AddRange(from JObject linkedEntity in linkedEntitiesJson["results"]?["documents"]?[0]?["entities"]!
                                             let linkedRestEntity = new LinkedRestEntity
                                             {
                                                 Name = linkedEntity["name"]?.ToString() ?? "N/A",
@@ -238,16 +239,32 @@ public class IndexModel : PageModel
         return Page();
     }
    
-    public async Task<RestResponse> RestRequest(string endpoint, string originalText)
+    public async Task<RestResponse> RestRequest(string endpoint, string originalText, string kind)
     {
-        JObject jsonBody = new JObject
+        JObject jsonBody = new()
         {
-            ["documents"] = new JArray
+            // ["documents"] = new JArray
+            // {
+            //     new JObject
+            //     {
+            //         ["id"] = 1,
+            //         ["text"] = originalText
+            //     }
+            // }
+            ["kind"] = $"{kind}",
+            ["parameters"] = new JObject
             {
-                new JObject
+                ["modelVersion"] = "latest"
+            },
+            ["analysisInput"] = new JObject
+            {
+                ["documents"] = new JArray
                 {
-                    ["id"] = 1,
-                    ["text"] = originalText
+                    new JObject
+                    {
+                        ["id"] = "1",
+                        ["text"] = originalText
+                    }
                 }
             }
         };

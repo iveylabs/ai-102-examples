@@ -1,0 +1,68 @@
+﻿@model ImageWebApp.Models.ImageModel
+@using Newtonsoft.Json
+
+<h1>Upload or select an image for analysis</h1>
+
+<form method="post">
+    <div class="form-group">
+        <label asp-for="InputText">Enter URL of image for analysis:</label>
+        <input asp-for="InputText" class="form-control" id="inputText" name="inputText" oninput="checkInput()">
+    </div>
+    <button type="submit" name="submitURL" id="submitURL" class="btn btn-primary" disabled>Submit</button>
+</form>
+@if(ViewBag.URLResult != null)
+{
+    <div>
+        <img src="@ViewBag.ImgURL" alt="Uploaded Image" width="256" height="256" style="display: block; margin: 0 auto;">
+    </div>
+}
+
+@if(ViewBag.URLResult != null)
+{
+    <div>
+        <h2>Response:</h2>
+        <pre>
+@Html.Raw(JsonConvert.SerializeObject(ViewBag.URLResult, Formatting.Indented))
+        </pre>
+    </div>
+}
+
+<form method="post" enctype="multipart/form-data">
+    <div>
+        <label asp-for="ImageFile"></label>
+        <input asp-for="ImageFile" type="file">
+        <span asp-validation-for="ImageFile"></span>
+    </div>
+    <div>
+        <input type="submit" value="Upload">
+    </div>
+</form>
+
+@if (ViewBag.ImagePath != null) 
+{
+    <div>
+        <img src="@ViewBag.ImagePath" alt="Uploaded Image" width="256" height="256" style="display: block; margin: 0 auto;"> 
+    </div>
+}
+
+@if (ViewBag.Caption != null) 
+{
+    <div>
+        <h2>Analysis:</h2>
+        <h3>Captions:</h3>
+        @ViewBag.Caption
+    </div>
+}
+
+<script>
+    var inputURLElement = document.getElementById("inputText");
+    var submitURLElement = document.getElementById("submitURL");
+    function checkInput() {
+        var inputText = inputURLElement.value;
+        if (inputText.trim().length > 0) {
+            submitURLElement.disabled = false;
+        } else {
+            submitURLElement.disabled = true;
+        }
+    }
+</script>
