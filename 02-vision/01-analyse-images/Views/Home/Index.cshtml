@@ -1,0 +1,91 @@
+﻿@model ImageWebApp.Models.ImageModel
+@using Newtonsoft.Json
+
+<h1>Upload an image for analysis</h1>
+
+<form method="post" enctype="multipart/form-data">
+    <div>
+        <label asp-for="ImageFile"></label>
+        <input asp-for="ImageFile" type="file">
+        <span asp-validation-for="ImageFile"></span>
+    </div>
+    <div class="form-group">
+        <div class="form-check">
+            <input asp-for="GenderNeutral" class="form-check-input" />
+            <label asp-for="GenderNeutral" class="form-check-label">Gender neutral captions</label>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="form-check">
+            <input asp-for="RemoveBackground" class="form-check-input" />
+            <label asp-for="RemoveBackground" class="form-check-label">Remove background</label>
+        </div>
+    </div>
+    <div>
+        <input type="submit" value="Upload">
+    </div>
+</form>
+
+@if (ViewBag.ImagePath != null) 
+{
+    <div>
+        <img src="@ViewBag.ImagePath" alt="Uploaded image" width="256" height="256" style="display: block; margin: 0 auto;"> 
+    </div>
+}
+
+@if (ViewBag.NewImagePath != null) 
+{
+    <div>
+        <img src="@ViewBag.NewImagePath" alt="Image with background removed" width="256" height="256" style="display: block; margin: 0 auto;"> 
+    </div>
+}
+
+@if (ViewBag.Caption != null) 
+{
+    <div>
+        <h3>Caption:</h3>
+        @ViewBag.Caption
+    </div>
+}
+<br />
+
+@if (ViewBag.DenseCaptions != null) 
+{
+    <div>
+        <h3>Dense captions:</h3>
+        @foreach(var caption in ViewBag.DenseCaptions)
+        {
+            <div>
+                @caption
+            </div>
+        }
+    </div>
+}
+<br />
+
+@if (ViewBag.Tags != null) 
+{
+    <div>
+        <h3>Tags:</h3>
+        @foreach(var tag in ViewBag.Tags)
+        {
+            <div>
+                @tag
+            </div>
+        }
+    </div>
+}
+<br />
+
+@if (ViewBag.Lines != null) 
+{
+    <div>
+        <h3>Text by line:</h3>
+        @foreach(var line in ViewBag.Lines)
+        {
+            <div>
+                @line
+            </div>
+        }
+    </div>
+}

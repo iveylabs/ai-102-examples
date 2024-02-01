@@ -1,0 +1,371 @@
+﻿
+@page
+@model IndexModel
+@using Newtonsoft.Json
+@{
+    ViewData["Title"] = "Analyse";
+}
+
+<form method="post" asp-page-handler="ProcessInput">
+    <div class="form-group">
+        <label for="inputText">Enter text for analysis:</label>
+        <textarea class="form-control" id="inputText" name="InputText" rows="5" oninput="checkInput(); resizeTextarea()"></textarea>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="summariseCheckbox" name="Summarise">
+        <label class="form-check-label" for="summariseCheckbox">
+            Summarise
+        </label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="piiCheckbox" name="DetectPII">
+        <label class="form-check-label" for="piiCheckbox">
+            PII detection
+        </label>
+    </div>
+    <button type="submit" name="submit" id="submitSDK" value="SDK" class="btn btn-primary" disabled>Submit (SDK)</button>
+    <button type="submit" name="submit" id="submitREST" value="REST" class="btn btn-primary" disabled>Submit (REST)</button>
+</form>
+
+<!-- Orignal text -->
+@if (ViewData["OriginalText"] != null)
+{
+    <div class="alert alert-primary" role="alert">
+        <b>Original text:</b> <br> @ViewData["OriginalText"]
+    </div>
+}
+
+<!-- PII redacted text -->
+@if (ViewData["RedactedText"] != null)
+{
+    <div class="alert alert-error" role="alert">
+        <b>PII redacted text:</b> <br> @ViewData["RedactedText"]
+    </div>
+}
+
+<!-- Abstract summary -->
+@if (ViewData["Summary"] != null)
+{
+    <div class="alert alert-warning" role="alert">
+        <b>Abstract summary:</b> <br> @ViewData["Summary"]
+    </div>
+}
+
+<!-- Detected language (SDK)-->
+@if (ViewData["LanguageMethod"] == null && ViewData["Language"] != null)
+{
+    <div class="alert alert-info" role="alert">
+        Detected language: <b>@ViewData["Language"]</b><br>
+        Language confidence score: <b>@ViewData["LanguageConfidence"]</b>
+    </div>
+}
+
+<!-- Detected language (REST)-->
+@if (ViewData["LanguageMethod"] != null)
+{
+    <div class="alert alert-info" role="alert">
+        Detected language: <b>@ViewData["Language"]</b><br>
+        Language confidence score: <b>@ViewData["LanguageConfidence"]</b><br>
+        <br>
+        <button id="language" class="btn btn-primary" onclick="toggleDetails('language')">Show REST request details</button>
+        <div id="language-details" style="display: none;">
+            <br><b>REST request details:</b><br>
+            Method: <b>@ViewData["LanguageMethod"]</b><br>
+            URI: <b>@ViewData["LanguageUri"]</b><br>
+            Body:
+            <b>
+            <pre>
+@Html.Raw(JsonConvert.SerializeObject(ViewData["LanguageBody"], Formatting.Indented).TrimStart())
+            </pre>
+            </b>
+        </div>
+        <br>
+        <button id="languageResponse" class="btn btn-primary" onclick="toggleDetails('languageResponse')">Show REST response details</button>
+        <div id="languageResponse-details" style="display: none;">
+            <br><b>REST response:</b><br>
+            <pre>
+@Html.Raw(JsonConvert.SerializeObject(ViewData["LanguageResponse"], Formatting.Indented).TrimStart())
+            </pre>
+        </div>
+    </div>
+}
+
+<!-- Sentiment (SDK)-->
+@if (ViewData["SentimentMethod"] == null && ViewData["Sentiment"] != null)
+{
+    string sentiment = ViewData["Sentiment"]?.ToString() ?? "NO SENTIMENT DETECTED";
+    string alertClass = "";
+    sentiment = sentiment.ToLower();
+
+    switch (sentiment)
+    {
+        case "positive":
+            alertClass = "alert-success";
+            break;
+        case "negative":
+            alertClass = "alert-danger";
+            break;
+        default:
+            alertClass = "alert-info";
+            break;
+    }
+
+    <div class="alert @alertClass" role="alert">
+        Sentiment: <b>@ViewData["Sentiment"]</b><br>
+        Positive score: <b>@ViewData["SentimentPositive"]</b><br>
+        Neutral score: <b>@ViewData["SentimentNeutral"]</b><br>
+        Negative score: <b>@ViewData["SentimentNegative"]</b><br>
+    </div>
+}
+
+<!-- Sentiment (REST)-->
+@if (ViewData["SentimentMethod"] != null)
+{
+    string sentiment = ViewData["Sentiment"]?.ToString() ?? "NO SENTIMENT DETECTED";
+    string alertClass = "";
+    sentiment = sentiment.ToLower();
+
+    switch (sentiment)
+    {
+        case "positive":
+            alertClass = "alert-success";
+            break;
+        case "negative":
+            alertClass = "alert-danger";
+            break;
+        default:
+            alertClass = "alert-info";
+            break;
+    }
+
+    <div class="alert @alertClass" role="alert">
+        Sentiment: <b>@ViewData["Sentiment"]</b><br>
+        Positive score: <b>@ViewData["SentimentPositive"]</b><br>
+        Neutral score: <b>@ViewData["SentimentNeutral"]</b><br>
+        Negative score: <b>@ViewData["SentimentNegative"]</b><br>
+        <br>
+        <button id="sentiment" class="btn btn-primary" onclick="toggleDetails('sentiment')">Show REST request details</button>
+        <div id="sentiment-details" style="display: none;">
+            <br><b>REST request details:</b><br>
+            Method: <b>@ViewData["SentimentMethod"]</b><br>
+            URI: <b>@ViewData["SentimentUri"]</b><br>
+            Body:
+            <b>
+            <pre>
+@Html.Raw(JsonConvert.SerializeObject(ViewData["SentimentBody"], Formatting.Indented).TrimStart())
+            </pre>
+            </b>
+        </div>
+        <br>
+        <button id="sentimentResponse" class="btn btn-primary" onclick="toggleDetails('sentimentResponse')">Show REST response details</button>
+        <div id="sentimentResponse-details" style="display: none;">
+            <br><b>REST response:</b><br>
+            <pre>
+@Html.Raw(JsonConvert.SerializeObject(ViewData["SentimentResponse"], Formatting.Indented).TrimStart())
+            </pre>
+        </div>
+    </div>
+}
+
+<!-- Key phrases (SDK) -->
+@if (ViewData["keyPhrasesMethod"] == null && ViewData["KeyPhrases"] != null)
+{
+    <div class="alert alert-info" role="alert">
+        Key phrases: <br><b>@ViewData["KeyPhrases"]</b>
+    </div>
+}
+
+<!-- Key phrases (REST) -->
+@if (ViewData["keyPhrasesMethod"] != null)
+{
+    <div class="alert alert-info" role="alert">
+        Key phrases: <br><b>@ViewData["KeyPhrases"]</b>
+        <br>
+        <button id="phrases" class="btn btn-primary" onclick="toggleDetails('phrases')">Show REST request details</button>
+        <div id="phrases-details" style="display: none;">
+            <br><b>REST request details:</b><br>
+            Method: <b>@ViewData["keyPhrasesMethod"]</b><br>
+            URI: <b>@ViewData["keyPhrasesUri"]</b><br>
+            Body:
+            <b>
+            <pre>
+@Html.Raw(JsonConvert.SerializeObject(ViewData["keyPhrasesBody"], Formatting.Indented).TrimStart())
+            </pre>
+            </b>
+        </div>
+        <br>
+        <button id="phrasesResponse" class="btn btn-primary" onclick="toggleDetails('phrasesResponse')">Show REST response details</button>
+        <div id="phrasesResponse-details" style="display: none;">
+            <br><b>REST response:</b><br>
+            <pre>
+@Html.Raw(JsonConvert.SerializeObject(ViewData["keyPhrasesResponse"], Formatting.Indented).TrimStart())
+            </pre>
+        </div>
+    </div>
+}
+
+<!-- Entities (SDK) -->
+@if (ViewData["EntitiesMethod"] == null && ViewData["Entities"] != null)
+{
+    <div class="alert alert-info" role="alert">
+        Entities:
+        @if (ViewData["Entities"] is List<Azure.AI.TextAnalytics.CategorizedEntity> entities)
+        {
+            foreach (Azure.AI.TextAnalytics.CategorizedEntity entity in entities)
+            {
+                <div>Text: <b>@entity.Text</b>, Category: <b>@entity.Category</b>, Sub-category: <b>@(entity.SubCategory ?? "N/A")</b>, Confidence score: <b>@entity.ConfidenceScore</b></div>
+            }
+        }
+        @if (ViewData["Entities"] is List<IndexModel.RestEntity> restEntities)
+        {
+            foreach (IndexModel.RestEntity entity in restEntities)
+            {
+                <div>Text: <b>@entity.Text</b>, Category: <b>@entity.Category</b>, Sub-category: <b>@(entity.SubCategory ?? "N/A")</b>, Confidence score: <b>@entity.ConfidenceScore</b></div>
+            }
+        }
+    </div>
+}
+
+<!-- Entities (REST) -->
+@if (ViewData["EntitiesMethod"] != null)
+{
+    <div class="alert alert-info" role="alert">
+        Entities:
+        @if (ViewData["Entities"] is List<Azure.AI.TextAnalytics.CategorizedEntity> entities)
+        {
+            foreach (Azure.AI.TextAnalytics.CategorizedEntity entity in entities)
+            {
+                <div>Text: <b>@entity.Text</b>, Category: <b>@entity.Category</b>, Sub-category: <b>@(entity.SubCategory ?? "N/A")</b>, Confidence score: <b>@entity.ConfidenceScore</b></div>
+            }
+        }
+        @if (ViewData["Entities"] is List<IndexModel.RestEntity> restEntities)
+        {
+            foreach (IndexModel.RestEntity entity in restEntities)
+            {
+                <div>Text: <b>@entity.Text</b>, Category: <b>@entity.Category</b>, Sub-category: <b>@(entity.SubCategory ?? "N/A")</b>, Confidence score: <b>@entity.ConfidenceScore</b></div>
+            }
+        }
+        <br>
+        <button id="entities" class="btn btn-primary" onclick="toggleDetails('entities')">Show REST request details</button>
+        <div id="entities-details" style="display: none;">
+            <br><b>REST request details:</b><br>
+            Method: <b>@ViewData["EntitiesMethod"]</b><br>
+            URI: <b>@ViewData["EntitiesUri"]</b><br>
+            Body:
+            <b>
+            <pre>
+@Html.Raw(JsonConvert.SerializeObject(ViewData["EntitiesBody"], Formatting.Indented).TrimStart())
+            </pre>
+            </b>
+        </div>
+        <br>
+        <button id="entitiesResponse" class="btn btn-primary" onclick="toggleDetails('entitiesResponse')">Show REST response details</button>
+        <div id="entitiesResponse-details" style="display: none;">
+            <br><b>REST response:</b><br>
+            <pre>
+@Html.Raw(JsonConvert.SerializeObject(ViewData["entitiesResponse"], Formatting.Indented).TrimStart())
+            </pre>
+        </div>
+    </div>
+}
+
+<!-- Linked entities (SDK) -->
+@if (ViewData["LinkedEntitiesMethod"] == null && ViewData["LinkedEntities"] != null)
+{
+    <div class="alert alert-info" role="alert">
+        Linked entities:
+        @if (ViewData["LinkedEntities"] is List<Azure.AI.TextAnalytics.LinkedEntity> linkedEntities)
+        {
+            foreach (Azure.AI.TextAnalytics.LinkedEntity linkedEntity in linkedEntities)
+            {
+                <div>Name: <b>@linkedEntity.Name</b>, Url: <b><a href="@linkedEntity.Url">@linkedEntity.Url</a></b></div>
+            }
+        }
+        @if (ViewData["LinkedEntities"] is List<IndexModel.LinkedRestEntity> linkedRestEntities)
+        {
+            foreach (IndexModel.LinkedRestEntity linkedEntity in linkedRestEntities)
+            {
+                <div>Name: <b>@linkedEntity.Name</b>, Url: <b><a href="@linkedEntity.Url">@linkedEntity.Url</a></b></div>
+            }
+        }
+    </div>
+}
+
+<!-- Linked entities (REST) -->
+@if (ViewData["LinkedEntitiesMethod"] != null)
+{
+    <div class="alert alert-info" role="alert">
+        Linked entities:
+        @if (ViewData["LinkedEntities"] is List<Azure.AI.TextAnalytics.LinkedEntity> linkedEntities)
+        {
+            foreach (Azure.AI.TextAnalytics.LinkedEntity linkedEntity in linkedEntities)
+            {
+                <div>Name: <b>@linkedEntity.Name</b>, Url: <b><a href="@linkedEntity.Url">@linkedEntity.Url</a></b></div>
+            }
+        }
+        @if (ViewData["LinkedEntities"] is List<IndexModel.LinkedRestEntity> linkedRestEntities)
+        {
+            foreach (IndexModel.LinkedRestEntity linkedEntity in linkedRestEntities)
+            {
+                <div>Name: <b>@linkedEntity.Name</b>, Url: <b><a href="@linkedEntity.Url">@linkedEntity.Url</a></b></div>
+            }
+        }
+        <br>
+        <button id="linkedEntities" class="btn btn-primary" onclick="toggleDetails('linkedEntities')">Show REST request details</button>
+        <div id="linkedEntities-details" style="display: none;">
+            <br><b>REST request details:</b><br>
+            Method: <b>@ViewData["LinkedEntitiesMethod"]</b><br>
+            URI: <b>@ViewData["LinkedEntitiesUri"]</b><br>
+            Body:
+            <b>
+            <pre>
+@Html.Raw(JsonConvert.SerializeObject(ViewData["LinkedEntitiesBody"], Formatting.Indented).TrimStart())
+            </pre>
+            </b>
+        </div>
+        <br>
+        <button id="linkedEntitiesResponse" class="btn btn-primary" onclick="toggleDetails('linkedEntitiesResponse')">Show REST response details</button>
+        <div id="linkedEntitiesResponse-details" style="display: none;">
+            <br><b>REST response:</b><br>
+            <pre>
+@Html.Raw(JsonConvert.SerializeObject(ViewData["linkedEntitiesResponse"], Formatting.Indented).TrimStart())
+            </pre>
+        </div>
+    </div>
+}
+
+<script>
+    var inputTextElement = document.getElementById("inputText");
+    var submitSDKElement = document.getElementById("submitSDK");
+    var submitRESTElement = document.getElementById("submitREST");
+    function checkInput() {
+        var inputText = inputTextElement.value;
+        if (inputText.trim().length > 0) {
+            submitSDKElement.disabled = false;
+            submitRESTElement.disabled = false;
+        } else {
+            submitSDKElement.disabled = true;
+            submitRESTElement.disabled = true;
+        }
+    }
+
+    function resizeTextarea() {
+    const textarea = document.getElementById('inputText');
+    textarea.style.height = 'auto';
+    textarea.style.height = textarea.scrollHeight + 'px';
+    }
+
+    function toggleDetails(buttonId) {
+        var details = document.getElementById(buttonId + "-details");
+        var button = document.getElementById(buttonId);
+        var reqOrResp = buttonId.toLowerCase().includes("response") ? "response" : "request";
+        if (details.style.display === "none") {
+            details.style.display = "block";
+            button.textContent = "Hide REST " + reqOrResp + " details";
+        } else {
+            details.style.display = "none";
+            button.textContent = "Show REST " + reqOrResp + " details";
+        }
+    }
+
+</script>

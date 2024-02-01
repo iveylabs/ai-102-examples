@@ -1,0 +1,66 @@
+﻿
+@page
+@model IndexModel
+@using Newtonsoft.Json
+@{
+
+    ViewData["Title"] = "REST Example";
+}
+
+<form method="post" asp-page-handler="ProcessInput">
+    <div class="form-group">
+        <label for="inputText">Enter text:</label>
+        <textarea class="form-control" id="inputText" name="InputText" rows="5" oninput="checkInput(); resizeTextarea()"></textarea>
+    </div>
+    <button type="submit" name="submit" id="submit" class="btn btn-primary" disabled>Submit</button>
+</form>
+
+<!-- Orignal text -->
+@if (ViewData["OriginalText"] != null)
+{
+    <div class="alert alert-primary" role="alert">
+        <b>Original text:</b> <br> @ViewData["OriginalText"]
+    </div>
+}
+
+<!-- Detected language (REST)-->
+@if (ViewData["LanguageMethod"] != null)
+{    
+    <div class="alert alert-info" role="alert">
+        <b>REST request details:</b><br>
+        Method: <b>@ViewData["LanguageMethod"]</b><br>
+        URI: <b>@ViewData["LanguageUri"]</b><br>
+        Headers: <b>@ViewData["LanguageHeaders"]</b><br>
+        Body:
+        <b>
+        <pre>
+@Html.Raw(JsonConvert.SerializeObject(ViewData["LanguageBody"], Formatting.Indented).TrimStart())
+        </pre>
+        </b>
+    </div>
+    <div class="alert alert-info" role="alert">
+        <br><b>REST response:</b><br>
+        <pre>
+@Html.Raw(JsonConvert.SerializeObject(ViewData["LanguageResponse"], Formatting.Indented).TrimStart())
+        </pre>
+    </div>
+}
+
+<script>
+    var inputTextElement = document.getElementById("inputText");
+    var submitElement = document.getElementById("submit");
+    function checkInput() {
+        var inputText = inputTextElement.value;
+        if (inputText.trim().length > 0) {
+            submitElement.disabled = false;
+        } else {
+            submitElement.disabled = true;
+        }
+    }
+
+    function resizeTextarea() {
+    const textarea = document.getElementById('inputText');
+    textarea.style.height = 'auto';
+    textarea.style.height = textarea.scrollHeight + 'px';
+    }
+</script>
