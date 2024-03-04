@@ -219,6 +219,20 @@
         "fields": []
       },
       {
+        "name": "text_fr",
+        "type": "Edm.String",
+        "searchable": true,
+        "filterable": true,
+        "retrievable": true,
+        "sortable": false,
+        "facetable": true,
+        "key": false,
+        "indexAnalyzer": null,
+        "searchAnalyzer": null,
+        "analyzer": "fr.lucene",
+        "synonymMaps": []
+      },
+      {
         "name": "keyphrases",
         "type": "Collection(Edm.String)",
         "facetable": false,

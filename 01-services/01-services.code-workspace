@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "01-GettingStarted"
+		},
+		{
+			"path": "02-Security"
+		},
+		{
+			"path": "03-Container"
+		}
+	],
+	"settings": {}
+}

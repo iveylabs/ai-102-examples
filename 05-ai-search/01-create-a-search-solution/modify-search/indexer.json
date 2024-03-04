@@ -40,6 +40,10 @@
         "targetFieldName": "language"
       },
       {
+        "sourceFieldName": "/document/merged_content/text_fr",
+        "targetFieldName": "text_fr"
+      },
+      {
         "sourceFieldName": "/document/merged_content",
         "targetFieldName": "merged_content"
       },

@@ -192,6 +192,10 @@ public class IndexModel : PageModel
             {
                 date_string = $"{date_string} (your birthday!)";
             }
+            if(date_string.StartsWith("14/02/"))
+            {
+                date_string = $"{date_string} (Valentine's Day!🌹)";
+            }
         }
         return date_string;
     }

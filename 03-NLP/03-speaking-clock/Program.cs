@@ -27,9 +27,6 @@ namespace speaking_clock
                 // Configure speech service
                 speechConfig = SpeechConfig.FromSubscription(speechSvcKey, speechSvcRegion);
                 Console.WriteLine("Ready to use speech service in " + speechConfig.Region);
-                    
-                // Configure voice
-                speechConfig.SpeechSynthesisVoiceName = "en-US-AriaNeural";
 
                 // Get spoken input
                 string command = "";

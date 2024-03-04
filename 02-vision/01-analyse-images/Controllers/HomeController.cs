@@ -1,8 +1,11 @@
 ﻿using ImageWebApp.Models;
 using Microsoft.AspNetCore.Mvc;
 using Azure;
-using Azure.AI.Vision.Common;
 using Azure.AI.Vision.ImageAnalysis;
+using System.Net.Http.Headers;
+using System.Text.Json;
+using System.Text;
+using Microsoft.AspNetCore.Http.Features;
 
 namespace ImageWebApp.Controllers
 {
@@ -43,105 +46,111 @@ namespace ImageWebApp.Controllers
                 ViewBag.ImagePath = "/images/" + fileName; // Set the ViewBag property to store the image path for displaying
 
                 // Authenticate
-                var serviceOptions = new VisionServiceOptions(
+                ImageAnalysisClient client = new (
                     new Uri(_visionEndpoint),
                     new AzureKeyCredential(_visionKey));
-
-                // Analyze the image from a file
-                using var imageStream = new FileStream(filePath, FileMode.Open);
                 
                 // Analysis options
-                var analysisOptions = new ImageAnalysisOptions()
+                ImageAnalysisOptions analysisOptions = new()
                 {
-                    // Specify features to be retrieved
-                    Features =
-                        ImageAnalysisFeature.Caption
-                        | ImageAnalysisFeature.DenseCaptions
-                        | ImageAnalysisFeature.Tags
-                        | ImageAnalysisFeature.Text
-                    ,
                     GenderNeutralCaption = GenderNeutral
                 };
 
-                // Analyze the image
-                using var imageSource = VisionSource.FromFile(filePath);
-                using var analyzer = new ImageAnalyzer(serviceOptions, imageSource, analysisOptions);
-                var result = analyzer.Analyze();
+                // Open the file in a stream
+                using FileStream stream = new(filePath, FileMode.Open);
 
-                if (result.Reason == ImageAnalysisResultReason.Analyzed)
+                // Analyse the image
+                ImageAnalysisResult result = client.Analyze(
+                    BinaryData.FromStream(stream),
+                    VisualFeatures.Caption |
+                    VisualFeatures.DenseCaptions |
+                    VisualFeatures.Tags |
+                    VisualFeatures.Read,
+                    analysisOptions
+                );
+
+                // Get image caption
+                if (result.Caption != null)
                 {
-                    // Get image caption
-                    if (result.Caption != null)
-                    {
-                        ViewBag.Caption = $"{result.Caption.Content} (confidence: {result.Caption.Confidence:0.0000})";
-                    }
-
-                    // Get image dense captions
-                    if (result.DenseCaptions != null)
-                    {
-
-                        var denseCaptions = new List<string>();
-
-                        foreach (var caption in result.DenseCaptions)
-                        {
-                            denseCaptions.Add($"{caption.Content} (confidence: {caption.Confidence:0.0000})");
-                        }
-                        ViewBag.DenseCaptions = denseCaptions;
-
-                    }
-
-                    // Get image tags
-                    if (result.Tags != null)
-                    {
-                        var tags = new List<string>();
-                        foreach (var tag in result.Tags)
-                        {
-                            tags.Add($"{tag.Name} (confidence: {tag.Confidence:0.0000})");
-                        }
-                        ViewBag.Tags = tags;
-                    }
-
-                    // Get image text
-                    if (result.Text != null)
-                    {
-                        var lines = new List<string>();
-                        foreach (var line in result.Text.Lines)
-                        {
-                            
-                            lines.Add($"{line.Content}");
-                        }
-                        ViewBag.Lines = lines;
-                    }
+                    ViewBag.Caption = $"{result.Caption.Text} (confidence: {result.Caption.Confidence:0.0000})";
                 }
+
+                // Get image dense captions
+                if (result.DenseCaptions != null)
+                {
+
+                    var denseCaptions = new List<string>();
+
+                    foreach (var caption in result.DenseCaptions.Values)
+                    {
+                        denseCaptions.Add($"{caption.Text} (confidence: {caption.Confidence:0.0000})");
+                    }
+                    ViewBag.DenseCaptions = denseCaptions;
+
+                }
+
+                // Get image tags
+                if (result.Tags != null)
+                {
+                    var tags = new List<string>();
+                    foreach (var tag in result.Tags.Values)
+                    {
+                        tags.Add($"{tag.Name} (confidence: {tag.Confidence:0.0000})");
+                    }
+                    ViewBag.Tags = tags;
+                }
+
+                // Get image text
+                if (result.Read != null)
+                {
+                    var lines = new List<string>();
+                    foreach (var block in result.Read.Blocks)
+                    {
+                        foreach (var line in block.Lines)
+                        
+                        lines.Add($"{line.Text}");
+                    }
+                    ViewBag.Lines = lines;
+                }
+
                 if(RemoveBackground)
                 {
-                    BackgroundRemoval(filePath, serviceOptions);
+                    string outputImageFile = $"{Path.GetFileNameWithoutExtension(filePath)}_background_removed.png";
+                    string newImagePath = Url.Content($"/images/{outputImageFile}");
+                    await BackgroundRemoval(filePath, newImagePath, outputImageFile);
                 }
 
             }
             return View(model); // Return the index view with the model
      
         }
-        public void BackgroundRemoval(string imageFile, VisionServiceOptions serviceOptions)
+        public async Task BackgroundRemoval(string filePath, string newImagePath, string outputImageFile)
         {
-            using var imageSource = VisionSource.FromFile(imageFile);
-            var analysisOptions = new ImageAnalysisOptions()
-            {
-                SegmentationMode = ImageSegmentationMode.BackgroundRemoval
-            };
-            using var analyzer = new ImageAnalyzer(serviceOptions, imageSource, analysisOptions);
-            var result = analyzer.Analyze();
+            string apiVersion = "2023-02-01-preview";
+            string mode = "backgroundRemoval";
+            string url = $"{_visionEndpoint}computervision/imageanalysis:segment?overload=stream&api-version={apiVersion}&mode={mode}";
 
-            // Remove the background
-            if(result.Reason == ImageAnalysisResultReason.Analyzed)
-            {
-                using var segmentationResult = result.SegmentationResult;
+            using var client = new HttpClient();
+            client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", _visionKey);
 
-                var imageBuffer = segmentationResult.ImageBuffer;
-                string outputImageFile = $"{Path.GetFileNameWithoutExtension(imageFile)}_background_removed.png";
+            using var stream = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+            var byteData = new byte[stream.Length];
+            await stream.ReadAsync(byteData.AsMemory(0, (int)stream.Length));
+
+            using var content = new ByteArrayContent(byteData);
+            content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
+            var response = await client.PostAsync(url, content);
+
+            if(response.IsSuccessStatusCode)
+            {
                 using var fileStream = new FileStream(Path.Combine(_env.WebRootPath, "images", outputImageFile), FileMode.Create);
-                fileStream.Write(imageBuffer.Span);
-                ViewBag.NewImagePath = Url.Content($"/images/{outputImageFile}");
+                fileStream.Write(await response.Content.ReadAsByteArrayAsync());
+
+                ViewBag.NewImagePath = newImagePath;
+            }
+            else
+            {
+                Console.WriteLine("It didn't work");
             }
         }
 
