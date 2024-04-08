@@ -1,0 +1,95 @@
+# Delete person group
+DELETE https://{{faceResourceName}}.cognitiveservices.azure.com/face/v1.0/persongroups/{{personGroupName}}
+Ocp-Apim-Subscription-Key: {{faceKey}}
+###
+
+# Create person group
+PUT https://{{faceResourceName}}.cognitiveservices.azure.com/face/v1.0/persongroups/{{personGroupName}}
+Ocp-Apim-Subscription-Key: {{faceKey}}
+
+{
+    "name": "Microsoft Technical Trainers",
+    "recognitionModel": "recognition_04"
+}
+###
+
+# Get person group
+GET https://{{faceResourceName}}.cognitiveservices.azure.com/face/v1.0/persongroups/{{personGroupName}}
+Ocp-Apim-Subscription-Key: {{faceKey}}
+###
+
+# Add person to person group
+# @name person
+POST https://{{faceResourceName}}.cognitiveservices.azure.com/face/v1.0/persongroups/{{personGroupName}}/persons
+Ocp-Apim-Subscription-Key: {{faceKey}}
+
+{
+    "name": "Paul Ivey",
+    "userData": "Some optional data"
+}
+###
+
+# Get person
+GET https://{{faceResourceName}}.cognitiveservices.azure.com/face/v1.0/persongroups/{{personGroupName}}/persons/{{person.response.body.personId}}
+Ocp-Apim-Subscription-Key: {{faceKey}}
+###
+
+# List persons in person group
+GET https://{{faceResourceName}}.cognitiveservices.azure.com/face/v1.0/persongroups/{{personGroupName}}/persons
+Ocp-Apim-Subscription-Key: {{faceKey}}
+###
+
+# Add face to person
+POST https://{{faceResourceName}}.cognitiveservices.azure.com/face/v1.0/persongroups/{{personGroupName}}/persons/{{person.response.body.personId}}/persistedFaces
+Ocp-Apim-Subscription-Key: {{faceKey}}
+Content-Type: application/octet-stream
+
+< {{faceTrainingPath}}1.jpg
+# < {{faceTrainingPath}}2.jpg
+# < {{faceTrainingPath}}3.jpg
+# < {{faceTrainingPath}}4.jpg
+# < {{faceTrainingPath}}5.jpg
+# < {{faceTrainingPath}}6.jpg
+# < {{faceTrainingPath}}7.jpg
+###
+
+# List persons in person group (now the faces have been added)
+GET https://{{faceResourceName}}.cognitiveservices.azure.com/face/v1.0/persongroups/{{personGroupName}}/persons
+Ocp-Apim-Subscription-Key: {{faceKey}}
+###
+
+# Train person group
+POST https://{{faceResourceName}}.cognitiveservices.azure.com/face/v1.0/persongroups/{{personGroupName}}/train
+Ocp-Apim-Subscription-Key: {{faceKey}}
+###
+
+# Get training status (URL found in Operation-Location header of the train person group response)
+GET https://{{faceResourceName}}.cognitiveservices.azure.com/face/v1.0/persongroups/{{personGroupName}}/training
+Ocp-Apim-Subscription-Key: {{faceKey}}
+###
+
+# Detect face (get FaceId)
+# @name faceId
+POST https://{{faceResourceName}}.cognitiveservices.azure.com/face/v1.0/detect
+    ?returnFaceId=true
+    &returnFaceLandmarks=true
+    &returnRecognitionModel=false
+    &faceIdTimeToLive=86400
+    &recognitionModel=recognition_04
+    &detectionModel=detection_03
+Ocp-Apim-Subscription-Key: {{faceKey}}
+Content-Type: application/octet-stream
+
+< {{faceTestingPath}}NotMe.jpg
+# < {{faceTestingPath}}Me.jpg
+###
+
+# Verify face
+POST https://{{faceResourceName}}.cognitiveservices.azure.com/face/v1.0/verify
+Ocp-Apim-Subscription-Key: {{faceKey}}
+
+{
+    "faceId": "{{faceId.response.body.*.faceId}}",
+    "personId": "{{person.response.body.personId}}",
+    "personGroupId": "{{personGroupName}}"
+}

@@ -1,0 +1,57 @@
+# List pre-built models
+GET {{docIntelEndpoint}}/documentintelligence/documentModels?api-version=2024-02-29-preview
+Ocp-Apim-Subscription-Key:{{docIntelKey}}
+###
+
+# Request the pre-built invoice model to analyze a document
+# @name invoice
+POST {{docIntelEndpoint}}/documentintelligence/documentModels/prebuilt-invoice:analyze?api-version=2024-02-29-preview
+Ocp-Apim-Subscription-Key:{{docIntelKey}}
+Content-Type: application/octet-stream
+
+< {{prebuiltPath}}sample-invoice.pdf
+###
+
+# Get analysis result
+GET {{invoice.response.headers.Operation-Location}}
+Ocp-Apim-Subscription-Key:{{docIntelKey}}
+###
+
+# Delete a custom model
+DELETE {{docIntelEndpoint}}/documentintelligence/documentModels/myCustomModel?api-version=2024-02-29-preview
+Ocp-Apim-Subscription-Key:{{docIntelKey}}
+###
+
+# Request building of a custom model
+# @name train
+POST {{docIntelEndpoint}}/documentintelligence/documentModels:build?api-version=2024-02-29-preview
+Ocp-Apim-Subscription-Key:{{docIntelKey}}
+
+{
+  "modelId": "myCustomModel",
+  "description": "Just for a demo",
+  "buildMode": "template",
+  "azureBlobSource": {
+    "containerUrl": "https://iveyrestr.blob.core.windows.net/customtraining"
+  }
+}
+####
+
+# Get training status
+GET {{train.response.headers.Operation-Location}}
+Ocp-Apim-Subscription-Key:{{docIntelKey}}
+###
+
+# Request the custom model to analyze a document
+# @name custom
+POST {{docIntelEndpoint}}/documentintelligence/documentModels/myCustomModel:analyze?api-version=2024-02-29-preview
+Ocp-Apim-Subscription-Key:{{docIntelKey}}
+Content-Type: application/octet-stream
+
+< {{customTestingPath}}custom-form.jpg
+###
+
+# Get analysis result
+GET {{custom.response.headers.Operation-Location}}
+Ocp-Apim-Subscription-Key:{{docIntelKey}}
+###
