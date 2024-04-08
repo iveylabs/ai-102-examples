@@ -132,7 +132,7 @@ public class IndexModel : PageModel
             // PII detection
             if(Request.Form["DetectPII"].Contains("on"))
             {
-                Response<PiiEntityCollection> piiResponse = client.RecognizePiiEntities(originalText, "en", new RecognizePiiEntitiesOptions { CategoriesFilter = { PiiEntityCategory.Email } });
+                Response<PiiEntityCollection> piiResponse = client.RecognizePiiEntities(originalText, "en", new RecognizePiiEntitiesOptions { CategoriesFilter = { PiiEntityCategory.Email, PiiEntityCategory.PhoneNumber } });
                 PiiEntityCollection piiEntities = piiResponse.Value;
                 if(piiEntities.Count > 0)
                 {

@@ -56,7 +56,7 @@ namespace search_client.Pages
                 Facets = {"metadata_author"},
                 HighlightFields = {"merged_content-3","imageCaption-3"} 
             };
-            options.Select.Add("url");
+            // options.Select.Add("url");
             options.Select.Add("metadata_storage_name");
             options.Select.Add("metadata_author");
             options.Select.Add("metadata_storage_size");
