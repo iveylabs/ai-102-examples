@@ -1,0 +1,697 @@
+{
+  "images": [
+    {
+      "id": 1,
+      "width": 1000,
+      "height": 788,
+      "file_name": "glasses7.jpg",
+      "coco_url": "AmlDatastore://object_detection_datastore/glasses7.jpg",
+      "absolute_url": "https://iveysionstr.blob.core.windows.net/detection/glasses7.jpg",
+      "date_captured": "2024-04-08T12:43:50.246628Z"
+    },
+    {
+      "id": 2,
+      "width": 1024,
+      "height": 1024,
+      "file_name": "glasses11(DALL-E).jpg",
+      "coco_url": "AmlDatastore://object_detection_datastore/glasses11(DALL-E).jpg",
+      "absolute_url": "https://iveysionstr.blob.core.windows.net/detection/glasses11(DALL-E).jpg",
+      "date_captured": "2024-04-08T12:43:50.2466164Z"
+    },
+    {
+      "id": 3,
+      "width": 1500,
+      "height": 1200,
+      "file_name": "61mBPVBxSuL._AC_UL1500_.jpg",
+      "coco_url": "AmlDatastore://object_detection_datastore/61mBPVBxSuL._AC_UL1500_.jpg",
+      "absolute_url": "https://iveysionstr.blob.core.windows.net/detection/61mBPVBxSuL._AC_UL1500_.jpg",
+      "date_captured": "2024-04-08T12:43:50.2466262Z"
+    },
+    {
+      "id": 4,
+      "width": 1536,
+      "height": 1023,
+      "file_name": "R.jpeg",
+      "coco_url": "AmlDatastore://object_detection_datastore/R.jpeg",
+      "absolute_url": "https://iveysionstr.blob.core.windows.net/detection/R.jpeg",
+      "date_captured": "2024-04-08T12:43:50.2466381Z"
+    },
+    {
+      "id": 5,
+      "width": 966,
+      "height": 1024,
+      "file_name": "glasses3.jpg",
+      "coco_url": "AmlDatastore://object_detection_datastore/glasses3.jpg",
+      "absolute_url": "https://iveysionstr.blob.core.windows.net/detection/glasses3.jpg",
+      "date_captured": "2024-04-08T12:43:50.2465965Z"
+    },
+    {
+      "id": 6,
+      "width": 1716,
+      "height": 2000,
+      "file_name": "79025711_901_main.jpg",
+      "coco_url": "AmlDatastore://object_detection_datastore/79025711_901_main.jpg",
+      "absolute_url": "https://iveysionstr.blob.core.windows.net/detection/79025711_901_main.jpg",
+      "date_captured": "2024-04-08T12:43:50.2466363Z"
+    },
+    {
+      "id": 7,
+      "width": 964,
+      "height": 601,
+      "file_name": "9fc072f4c2d092f54f91a02d2e7f1d9a.jpg",
+      "coco_url": "AmlDatastore://object_detection_datastore/9fc072f4c2d092f54f91a02d2e7f1d9a.jpg",
+      "absolute_url": "https://iveysionstr.blob.core.windows.net/detection/9fc072f4c2d092f54f91a02d2e7f1d9a.jpg",
+      "date_captured": "2024-04-08T12:43:50.246608Z"
+    },
+    {
+      "id": 8,
+      "width": 1024,
+      "height": 1024,
+      "file_name": "OIG.jpeg",
+      "coco_url": "AmlDatastore://object_detection_datastore/OIG.jpeg",
+      "absolute_url": "https://iveysionstr.blob.core.windows.net/detection/OIG.jpeg",
+      "date_captured": "2024-04-08T12:43:50.2466061Z"
+    },
+    {
+      "id": 9,
+      "width": 900,
+      "height": 653,
+      "file_name": "glasses1.jpg",
+      "coco_url": "AmlDatastore://object_detection_datastore/glasses1.jpg",
+      "absolute_url": "https://iveysionstr.blob.core.windows.net/detection/glasses1.jpg",
+      "date_captured": "2024-04-08T12:43:50.2466214Z"
+    },
+    {
+      "id": 10,
+      "width": 590,
+      "height": 800,
+      "file_name": "C0232119-Sunglasses_and_purse,_X-ray.jpg",
+      "coco_url": "AmlDatastore://object_detection_datastore/C0232119-Sunglasses_and_purse,_X-ray.jpg",
+      "absolute_url": "https://iveysionstr.blob.core.windows.net/detection/C0232119-Sunglasses_and_purse,_X-ray.jpg",
+      "date_captured": "2024-04-08T12:43:50.2466399Z"
+    },
+    {
+      "id": 11,
+      "width": 5184,
+      "height": 3456,
+      "file_name": "accessory-eyewear-fashion-701877.jpg",
+      "coco_url": "AmlDatastore://object_detection_datastore/accessory-eyewear-fashion-701877.jpg",
+      "absolute_url": "https://iveysionstr.blob.core.windows.net/detection/accessory-eyewear-fashion-701877.jpg",
+      "date_captured": "2024-04-08T12:43:50.2466198Z"
+    },
+    {
+      "id": 12,
+      "width": 1144,
+      "height": 1479,
+      "file_name": "glasses6.jpg",
+      "coco_url": "AmlDatastore://object_detection_datastore/glasses6.jpg",
+      "absolute_url": "https://iveysionstr.blob.core.windows.net/detection/glasses6.jpg",
+      "date_captured": "2024-04-08T12:43:50.2466312Z"
+    },
+    {
+      "id": 13,
+      "width": 942,
+      "height": 686,
+      "file_name": "glasses2.png",
+      "coco_url": "AmlDatastore://object_detection_datastore/glasses2.png",
+      "absolute_url": "https://iveysionstr.blob.core.windows.net/detection/glasses2.png",
+      "date_captured": "2024-04-08T12:43:50.2465926Z"
+    },
+    {
+      "id": 14,
+      "width": 3840,
+      "height": 2400,
+      "file_name": "wp2366361.jpg",
+      "coco_url": "AmlDatastore://object_detection_datastore/wp2366361.jpg",
+      "absolute_url": "https://iveysionstr.blob.core.windows.net/detection/wp2366361.jpg",
+      "date_captured": "2024-04-08T12:43:50.2465984Z"
+    },
+    {
+      "id": 15,
+      "width": 1024,
+      "height": 1024,
+      "file_name": "glasses10(DALL-E).jpg",
+      "coco_url": "AmlDatastore://object_detection_datastore/glasses10(DALL-E).jpg",
+      "absolute_url": "https://iveysionstr.blob.core.windows.net/detection/glasses10(DALL-E).jpg",
+      "date_captured": "2024-04-08T12:43:50.2466181Z"
+    },
+    {
+      "id": 16,
+      "width": 3381,
+      "height": 1494,
+      "file_name": "2-2-sunglasses-picture.png",
+      "coco_url": "AmlDatastore://object_detection_datastore/2-2-sunglasses-picture.png",
+      "absolute_url": "https://iveysionstr.blob.core.windows.net/detection/2-2-sunglasses-picture.png",
+      "date_captured": "2024-04-08T12:43:50.2466147Z"
+    },
+    {
+      "id": 17,
+      "width": 1600,
+      "height": 1200,
+      "file_name": "glasses-1546680.jpg",
+      "coco_url": "AmlDatastore://object_detection_datastore/glasses-1546680.jpg",
+      "absolute_url": "https://iveysionstr.blob.core.windows.net/detection/glasses-1546680.jpg",
+      "date_captured": "2024-04-08T12:43:50.2466001Z"
+    },
+    {
+      "id": 18,
+      "width": 2053,
+      "height": 1360,
+      "file_name": "R.png",
+      "coco_url": "AmlDatastore://object_detection_datastore/R.png",
+      "absolute_url": "https://iveysionstr.blob.core.windows.net/detection/R.png",
+      "date_captured": "2024-04-08T12:43:50.2466042Z"
+    },
+    {
+      "id": 19,
+      "width": 1024,
+      "height": 684,
+      "file_name": "glasses9.jpg",
+      "coco_url": "AmlDatastore://object_detection_datastore/glasses9.jpg",
+      "absolute_url": "https://iveysionstr.blob.core.windows.net/detection/glasses9.jpg",
+      "date_captured": "2024-04-08T12:43:50.2466111Z"
+    },
+    {
+      "id": 20,
+      "width": 620,
+      "height": 620,
+      "file_name": "glasses5.png",
+      "coco_url": "AmlDatastore://object_detection_datastore/glasses5.png",
+      "absolute_url": "https://iveysionstr.blob.core.windows.net/detection/glasses5.png",
+      "date_captured": "2024-04-08T12:43:50.2466018Z"
+    },
+    {
+      "id": 21,
+      "width": 383,
+      "height": 612,
+      "file_name": "glasses4.jpg",
+      "coco_url": "AmlDatastore://object_detection_datastore/glasses4.jpg",
+      "absolute_url": "https://iveysionstr.blob.core.windows.net/detection/glasses4.jpg",
+      "date_captured": "2024-04-08T12:43:50.2466129Z"
+    },
+    {
+      "id": 22,
+      "width": 1756,
+      "height": 1756,
+      "file_name": "7d548e27-01f0-43a9-bcd7-afe71f6472b1.91a7d5c8991278afc7d5fd64afcd8cd0.jpg",
+      "coco_url": "AmlDatastore://object_detection_datastore/7d548e27-01f0-43a9-bcd7-afe71f6472b1.91a7d5c8991278afc7d5fd64afcd8cd0.jpg",
+      "absolute_url": "https://iveysionstr.blob.core.windows.net/detection/7d548e27-01f0-43a9-bcd7-afe71f6472b1.91a7d5c8991278afc7d5fd64afcd8cd0.jpg",
+      "date_captured": "2024-04-08T12:43:50.2466233Z"
+    },
+    {
+      "id": 23,
+      "width": 474,
+      "height": 314,
+      "file_name": "OIP (1).jpeg",
+      "coco_url": "AmlDatastore://object_detection_datastore/OIP (1).jpeg",
+      "absolute_url": "https://iveysionstr.blob.core.windows.net/detection/OIP%20(1).jpeg",
+      "date_captured": "2024-04-08T12:43:50.2466329Z"
+    },
+    {
+      "id": 24,
+      "width": 474,
+      "height": 266,
+      "file_name": "OIP.jpeg",
+      "coco_url": "AmlDatastore://object_detection_datastore/OIP.jpeg",
+      "absolute_url": "https://iveysionstr.blob.core.windows.net/detection/OIP.jpeg",
+      "date_captured": "2024-04-08T12:43:50.2466346Z"
+    },
+    {
+      "id": 25,
+      "width": 1000,
+      "height": 704,
+      "file_name": "glasses-1177867.jpg",
+      "coco_url": "AmlDatastore://object_detection_datastore/glasses-1177867.jpg",
+      "absolute_url": "https://iveysionstr.blob.core.windows.net/detection/glasses-1177867.jpg",
+      "date_captured": "2024-04-08T12:43:50.2466297Z"
+    }
+  ],
+  "annotations": [
+    {
+      "id": 1,
+      "category_id": 1,
+      "image_id": 1,
+      "area": 0.038,
+      "bbox": [
+        0.36294128521126756,
+        0.20422535211267606,
+        0.13429295774647887,
+        0.28450704225352114
+      ]
+    },
+    {
+      "id": 2,
+      "category_id": 1,
+      "image_id": 2,
+      "area": 0.07,
+      "bbox": [
+        0.25,
+        0.4197183098591549,
+        0.4492957746478873,
+        0.1563380281690141
+      ]
+    },
+    {
+      "id": 3,
+      "category_id": 1,
+      "image_id": 3,
+      "area": 0.42,
+      "bbox": [
+        0.0,
+        0.04647887323943662,
+        0.8791549295774648,
+        0.47746478873239434
+      ]
+    },
+    {
+      "id": 4,
+      "category_id": 1,
+      "image_id": 3,
+      "area": 0.413,
+      "bbox": [
+        0.0014084507042253522,
+        0.532394366197183,
+        0.8822535211267606,
+        0.46760563380281694
+      ]
+    },
+    {
+      "id": 5,
+      "category_id": 1,
+      "image_id": 4,
+      "area": 0.154,
+      "bbox": [
+        0.21812598000110037,
+        0.3323943661971831,
+        0.45214018485915486,
+        0.3408450704225352
+      ]
+    },
+    {
+      "id": 6,
+      "category_id": 1,
+      "image_id": 5,
+      "area": 0.024,
+      "bbox": [
+        0.7411425072172163,
+        0.46338028169014084,
+        0.0791298515732074,
+        0.3084507042253521
+      ]
+    },
+    {
+      "id": 7,
+      "category_id": 1,
+      "image_id": 6,
+      "area": 0.294,
+      "bbox": [
+        0.031343363209560396,
+        0.34225352112676055,
+        0.9356840342755836,
+        0.31408450704225355
+      ]
+    },
+    {
+      "id": 8,
+      "category_id": 1,
+      "image_id": 7,
+      "area": 0.019,
+      "bbox": [
+        0.2554556233928467,
+        0.3929577464788732,
+        0.0702472093974636,
+        0.2633802816901409
+      ]
+    },
+    {
+      "id": 9,
+      "category_id": 2,
+      "image_id": 7,
+      "area": 0.095,
+      "bbox": [
+        0.5136141179285255,
+        0.24788732394366197,
+        0.3292837940506107,
+        0.2873239436619718
+      ]
+    },
+    {
+      "id": 10,
+      "category_id": 2,
+      "image_id": 7,
+      "area": 0.078,
+      "bbox": [
+        0.4767343329948571,
+        0.2140845070422535,
+        0.33367424463795214,
+        0.23521126760563382
+      ]
+    },
+    {
+      "id": 11,
+      "category_id": 1,
+      "image_id": 8,
+      "area": 0.047,
+      "bbox": [
+        0.14014084507042254,
+        0.30422535211267604,
+        0.33098591549295775,
+        0.1422535211267606
+      ]
+    },
+    {
+      "id": 12,
+      "category_id": 1,
+      "image_id": 8,
+      "area": 0.043,
+      "bbox": [
+        0.1556338028169014,
+        0.45211267605633804,
+        0.31408450704225355,
+        0.13661971830985914
+      ]
+    },
+    {
+      "id": 13,
+      "category_id": 1,
+      "image_id": 9,
+      "area": 0.014,
+      "bbox": [
+        0.4054744229264476,
+        0.7788732394366197,
+        0.19722848200312987,
+        0.06901408450704227
+      ]
+    },
+    {
+      "id": 14,
+      "category_id": 1,
+      "image_id": 10,
+      "area": 0.069,
+      "bbox": [
+        0.24695631415612318,
+        0.4887323943661972,
+        0.5309142993554548,
+        0.12957746478873233
+      ]
+    },
+    {
+      "id": 15,
+      "category_id": 1,
+      "image_id": 11,
+      "area": 0.272,
+      "bbox": [
+        0.15492957746478872,
+        0.34507042253521125,
+        0.6657276995305165,
+        0.4084507042253521
+      ]
+    },
+    {
+      "id": 16,
+      "category_id": 1,
+      "image_id": 12,
+      "area": 0.002,
+      "bbox": [
+        0.4615256763821228,
+        0.5287107258938245,
+        0.03221575282788719,
+        0.054712892741061725
+      ]
+    },
+    {
+      "id": 17,
+      "category_id": 2,
+      "image_id": 13,
+      "area": 0.048,
+      "bbox": [
+        0.11178386000717683,
+        0.5084507042253521,
+        0.12205675667593671,
+        0.3915492957746479
+      ]
+    },
+    {
+      "id": 18,
+      "category_id": 2,
+      "image_id": 13,
+      "area": 0.047,
+      "bbox": [
+        0.16717095967524895,
+        0.5211267605633803,
+        0.1200053826141563,
+        0.39295774647887327
+      ]
+    },
+    {
+      "id": 19,
+      "category_id": 2,
+      "image_id": 13,
+      "area": 0.057,
+      "bbox": [
+        0.6256530624831793,
+        0.4915492957746479,
+        0.14462187135552174,
+        0.39577464788732397
+      ]
+    },
+    {
+      "id": 20,
+      "category_id": 2,
+      "image_id": 13,
+      "area": 0.073,
+      "bbox": [
+        0.72001626932508,
+        0.5535211267605634,
+        0.19180347477647197,
+        0.3830985915492957
+      ]
+    },
+    {
+      "id": 21,
+      "category_id": 1,
+      "image_id": 13,
+      "area": 0.046,
+      "bbox": [
+        0.35897443445172095,
+        0.44366197183098594,
+        0.2123172153942765,
+        0.21690140845070421
+      ]
+    },
+    {
+      "id": 22,
+      "category_id": 1,
+      "image_id": 14,
+      "area": 0.51,
+      "bbox": [
+        0.06998239436619719,
+        0.1056338028169014,
+        0.8838028169014085,
+        0.5774647887323944
+      ]
+    },
+    {
+      "id": 23,
+      "category_id": 1,
+      "image_id": 15,
+      "area": 0.136,
+      "bbox": [
+        0.36971830985915494,
+        0.4211267605633803,
+        0.4929577464788732,
+        0.276056338028169
+      ]
+    },
+    {
+      "id": 24,
+      "category_id": 1,
+      "image_id": 16,
+      "area": 0.677,
+      "bbox": [
+        0.034045922406967535,
+        0.13808112497495928,
+        0.9121140142517814,
+        0.7418080874567154
+      ]
+    },
+    {
+      "id": 25,
+      "category_id": 1,
+      "image_id": 17,
+      "area": 0.439,
+      "bbox": [
+        0.08751100352112677,
+        0.12816901408450704,
+        0.8302816901408452,
+        0.528169014084507
+      ]
+    },
+    {
+      "id": 26,
+      "category_id": 1,
+      "image_id": 18,
+      "area": 0.335,
+      "bbox": [
+        0.059159388870975486,
+        0.30422535211267604,
+        0.7006990800134464,
+        0.47746478873239434
+      ]
+    },
+    {
+      "id": 27,
+      "category_id": 1,
+      "image_id": 19,
+      "area": 0.013,
+      "bbox": [
+        0.4120414626430458,
+        0.7816901408450704,
+        0.17875220070422532,
+        0.07464788732394367
+      ]
+    },
+    {
+      "id": 28,
+      "category_id": 1,
+      "image_id": 20,
+      "area": 0.018,
+      "bbox": [
+        0.6373239436619719,
+        0.3901408450704225,
+        0.09436619718309858,
+        0.19577464788732396
+      ]
+    },
+    {
+      "id": 29,
+      "category_id": 2,
+      "image_id": 20,
+      "area": 0.044,
+      "bbox": [
+        0.35140845070422533,
+        0.5394366197183098,
+        0.13521126760563384,
+        0.32535211267605635
+      ]
+    },
+    {
+      "id": 30,
+      "category_id": 2,
+      "image_id": 20,
+      "area": 0.043,
+      "bbox": [
+        0.26549295774647885,
+        0.4507042253521127,
+        0.1295774647887324,
+        0.328169014084507
+      ]
+    },
+    {
+      "id": 31,
+      "category_id": 1,
+      "image_id": 21,
+      "area": 0.019,
+      "bbox": [
+        0.6924399202000514,
+        0.44084507042253523,
+        0.09677490530651267,
+        0.1971830985915493
+      ]
+    },
+    {
+      "id": 32,
+      "category_id": 2,
+      "image_id": 21,
+      "area": 0.067,
+      "bbox": [
+        0.21081597286066264,
+        0.4098591549295775,
+        0.3398374581693817,
+        0.19718309859154926
+      ]
+    },
+    {
+      "id": 33,
+      "category_id": 2,
+      "image_id": 21,
+      "area": 0.064,
+      "bbox": [
+        0.29183682381495235,
+        0.5197183098591549,
+        0.35784209171477943,
+        0.1788732394366197
+      ]
+    },
+    {
+      "id": 34,
+      "category_id": 1,
+      "image_id": 22,
+      "area": 0.274,
+      "bbox": [
+        0.04295774647887324,
+        0.15211267605633802,
+        0.9225352112676057,
+        0.29718309859154934
+      ]
+    },
+    {
+      "id": 35,
+      "category_id": 1,
+      "image_id": 22,
+      "area": 0.27,
+      "bbox": [
+        0.048591549295774646,
+        0.6281690140845071,
+        0.8943661971830985,
+        0.3014084507042253
+      ]
+    },
+    {
+      "id": 36,
+      "category_id": 1,
+      "image_id": 23,
+      "area": 0.343,
+      "bbox": [
+        0.08901635021097046,
+        0.43380281690140843,
+        0.8247934866583466,
+        0.4154929577464789
+      ]
+    },
+    {
+      "id": 37,
+      "category_id": 1,
+      "image_id": 24,
+      "area": 0.353,
+      "bbox": [
+        0.10444674250258532,
+        0.23034577135703788,
+        0.7849017580144777,
+        0.45026839656016987
+      ]
+    },
+    {
+      "id": 38,
+      "category_id": 1,
+      "image_id": 25,
+      "area": 0.411,
+      "bbox": [
+        0.06124366197183099,
+        0.32535211267605635,
+        0.8150535211267607,
+        0.504225352112676
+      ]
+    }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "name": "Glasses"
+    },
+    {
+      "id": 2,
+      "name": "Footwear"
+    }
+  ]
+}
