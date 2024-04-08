@@ -1,0 +1,141 @@
+{
+    "projectFileVersion": "2022-10-01-preview",
+    "stringIndexType": "Utf16CodeUnit",
+    "metadata": {
+        "projectKind": "CustomSingleLabelClassification",
+        "storageInputContainerName": "classification",
+        "settings": {
+            "confidenceThreshold": 0
+        },
+        "projectName": "CustomClassification",
+        "multilingual": false,
+        "description": "",
+        "language": "en-us"
+    },
+    "assets": {
+        "projectKind": "CustomSingleLabelClassification",
+        "classes": [
+            {
+                "category": "None"
+            },
+            {
+                "category": "Adverts"
+            },
+            {
+                "category": "Sports"
+            },
+            {
+                "category": "News"
+            },
+            {
+                "category": "Entertainment"
+            }
+        ],
+        "documents": [
+            {
+                "location": "Article 1.txt",
+                "language": "en-us",
+                "class": {
+                    "category": "Sports"
+                },
+                "dataset": "Train"
+            },
+            {
+                "location": "Article 10.txt",
+                "language": "en-us",
+                "class": {
+                    "category": "News"
+                },
+                "dataset": "Train"
+            },
+            {
+                "location": "Article 11.txt",
+                "language": "en-us",
+                "class": {
+                    "category": "Entertainment"
+                },
+                "dataset": "Test"
+            },
+            {
+                "location": "Article 12.txt",
+                "language": "en-us",
+                "class": {
+                    "category": "News"
+                },
+                "dataset": "Test"
+            },
+            {
+                "location": "Article 13.txt",
+                "language": "en-us",
+                "class": {
+                    "category": "Sports"
+                },
+                "dataset": "Test"
+            },
+            {
+                "location": "Article 2.txt",
+                "language": "en-us",
+                "class": {
+                    "category": "Sports"
+                },
+                "dataset": "Train"
+            },
+            {
+                "location": "Article 3.txt",
+                "language": "en-us",
+                "class": {
+                    "category": "Adverts"
+                },
+                "dataset": "Train"
+            },
+            {
+                "location": "Article 4.txt",
+                "language": "en-us",
+                "class": {
+                    "category": "Adverts"
+                },
+                "dataset": "Train"
+            },
+            {
+                "location": "Article 5.txt",
+                "language": "en-us",
+                "class": {
+                    "category": "Entertainment"
+                },
+                "dataset": "Train"
+            },
+            {
+                "location": "Article 6.txt",
+                "language": "en-us",
+                "class": {
+                    "category": "Entertainment"
+                },
+                "dataset": "Train"
+            },
+            {
+                "location": "Article 7.txt",
+                "language": "en-us",
+                "class": {
+                    "category": "News"
+                },
+                "dataset": "Train"
+            },
+            {
+                "location": "Article 8.txt",
+                "language": "en-us",
+                "class": {
+                    "category": "News"
+                },
+                "dataset": "Train"
+            },
+            {
+                "location": "Article 9.txt",
+                "language": "en-us",
+                "class": {
+                    "category": "Entertainment"
+                },
+                "dataset": "Train"
+            }
+        ]
+    }
+}
