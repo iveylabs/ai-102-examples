@@ -3,7 +3,7 @@
     "stringIndexType": "Utf16CodeUnit",
     "metadata": {
         "projectKind": "CustomEntityRecognition",
-        "storageInputContainerName": "ner",
+        "storageInputContainerName": "entityrecognition",
         "settings": {
             "confidenceThreshold": 0
         },
