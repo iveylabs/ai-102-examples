@@ -1,3 +1,11 @@
+// ************************************************************
+//            BEFORE RUNNING THE DEMOS
+//    Make sure the following resources have been hard deleted:
+//    - AI Services resources
+//    - Key Vaults
+//    - Storage Accounts
+//    - AML Workspaces
+
 using 'AI102Demos.bicep'
 
 // Set true for the demos you're running
