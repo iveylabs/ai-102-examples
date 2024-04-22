@@ -1,10 +1,10 @@
 # Delete person group
-DELETE https://{{faceResourceName}}.cognitiveservices.azure.com/face/v1.0/persongroups/{{personGroupName}}
+DELETE https://{{faceRegion}}.api.cognitive.microsoft.com/face/v1.0/persongroups/{{personGroupName}}
 Ocp-Apim-Subscription-Key: {{faceKey}}
 ###
 
 # Create person group
-PUT https://{{faceResourceName}}.cognitiveservices.azure.com/face/v1.0/persongroups/{{personGroupName}}
+PUT https://{{faceRegion}}.api.cognitive.microsoft.com/face/v1.0/persongroups/{{personGroupName}}
 Ocp-Apim-Subscription-Key: {{faceKey}}
 
 {
@@ -14,13 +14,13 @@ Ocp-Apim-Subscription-Key: {{faceKey}}
 ###
 
 # Get person group
-GET https://{{faceResourceName}}.cognitiveservices.azure.com/face/v1.0/persongroups/{{personGroupName}}
+GET https://{{faceRegion}}.api.cognitive.microsoft.com/face/v1.0/persongroups/{{personGroupName}}
 Ocp-Apim-Subscription-Key: {{faceKey}}
 ###
 
 # Add person to person group
 # @name person
-POST https://{{faceResourceName}}.cognitiveservices.azure.com/face/v1.0/persongroups/{{personGroupName}}/persons
+POST https://{{faceRegion}}.api.cognitive.microsoft.com/face/v1.0/persongroups/{{personGroupName}}/persons
 Ocp-Apim-Subscription-Key: {{faceKey}}
 
 {
@@ -30,17 +30,17 @@ Ocp-Apim-Subscription-Key: {{faceKey}}
 ###
 
 # Get person
-GET https://{{faceResourceName}}.cognitiveservices.azure.com/face/v1.0/persongroups/{{personGroupName}}/persons/{{person.response.body.personId}}
+GET https://{{faceRegion}}.api.cognitive.microsoft.com/face/v1.0/persongroups/{{personGroupName}}/persons/{{person.response.body.personId}}
 Ocp-Apim-Subscription-Key: {{faceKey}}
 ###
 
 # List persons in person group
-GET https://{{faceResourceName}}.cognitiveservices.azure.com/face/v1.0/persongroups/{{personGroupName}}/persons
+GET https://{{faceRegion}}.api.cognitive.microsoft.com/face/v1.0/persongroups/{{personGroupName}}/persons
 Ocp-Apim-Subscription-Key: {{faceKey}}
 ###
 
 # Add face to person
-POST https://{{faceResourceName}}.cognitiveservices.azure.com/face/v1.0/persongroups/{{personGroupName}}/persons/{{person.response.body.personId}}/persistedFaces
+POST https://{{faceRegion}}.api.cognitive.microsoft.com/face/v1.0/persongroups/{{personGroupName}}/persons/{{person.response.body.personId}}/persistedFaces
 Ocp-Apim-Subscription-Key: {{faceKey}}
 Content-Type: application/octet-stream
 
@@ -54,23 +54,23 @@ Content-Type: application/octet-stream
 ###
 
 # List persons in person group (now the faces have been added)
-GET https://{{faceResourceName}}.cognitiveservices.azure.com/face/v1.0/persongroups/{{personGroupName}}/persons
+GET https://{{faceRegion}}.api.cognitive.microsoft.com/face/v1.0/persongroups/{{personGroupName}}/persons
 Ocp-Apim-Subscription-Key: {{faceKey}}
 ###
 
 # Train person group
-POST https://{{faceResourceName}}.cognitiveservices.azure.com/face/v1.0/persongroups/{{personGroupName}}/train
+POST https://{{faceRegion}}.api.cognitive.microsoft.com/face/v1.0/persongroups/{{personGroupName}}/train
 Ocp-Apim-Subscription-Key: {{faceKey}}
 ###
 
 # Get training status (URL found in Operation-Location header of the train person group response)
-GET https://{{faceResourceName}}.cognitiveservices.azure.com/face/v1.0/persongroups/{{personGroupName}}/training
+GET https://{{faceRegion}}.api.cognitive.microsoft.com/face/v1.0/persongroups/{{personGroupName}}/training
 Ocp-Apim-Subscription-Key: {{faceKey}}
 ###
 
 # Detect face (get FaceId)
 # @name faceId
-POST https://{{faceResourceName}}.cognitiveservices.azure.com/face/v1.0/detect
+POST https://{{faceRegion}}.api.cognitive.microsoft.com/face/v1.0/detect
     ?returnFaceId=true
     &returnFaceLandmarks=true
     &returnRecognitionModel=false
@@ -85,7 +85,7 @@ Content-Type: application/octet-stream
 ###
 
 # Verify face
-POST https://{{faceResourceName}}.cognitiveservices.azure.com/face/v1.0/verify
+POST https://{{faceRegion}}.api.cognitive.microsoft.com/face/v1.0/verify
 Ocp-Apim-Subscription-Key: {{faceKey}}
 
 {
