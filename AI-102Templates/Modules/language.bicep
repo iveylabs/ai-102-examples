@@ -1,7 +1,7 @@
 param location string
 
 var roleDefinitionId = 'b7e6dc6d-f1e8-4753-8033-0f276bb0955b'
-var unique = uniqueString(resourceGroup().id, subscription().id)
+var unique = uniqueString(resourceGroup().id, subscription().id, deployment().name)
 
 // Storage resources
 resource str 'Microsoft.Storage/storageAccounts@2023-01-01' = {

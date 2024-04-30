@@ -1,6 +1,6 @@
 param location string
 
-var unique = uniqueString(resourceGroup().id, subscription().id)
+var unique = uniqueString(resourceGroup().id, subscription().id, deployment().name)
 
 // Search resource
 resource search 'Microsoft.Search/searchServices@2024-03-01-preview' = {

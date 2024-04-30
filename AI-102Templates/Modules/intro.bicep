@@ -2,7 +2,7 @@ param location string
 param tenantId string
 param myObjectId string
 
-var unique = uniqueString(resourceGroup().id, subscription().id)
+var unique = uniqueString(resourceGroup().id, subscription().id, deployment().name)
 
 // Language resource
 resource account 'Microsoft.CognitiveServices/accounts@2023-10-01-preview' = {
@@ -10,7 +10,7 @@ resource account 'Microsoft.CognitiveServices/accounts@2023-10-01-preview' = {
   location: location
   kind: 'TextAnalytics'
   sku: {
-    name: 'F0'
+    name: 'S'
   }
 }
 

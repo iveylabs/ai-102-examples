@@ -3,7 +3,7 @@ param location string
 param tenantId string
 param myObjectId string
 
-var unique = uniqueString(resourceGroup().id, subscription().id)
+var unique = uniqueString(resourceGroup().id, subscription().id, deployment().name)
 
 // Custom vision resources (if you want to do a brief demo)
 resource customTraining 'Microsoft.CognitiveServices/accounts@2023-10-01-preview' = if (customVision) {
@@ -11,7 +11,7 @@ resource customTraining 'Microsoft.CognitiveServices/accounts@2023-10-01-preview
   location: location
   kind: 'CustomVision.Training'
   sku: {
-    name: 'F0'
+    name: 'S0'
   }
 }
 resource customPrediction 'Microsoft.CognitiveServices/accounts@2023-10-01-preview' = if (customVision) {
@@ -19,7 +19,7 @@ resource customPrediction 'Microsoft.CognitiveServices/accounts@2023-10-01-previ
   location: location
   kind: 'CustomVision.Prediction'
   sku: {
-    name: 'F0'
+    name: 'S0'
   }
 }
 
