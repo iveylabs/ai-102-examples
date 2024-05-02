@@ -13,6 +13,9 @@ resource customTraining 'Microsoft.CognitiveServices/accounts@2023-10-01-preview
   sku: {
     name: 'S0'
   }
+  properties: {
+    publicNetworkAccess: 'Enabled'
+  }
 }
 resource customPrediction 'Microsoft.CognitiveServices/accounts@2023-10-01-preview' = if (customVision) {
   name: 'predict${unique}'
@@ -20,6 +23,9 @@ resource customPrediction 'Microsoft.CognitiveServices/accounts@2023-10-01-previ
   kind: 'CustomVision.Prediction'
   sku: {
     name: 'S0'
+  }
+  properties: {
+    publicNetworkAccess: 'Enabled'
   }
 }
 
@@ -110,6 +116,9 @@ resource computerVision 'Microsoft.CognitiveServices/accounts@2023-10-01-preview
   sku: {
     name: 'S1'
   }
+  properties: {
+    publicNetworkAccess: 'Enabled'
+  }
 }
 
 // Face resource
@@ -119,5 +128,8 @@ resource face 'Microsoft.CognitiveServices/accounts@2023-10-01-preview' = {
   kind: 'Face'
   sku: {
     name: 'S0'
+  }
+  properties: {
+    publicNetworkAccess: 'Enabled'
   }
 }
