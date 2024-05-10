@@ -8,25 +8,25 @@
 
 using 'main.bicep'
 
-// Environment name, only used for azd deployments
+// For azd deployments
 param envName = readEnvironmentVariable('AZURE_ENV_NAME', 'demo')
 
 // Set true for the demos you're running
 param introDemo = true
-param visionDemo = false
-param languageDemo = false
-param openAIDemo = false
-param searchDemo = false
-param docIntelDemo = false
+param visionDemo = true
+param languageDemo = true
+param openAIDemo = true
+param searchDemo = true
+param docIntelDemo = true
 
 // Resource group names
-param multiRGName = '${envName}multi-rg'
-param introRGName = '${envName}intro-rg'
-param visionRGName = '${envName}vis-rg'
-param languageRGName = '${envName}lang-rg'
-param openAIRGName = '${envName}openai-rg'
-param searchRGName = '${envName}search-rg'
-param docIntelRGName = '${envName}docintel-rg'
+param multiRGName = 'multi-rg'
+param introRGName = 'intro-rg'
+param visionRGName = 'vision-rg'
+param languageRGName = 'language-rg'
+param openAIRGName = 'openai-rg'
+param searchRGName = 'search-rg'
+param docIntelRGName = 'docintel-rg'
 
 // General parameters
 param defaultLocation = 'uksouth'

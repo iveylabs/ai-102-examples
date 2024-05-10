@@ -1,12 +1,10 @@
 param location string
-// For azd deployments
-param envName string
 
 var unique = uniqueString(resourceGroup().id, deployment().name)
 
 // Search resource
 resource search 'Microsoft.Search/searchServices@2024-03-01-preview' = {
-  name: '${envName}srch${unique}'
+  name: 'search${unique}'
   location: location
   sku: {
     name: 'basic'
@@ -21,7 +19,7 @@ resource search 'Microsoft.Search/searchServices@2024-03-01-preview' = {
 
 // Storage resources
 resource str 'Microsoft.Storage/storageAccounts@2023-01-01' = {
-  name: '${envName}str${unique}'
+  name: 'str${unique}'
   location: location
   kind: 'StorageV2'
   sku: {

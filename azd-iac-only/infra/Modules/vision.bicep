@@ -2,14 +2,12 @@ param customVision bool
 param location string
 param tenantId string
 param myObjectId string
-// For azd deployments
-param envName string
 
 var unique = uniqueString(resourceGroup().id, deployment().name)
 
 // Custom vision resources (if you want to do a brief demo)
 resource customTraining 'Microsoft.CognitiveServices/accounts@2023-10-01-preview' = if (customVision) {
-  name: '${envName}trn${unique}'
+  name: 'train${unique}'
   location: location
   kind: 'CustomVision.Training'
   sku: {
@@ -20,7 +18,7 @@ resource customTraining 'Microsoft.CognitiveServices/accounts@2023-10-01-preview
   }
 }
 resource customPrediction 'Microsoft.CognitiveServices/accounts@2023-10-01-preview' = if (customVision) {
-  name: '${envName}prdct${unique}'
+  name: 'predict${unique}'
   location: location
   kind: 'CustomVision.Prediction'
   sku: {
@@ -33,7 +31,7 @@ resource customPrediction 'Microsoft.CognitiveServices/accounts@2023-10-01-previ
 
 // Storage resources
 resource str 'Microsoft.Storage/storageAccounts@2023-01-01' = {
-  name: '${envName}str${unique}'
+  name: 'str${unique}'
   location: location
   kind: 'StorageV2'
   sku: {
@@ -61,11 +59,11 @@ resource str 'Microsoft.Storage/storageAccounts@2023-01-01' = {
 
 // Azure Machine Learning resources
 resource appInsightsWorkspace 'Microsoft.OperationalInsights/workspaces@2023-09-01' = {
-  name: '${envName}appi${unique}'
+  name: 'appinsights${unique}'
   location: location
 }
 resource appInsights 'Microsoft.Insights/components@2020-02-02' = {
-  name: '${envName}appi${unique}'
+  name: 'appinsights${unique}'
   location: location
   kind: 'web'
   properties: {
@@ -74,7 +72,7 @@ resource appInsights 'Microsoft.Insights/components@2020-02-02' = {
   }
 }
 resource vault 'Microsoft.KeyVault/vaults@2023-07-01' = {
-  name: '${envName}kv${unique}'
+  name: 'kv${unique}'
   location: location
   properties: {
     sku: {
@@ -94,7 +92,7 @@ resource vault 'Microsoft.KeyVault/vaults@2023-07-01' = {
   }
 }
 resource amlWorkspace 'Microsoft.MachineLearningServices/workspaces@2024-01-01-preview' = {
-  name: '${envName}aml${unique}'
+  name: 'aml${unique}'
   location: location
   sku: {
     name: 'Basic'
@@ -112,7 +110,7 @@ resource amlWorkspace 'Microsoft.MachineLearningServices/workspaces@2024-01-01-p
 
 // Computer vision resource
 resource computerVision 'Microsoft.CognitiveServices/accounts@2023-10-01-preview' = {
-  name: '${envName}vis${unique}'
+  name: 'vision${unique}'
   location: location
   kind: 'ComputerVision'
   sku: {
@@ -125,7 +123,7 @@ resource computerVision 'Microsoft.CognitiveServices/accounts@2023-10-01-preview
 
 // Face resource
 resource face 'Microsoft.CognitiveServices/accounts@2023-10-01-preview' = {
-  name: '${envName}face${unique}'
+  name: 'face${unique}'
   location: location
   kind: 'Face'
   sku: {

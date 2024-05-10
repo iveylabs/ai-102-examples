@@ -1,14 +1,12 @@
 param location string
 param tenantId string
 param myObjectId string
-// For azd deployments
-param envName string
 
 var unique = uniqueString(resourceGroup().id, deployment().name)
 
 // Language resource
 resource account 'Microsoft.CognitiveServices/accounts@2023-10-01-preview' = {
-  name: '${envName}intro${unique}'
+  name: 'intro${unique}'
   location: location
   kind: 'TextAnalytics'
   sku: {
@@ -21,7 +19,7 @@ resource account 'Microsoft.CognitiveServices/accounts@2023-10-01-preview' = {
 
 // Key Vault resource with secret
 resource vault 'Microsoft.KeyVault/vaults@2023-07-01' = {
-  name: '${envName}kv${unique}'
+  name: 'kv${unique}'
   location: location
   properties: {
     sku: {

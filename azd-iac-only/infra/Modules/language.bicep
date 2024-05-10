@@ -1,13 +1,11 @@
 param location string
-// For azd deployments
-param envName string
 
 var roleDefinitionId = 'b7e6dc6d-f1e8-4753-8033-0f276bb0955b'
 var unique = uniqueString(resourceGroup().id, deployment().name)
 
 // Storage resources
 resource str 'Microsoft.Storage/storageAccounts@2023-01-01' = {
-  name: '${envName}str${unique}'
+  name: 'str${unique}'
   location: location
   kind: 'StorageV2'
   sku: {
@@ -48,7 +46,7 @@ resource str 'Microsoft.Storage/storageAccounts@2023-01-01' = {
 
 // Speech resource
 resource speech 'Microsoft.CognitiveServices/accounts@2023-10-01-preview' = {
-  name: '${envName}spch${unique}'
+  name: 'speech${unique}'
   location: location
   kind: 'SpeechServices'
   sku: {
@@ -61,7 +59,7 @@ resource speech 'Microsoft.CognitiveServices/accounts@2023-10-01-preview' = {
 
 // Translate resource
 resource translation 'Microsoft.CognitiveServices/accounts@2023-10-01-preview' = {
-  name: '${envName}trns${unique}'
+  name: 'translate${unique}'
   location: 'global'
   kind: 'TextTranslation'
   sku: {
@@ -74,7 +72,7 @@ resource translation 'Microsoft.CognitiveServices/accounts@2023-10-01-preview' =
 
 // Search resource
 resource search 'Microsoft.Search/searchServices@2024-03-01-preview' = {
-  name: '${envName}srch${unique}'
+  name: 'search${unique}'
   location: location
   sku: {
     name: 'basic'
@@ -90,7 +88,7 @@ resource search 'Microsoft.Search/searchServices@2024-03-01-preview' = {
 
 // Language resource
 resource language 'Microsoft.CognitiveServices/accounts@2023-10-01-preview' = {
-  name: '${envName}lang${unique}'
+  name: 'language${unique}'
   location: location
   sku: {
     name: 'S'

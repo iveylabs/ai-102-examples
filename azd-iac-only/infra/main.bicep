@@ -36,7 +36,7 @@ param docIntelLocation string
 
 // Multi-service account
 module multiRG 'Modules/resourcegroup.bicep' = if(introDemo || visionDemo || languageDemo || openAIDemo || searchDemo || docIntelDemo) {
-  name: '${envName}multiRG'
+  name: 'multiRG'
   params: {
     name: multiRGName
     location: defaultLocation
@@ -44,10 +44,9 @@ module multiRG 'Modules/resourcegroup.bicep' = if(introDemo || visionDemo || lan
   }
 }
 module multiModule 'Modules/multi.bicep' = if(introDemo || visionDemo || languageDemo || openAIDemo || searchDemo || docIntelDemo) {
-  name: '${envName}multiModule'
+  name: 'multiModule'
   params: {
     location: defaultLocation
-    envName: envName
   }
   dependsOn: [
     multiRG
@@ -58,7 +57,7 @@ module multiModule 'Modules/multi.bicep' = if(introDemo || visionDemo || languag
 // Intro resources
 // You still need to create an app registration and assign the required permissions on the vault
 module introRG 'Modules/resourcegroup.bicep' = if (introDemo) {
-  name: '${envName}introRG'
+  name: 'introRG'
   params: {
     name: introRGName
     location: defaultLocation
@@ -66,12 +65,11 @@ module introRG 'Modules/resourcegroup.bicep' = if (introDemo) {
   }
 }
 module introModule 'Modules/intro.bicep' = if (introDemo) {
-  name: '${envName}introModule'
+  name: 'introModule'
   params: {
     location: defaultLocation
     tenantId: tenantId
     myObjectId: myObjectId
-    envName: envName
   }
   dependsOn: [
     introRG
@@ -81,7 +79,7 @@ module introModule 'Modules/intro.bicep' = if (introDemo) {
 
 // Vision resources
 module visionRG 'Modules/resourcegroup.bicep' = if (visionDemo) {
-  name: '${envName}visionRG'
+  name: 'visionRG'
   params: {
     name: visionRGName
     location: visionLocation
@@ -89,13 +87,12 @@ module visionRG 'Modules/resourcegroup.bicep' = if (visionDemo) {
   }
 }
 module visionModule 'Modules/vision.bicep' = if (visionDemo) {
-  name: '${envName}visionModule'
+  name: 'visionModule'
   params: {
     location: visionLocation
     customVision: customVision
     tenantId: tenantId
     myObjectId: myObjectId
-    envName: envName
   }
   dependsOn: [
     visionRG
@@ -105,7 +102,7 @@ module visionModule 'Modules/vision.bicep' = if (visionDemo) {
 
 // Language resources
 module languageRG 'Modules/resourcegroup.bicep' = if (languageDemo) {
-  name: '${envName}languageRG'
+  name: 'languageRG'
   params: {
     name: languageRGName
     location: defaultLocation
@@ -113,10 +110,9 @@ module languageRG 'Modules/resourcegroup.bicep' = if (languageDemo) {
   }
 }
 module languageModule 'Modules/language.bicep' = if (languageDemo) {
-  name: '${envName}languageModule'
+  name: 'languageModule'
   params: {
     location: defaultLocation
-    envName: envName
   }
   dependsOn: [
     languageRG
@@ -126,7 +122,7 @@ module languageModule 'Modules/language.bicep' = if (languageDemo) {
 
 // OpenAI resources
 module openAIRG 'Modules/resourcegroup.bicep' = if (openAIDemo) {
-  name: '${envName}openAIRG'
+  name: 'openAIRG'
   params: {
     name: openAIRGName
     location: openAILocation
@@ -134,10 +130,9 @@ module openAIRG 'Modules/resourcegroup.bicep' = if (openAIDemo) {
   }
 }
 module openAIModule 'Modules/openai.bicep' = if (openAIDemo) {
-  name: '${envName}openAIModule'
+  name: 'openAIModule'
   params: {
     location: openAILocation
-    envName: envName
   }
   dependsOn: [
     openAIRG
@@ -147,7 +142,7 @@ module openAIModule 'Modules/openai.bicep' = if (openAIDemo) {
 
 // Search resources
 module searchRG 'Modules/resourcegroup.bicep' = if (searchDemo) {
-  name: '${envName}searchRG'
+  name: 'searchRG'
   params: {
     name: searchRGName
     location: defaultLocation
@@ -155,10 +150,9 @@ module searchRG 'Modules/resourcegroup.bicep' = if (searchDemo) {
   }
 }
 module searchModule 'Modules/search.bicep' = if (searchDemo) {
-  name: '${envName}searchModule'
+  name: 'searchModule'
   params: {
     location: defaultLocation
-    envName: envName
   }
   dependsOn: [
     searchRG
@@ -168,7 +162,7 @@ module searchModule 'Modules/search.bicep' = if (searchDemo) {
 
 // Documend Intelligence resources
 module docIntelRG 'Modules/resourcegroup.bicep' = if (docIntelDemo) {
-  name: '${envName}docIntelRG'
+  name: 'docIntelRG'
   params: {
     name: docIntelRGName
     location: docIntelLocation
@@ -176,10 +170,9 @@ module docIntelRG 'Modules/resourcegroup.bicep' = if (docIntelDemo) {
   }
 }
 module docIntelModule 'Modules/docintel.bicep' = if (docIntelDemo) {
-  name: '${envName}docIntelModule'
+  name: 'docIntelModule'
   params: {
     location: docIntelLocation
-    envName: envName
   }
   dependsOn: [
     docIntelRG
