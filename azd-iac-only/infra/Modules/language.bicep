@@ -1,7 +1,7 @@
 param location string
 
 var roleDefinitionId = 'b7e6dc6d-f1e8-4753-8033-0f276bb0955b'
-var unique = uniqueString(resourceGroup().id, deployment().name)
+var unique = uniqueString(resourceGroup().id, subscription().id)
 
 // Storage resources
 resource str 'Microsoft.Storage/storageAccounts@2023-01-01' = {
@@ -120,3 +120,14 @@ module roleAssignment 'languageroleassignment.bicep' = {
     strName: str.name
   }
 }
+
+// Outputs
+var speechKey = speech.listKeys().key1
+var translationKey = translation.listKeys().key1
+var languageKey = language.listKeys().key1
+output speechEndpoint string = speech.properties.endpoint
+output speechKey string = speechKey
+output translationEndpoint string = translation.properties.endpoint
+output translationKey string = translationKey
+output languageEndpoint string = language.properties.endpoint
+output languageKey string = languageKey

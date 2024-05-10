@@ -1,6 +1,6 @@
 param location string
 
-var unique = uniqueString(resourceGroup().id, deployment().name)
+var unique = uniqueString(resourceGroup().id, subscription().id)
 
 // Multi-service account resource
 resource multi 'Microsoft.CognitiveServices/accounts@2023-10-01-preview' = {
@@ -14,3 +14,8 @@ resource multi 'Microsoft.CognitiveServices/accounts@2023-10-01-preview' = {
     publicNetworkAccess: 'Enabled'
   }
 }
+
+// Outputs
+var key = multi.listKeys().key1
+output endpoint string = multi.properties.endpoint
+output key string = key

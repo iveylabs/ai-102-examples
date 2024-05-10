@@ -3,7 +3,7 @@ param location string
 param tenantId string
 param myObjectId string
 
-var unique = uniqueString(resourceGroup().id, deployment().name)
+var unique = uniqueString(resourceGroup().id, subscription().id)
 
 // Custom vision resources (if you want to do a brief demo)
 resource customTraining 'Microsoft.CognitiveServices/accounts@2023-10-01-preview' = if (customVision) {
@@ -133,3 +133,11 @@ resource face 'Microsoft.CognitiveServices/accounts@2023-10-01-preview' = {
     publicNetworkAccess: 'Enabled'
   }
 }
+
+// Outputs
+var visionKey = computerVision.listKeys().key1
+var faceKey = face.listKeys().key1
+output visionEndpoint string = computerVision.properties.endpoint
+output visionKey string = visionKey
+output faceEndpoint string = face.properties.endpoint
+output faceKey string = faceKey

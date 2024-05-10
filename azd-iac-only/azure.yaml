@@ -1,6 +1,6 @@
 name: ai-102-demos
 
-# Make sure you update the infra/bicepparams file with the correct values before running 
+# Make sure you update the infra/main.bicepparams file with the correct values before running 
 # azd up
 infra:
   provider: "bicep"

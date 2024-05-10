@@ -2,7 +2,7 @@ param location string
 param tenantId string
 param myObjectId string
 
-var unique = uniqueString(resourceGroup().id, deployment().name)
+var unique = uniqueString(resourceGroup().id, subscription().id)
 
 // Language resource
 resource account 'Microsoft.CognitiveServices/accounts@2023-10-01-preview' = {
@@ -44,3 +44,8 @@ resource vault 'Microsoft.KeyVault/vaults@2023-07-01' = {
     }
   }
 }
+
+// Outputs
+var key = account.listKeys().key1
+output endpoint string = account.properties.endpoint
+output key string = key

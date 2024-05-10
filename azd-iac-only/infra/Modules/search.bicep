@@ -1,6 +1,6 @@
 param location string
 
-var unique = uniqueString(resourceGroup().id, deployment().name)
+var unique = uniqueString(resourceGroup().id, subscription().id)
 
 // Search resource
 resource search 'Microsoft.Search/searchServices@2024-03-01-preview' = {
@@ -38,3 +38,8 @@ resource str 'Microsoft.Storage/storageAccounts@2023-01-01' = {
     }
   }
 }
+
+// Outputs
+var searchKey = search.listAdminKeys().primaryKey
+output searchName string = search.name
+output searchKey string = searchKey

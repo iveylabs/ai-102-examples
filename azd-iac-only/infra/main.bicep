@@ -179,3 +179,37 @@ module docIntelModule 'Modules/docintel.bicep' = if (docIntelDemo) {
   ]
   scope: resourceGroup(docIntelRGName)
 }
+
+// Multi-service outputs
+output multiEndpoint string = introDemo || visionDemo || languageDemo || openAIDemo || searchDemo || docIntelDemo ? multiModule.outputs.endpoint : 'N/A'
+output multiKey string = introDemo || visionDemo || languageDemo || openAIDemo || searchDemo || docIntelDemo ? multiModule.outputs.key : 'N/A'
+
+// Intro outputs
+output introEndpoint string = introDemo ? introModule.outputs.endpoint : 'N/A'
+output introKey string = introDemo ? introModule.outputs.key : 'N/A'
+
+// Vision outputs
+output visionEndpoint string = visionDemo ? visionModule.outputs.visionEndpoint : 'N/A'
+output visionKey string = visionDemo ? visionModule.outputs.visionKey : 'N/A'
+output faceEndpoint string = visionDemo ? visionModule.outputs.faceEndpoint : 'N/A'
+output faceKey string = visionDemo ? visionModule.outputs.faceKey : 'N/A'
+
+// Language outputs
+output speechEndpoint string = languageDemo ? languageModule.outputs.speechEndpoint : 'N/A'
+output speechKey string = languageDemo ? languageModule.outputs.speechKey : 'N/A'
+output translationEndpoint string = languageDemo ? languageModule.outputs.translationEndpoint : 'N/A'
+output translationKey string = languageDemo ? languageModule.outputs.translationKey : 'N/A'
+output languageEndpoint string = languageDemo ? languageModule.outputs.languageEndpoint : 'N/A'
+output languageKey string = languageDemo ? languageModule.outputs.languageKey : 'N/A'
+
+// OpenAI outputs
+output aoaiEndpoint string = openAIDemo ? openAIModule.outputs.aoaiEndpoint : 'N/A'
+output aoaiKey string = openAIDemo ? openAIModule.outputs.aoaiKey : 'N/A'
+
+// Search outputs
+output searchName string = searchDemo ? searchModule.outputs.searchName : 'N/A'
+output searchKey string = searchDemo ? searchModule.outputs.searchKey : 'N/A'
+
+// Doc Intel outputs
+output docintelEndpoint string = docIntelDemo ? docIntelModule.outputs.docintelEndpoint : 'N/A'
+output docintelKey string = docIntelDemo ? docIntelModule.outputs.docIntelKey : 'N/A'
