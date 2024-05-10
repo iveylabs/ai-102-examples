@@ -52,6 +52,9 @@ resource speech 'Microsoft.CognitiveServices/accounts@2023-10-01-preview' = {
   sku: {
     name: 'S0'
   }
+  properties: {
+    publicNetworkAccess: 'Enabled'
+  }
 }
 
 // Translate resource
@@ -61,6 +64,9 @@ resource translation 'Microsoft.CognitiveServices/accounts@2023-10-01-preview' =
   kind: 'TextTranslation'
   sku: {
     name: 'S1'
+  }
+  properties: {
+    publicNetworkAccess: 'Enabled'
   }
 }
 
@@ -76,6 +82,7 @@ resource search 'Microsoft.Search/searchServices@2024-03-01-preview' = {
     replicaCount: 1
     partitionCount: 1
     semanticSearch: 'disabled'
+    publicNetworkAccess: 'enabled'
   }
 }
 
@@ -90,7 +97,6 @@ resource language 'Microsoft.CognitiveServices/accounts@2023-10-01-preview' = {
   identity: {
     type: 'SystemAssigned'
   }
-  
   properties: {
     userOwnedStorage: [
       {
@@ -99,7 +105,9 @@ resource language 'Microsoft.CognitiveServices/accounts@2023-10-01-preview' = {
     ]
     apiProperties: {
       qnaAzureSearchEndpointId: search.id
+      qnaAzureSearchEndpointKey: search.listAdminKeys().primaryKey
     }
+    publicNetworkAccess: 'Enabled'
   }
 }
 

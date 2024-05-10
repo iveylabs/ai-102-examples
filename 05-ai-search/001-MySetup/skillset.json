@@ -1,0 +1,224 @@
+{
+    "name": "margies-skillset",
+    "description": "Skillset created by Paul Ivey for demonstration purposes",
+    "skills": [
+      {
+        "@odata.type": "#Microsoft.Skills.Text.V3.EntityRecognitionSkill",
+        "name": "#1",
+        "description": null,
+        "context": "/document/merged_content",
+        "categories": [
+          "Quantity",
+          "Event",
+          "Skill",
+          "IPAddress",
+          "PhoneNumber",
+          "Location",
+          "Product",
+          "Email",
+          "Address",
+          "DateTime",
+          "Person",
+          "PersonType",
+          "URL",
+          "Organization"
+        ],
+        "defaultLanguageCode": "en",
+        "minimumPrecision": null,
+        "modelVersion": null,
+        "inputs": [
+          {
+            "name": "text",
+            "source": "/document/merged_content"
+          },
+          {
+            "name": "languageCode",
+            "source": "/document/language"
+          }
+        ],
+        "outputs": [
+          {
+            "name": "locations",
+            "targetName": "locations"
+          }
+        ]
+      },
+      {
+        "@odata.type": "#Microsoft.Skills.Text.KeyPhraseExtractionSkill",
+        "name": "#2",
+        "description": null,
+        "context": "/document/merged_content",
+        "defaultLanguageCode": "en",
+        "maxKeyPhraseCount": null,
+        "modelVersion": null,
+        "inputs": [
+          {
+            "name": "text",
+            "source": "/document/merged_content"
+          },
+          {
+            "name": "languageCode",
+            "source": "/document/language"
+          }
+        ],
+        "outputs": [
+          {
+            "name": "keyPhrases",
+            "targetName": "keyphrases"
+          }
+        ]
+      },
+      {
+        "@odata.type": "#Microsoft.Skills.Text.LanguageDetectionSkill",
+        "name": "#3",
+        "description": null,
+        "context": "/document",
+        "defaultCountryHint": null,
+        "modelVersion": null,
+        "inputs": [
+          {
+            "name": "text",
+            "source": "/document/merged_content"
+          }
+        ],
+        "outputs": [
+          {
+            "name": "languageCode",
+            "targetName": "language"
+          }
+        ]
+      },
+      {
+        "@odata.type": "#Microsoft.Skills.Text.TranslationSkill",
+        "name": "#4",
+        "description": null,
+        "context": "/document/merged_content",
+        "defaultFromLanguageCode": null,
+        "defaultToLanguageCode": "fr",
+        "suggestedFrom": "en",
+        "inputs": [
+          {
+            "name": "text",
+            "source": "/document/merged_content"
+          }
+        ],
+        "outputs": [
+          {
+            "name": "translatedText",
+            "targetName": "translated_text"
+          }
+        ]
+      },
+      {
+        "@odata.type": "#Microsoft.Skills.Text.MergeSkill",
+        "name": "#5",
+        "description": null,
+        "context": "/document",
+        "insertPreTag": " ",
+        "insertPostTag": " ",
+        "inputs": [
+          {
+            "name": "text",
+            "source": "/document/content"
+          },
+          {
+            "name": "itemsToInsert",
+            "source": "/document/normalized_images/*/text"
+          },
+          {
+            "name": "offsets",
+            "source": "/document/normalized_images/*/contentOffset"
+          }
+        ],
+        "outputs": [
+          {
+            "name": "mergedText",
+            "targetName": "merged_content"
+          }
+        ]
+      },
+      {
+        "@odata.type": "#Microsoft.Skills.Vision.OcrSkill",
+        "name": "#6",
+        "description": null,
+        "context": "/document/normalized_images/*",
+        "textExtractionAlgorithm": null,
+        "lineEnding": "Space",
+        "defaultLanguageCode": "en",
+        "detectOrientation": true,
+        "inputs": [
+          {
+            "name": "image",
+            "source": "/document/normalized_images/*"
+          }
+        ],
+        "outputs": [
+          {
+            "name": "text",
+            "targetName": "text"
+          },
+          {
+            "name": "layoutText",
+            "targetName": "layoutText"
+          }
+        ]
+      },
+      {
+        "@odata.type": "#Microsoft.Skills.Vision.ImageAnalysisSkill",
+        "name": "#7",
+        "description": null,
+        "context": "/document/normalized_images/*",
+        "defaultLanguageCode": "en",
+        "visualFeatures": [
+          "tags",
+          "description"
+        ],
+        "details": [],
+        "inputs": [
+          {
+            "name": "image",
+            "source": "/document/normalized_images/*"
+          }
+        ],
+        "outputs": [
+          {
+            "name": "tags",
+            "targetName": "imageTags"
+          },
+          {
+            "name": "description",
+            "targetName": "imageCaption"
+          }
+        ]
+      },
+      {
+        "@odata.type": "#Microsoft.Skills.Text.V3.SentimentSkill",
+        "defaultLanguageCode": "en",
+        "modelVersion": "latest",
+        "includeOpinionMining": true,
+        "name": "#8",
+        "description": null,
+        "context": "/document",
+        "inputs": [
+          {
+            "name": "text",
+            "source": "/document/merged_content"
+          },
+          {
+            "name": "languageCode",
+            "source": "/document/language"
+          }
+        ],
+        "outputs": [
+          {
+            "name": "sentiment",
+            "targetName": "sentimentLabel"
+          }
+        ]
+      }
+    ],
+    "cognitiveServices": {
+      "@odata.type": "#Microsoft.Azure.Search.CognitiveServicesByKey",
+      "key": "MULTI_ACCOUNT_KEY"
+    }
+  }

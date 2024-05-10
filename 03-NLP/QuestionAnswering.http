@@ -1,5 +1,5 @@
 # Ask a question
-POST https://{{qnaEndpoint}}.cognitiveservices.azure.com/language/:query-knowledgebases
+POST {{qnaEndpoint}}language/:query-knowledgebases
     ?projectName={{qnaProj}}
     &api-version=2021-10-01
     &deploymentName={{qndDep}}
@@ -11,7 +11,7 @@ Ocp-Apim-Subscription-Key: {{qnaKey}}
 ###
 
 # Test synonyms
-POST https://{{qnaEndpoint}}.cognitiveservices.azure.com/language/:query-knowledgebases
+POST {{qnaEndpoint}}language/:query-knowledgebases
     ?projectName={{qnaProj}}
     &api-version=2021-10-01
     &deploymentName={{qndDep}}
@@ -23,7 +23,7 @@ Ocp-Apim-Subscription-Key: {{qnaKey}}
 ###
 
 # Ask a question with no answer in the knowledgebase
-POST https://{{qnaEndpoint}}.cognitiveservices.azure.com/language/:query-knowledgebases
+POST {{qnaEndpoint}}language/:query-knowledgebases
     ?projectName={{qnaProj}}
     &api-version=2021-10-01
     &deploymentName={{qndDep}}
