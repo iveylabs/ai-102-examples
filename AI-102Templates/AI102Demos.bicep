@@ -17,6 +17,7 @@ param docIntelRGName string
 // General parameters
 param defaultLocation string
 param tenantId string = subscription().tenantId
+@minLength(1)
 param myObjectId string
 param multiRGName string
 
