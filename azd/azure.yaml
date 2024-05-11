@@ -1,0 +1,20 @@
+name: ai-102-demos
+
+# Make sure you update the infra/main.bicepparams file with the correct values before running 
+# azd up
+infra:
+  provider: "bicep"
+  path: "infra"
+  module: main.bicep
+
+hooks:
+  preprovision:
+    shell: pwsh
+    continueOnError: false
+    interactive: true
+    run: ./scripts/preprovision.ps1
+  postprovision:
+    shell: pwsh
+    continueOnError: false
+    interactive: true
+    run: ./scripts/postprovision.ps1

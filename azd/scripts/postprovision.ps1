@@ -1,0 +1,140 @@
+
+if ($env:VISION_DEMO -eq "true") {
+    # Upload image classification images to Blob Storage
+    $confirmation = Read-Host "Upload image classification images from the repo? (y/n)"
+
+    if ($confirmation -eq 'y') {
+        try {
+            $accountName = az storage account list --resource-group $env:VISION_RESOURCE_GROUP --query "[0].name" --output tsv
+            $sourcePath = "..\02-vision\02-image-classification\training-images"
+
+            Write-Host "Uploading image classification images to Blob Storage..." -ForegroundColor Cyan
+            az storage blob upload-batch -d "classification" -s $sourcePath --account-name $accountName --auth-mode login  --output none
+            Write-Host "Image classification images uploaded successfully." -ForegroundColor Green
+        }
+        catch {
+            Write-Host "Failed to upload object detection images." -ForegroundColor Red
+            Write-Host $_.Exception.Message -ForegroundColor Red
+            Write-Host $_.Exception.ItemName -ForegroundColor Red
+        }
+    }
+    else {
+        Write-Host "Image classification images won't be uploaded.`n" -ForegroundColor Yellow
+    }
+
+    # Upload object detection images to Blob Storage
+    $confirmation = Read-Host "Upload object detection images from the repo? (y/n)"
+
+    if ($confirmation -eq 'y') {
+        try {
+            $accountName = az storage account list --resource-group $env:VISION_RESOURCE_GROUP --query "[0].name" --output tsv
+            $sourcePath = "..\02-vision\03-object-detection\training-images"
+
+            Write-Host "Uploading object detection images to Blob Storage..." -ForegroundColor Cyan
+            az storage blob upload-batch -d "detection" -s $sourcePath --account-name $accountName --auth-mode login  --output none
+            Write-Host "Object detection images uploaded successfully." -ForegroundColor Green
+        }
+        catch {
+            Write-Host "Failed to upload object detection images." -ForegroundColor Red
+            Write-Host $_.Exception.Message -ForegroundColor Red
+            Write-Host $_.Exception.ItemName -ForegroundColor Red
+        }
+    }
+    else {
+        Write-Host "Object detection images won't be uploaded.`n" -ForegroundColor Yellow
+    }
+}
+
+if ($env:LANGUAGE_DEMO -eq "true") {
+    # Upload custom text classification files to Blob Storage
+    $confirmation = Read-Host "Upload custom text classification files from the repo? (y/n)"
+
+    if ($confirmation -eq 'y') {
+        try {
+            $accountName = az storage account list --resource-group $env:LANGUAGE_RESOURCE_GROUP --query "[0].name" --output tsv
+            $sourcePath = "..\03-nlp\04-custom-classification\articles_train"
+
+            Write-Host "Uploading custom text classification files to Blob Storage..." -ForegroundColor Cyan
+            az storage blob upload-batch -d "classification" -s $sourcePath --account-name $accountName --auth-mode login  --output none
+            Write-Host "Custom text classification files uploaded successfully." -ForegroundColor Green
+        }
+        catch {
+            Write-Host "Failed to upload custom text classification files." -ForegroundColor Red
+            Write-Host $_.Exception.Message -ForegroundColor Red
+            Write-Host $_.Exception.ItemName -ForegroundColor Red
+        }
+    }
+    else {
+        Write-Host "Custom text classification files won't be uploaded.`n" -ForegroundColor Yellow
+    }
+
+    # Upload custom NER files to Blob Storage
+    $confirmation = Read-Host "Upload custom NER files from the repo? (y/n)"
+
+    if ($confirmation -eq 'y') {
+        try {
+            $accountName = az storage account list --resource-group $env:LANGUAGE_RESOURCE_GROUP --query "[0].name" --output tsv
+            $sourcePath = "..\03-nlp\05-custom-ner\ads_train"
+
+            Write-Host "Uploading custom NER files to Blob Storage..." -ForegroundColor Cyan
+            az storage blob upload-batch -d "entityrecognition" -s $sourcePath --account-name $accountName --auth-mode login  --output none
+            Write-Host "Custom NER files uploaded successfully." -ForegroundColor Green
+        }
+        catch {
+            Write-Host "Failed to upload custom NER files." -ForegroundColor Red
+            Write-Host $_.Exception.Message -ForegroundColor Red
+            Write-Host $_.Exception.ItemName -ForegroundColor Red
+        }
+    }
+    else {
+        Write-Host "Custom NER files won't be uploaded.`n" -ForegroundColor Yellow
+    }
+}
+
+if ($env:SEARCH_DEMO -eq "true") {
+    # Upload Search files to Blob Storage
+    $confirmation = Read-Host "Upload Search files from the repo? (y/n)"
+
+    if ($confirmation -eq 'y') {
+        try {
+            $accountName = az storage account list --resource-group $env:SEARCH_RESOURCE_GROUP --query "[0].name" --output tsv
+            $sourcePath = "..\05-ai-search\001-MySetup\data"
+
+            Write-Host "Uploading Search files to Blob Storage..." -ForegroundColor Cyan
+            az storage blob upload-batch -d "margies-travel" -s $sourcePath --account-name $accountName --auth-mode login  --output none
+            Write-Host "Search uploaded successfully." -ForegroundColor Green
+        }
+        catch {
+            Write-Host "Failed to upload Search files." -ForegroundColor Red
+            Write-Host $_.Exception.Message -ForegroundColor Red
+            Write-Host $_.Exception.ItemName -ForegroundColor Red
+        }
+    }
+    else {
+        Write-Host "Search files won't be uploaded.`n" -ForegroundColor Yellow
+    }
+}
+
+if ($env:DOCINTEL_DEMO -eq "true") {
+    # Upload Doc Intel custom training files to Blob Storage
+    $confirmation = Read-Host "Upload Doc Intel custom training files from the repo? (y/n)"
+
+    if ($confirmation -eq 'y') {
+        try {
+            $accountName = az storage account list --resource-group $env:DOCINTEL_RESOURCE_GROUP --query "[0].name" --output tsv
+            $sourcePath = "..\06-doc-intel\customtraining"
+
+            Write-Host "Uploading Doc Intel custom training files to Blob Storage..." -ForegroundColor Cyan
+            az storage blob upload-batch -d "customtraining" -s $sourcePath --account-name $accountName --auth-mode login  --output none
+            Write-Host "Doc Intel custom training files uploaded successfully." -ForegroundColor Green
+        }
+        catch {
+            Write-Host "Failed to upload Doc Intel custom training files." -ForegroundColor Red
+            Write-Host $_.Exception.Message -ForegroundColor Red
+            Write-Host $_.Exception.ItemName -ForegroundColor Red
+        }
+    }
+    else {
+        Write-Host "Doc Intel custom training files won't be uploaded.`n" -ForegroundColor Yellow
+    }
+}

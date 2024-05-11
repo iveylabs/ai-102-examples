@@ -15,6 +15,28 @@ resource docIntel 'Microsoft.CognitiveServices/accounts@2023-10-01-preview' = {
   }
 }
 
+// Storage resources
+resource str 'Microsoft.Storage/storageAccounts@2023-01-01' = {
+  name: 'str${unique}'
+  location: location
+  kind: 'StorageV2'
+  sku: {
+    name: 'Standard_LRS'
+  }
+  properties: {
+    allowBlobPublicAccess: true
+  }
+  resource blobServices 'blobServices@2023-01-01' = {
+    name: 'default'
+    resource trainingContainer 'containers@2023-01-01' = {
+      name: 'customtraining'
+      properties: {
+        publicAccess: 'Blob'
+      }
+    }
+  }
+}
+
 // Outputs
 var key = docIntel.listKeys().key1
 output docintelEndpoint string = docIntel.properties.endpoint
