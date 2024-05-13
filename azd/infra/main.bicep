@@ -187,6 +187,7 @@ output multiKey string = introDemo || visionDemo || languageDemo || openAIDemo |
 // Intro outputs
 output introEndpoint string = introDemo ? introModule.outputs.endpoint : 'N/A'
 output introKey string = introDemo ? introModule.outputs.key : 'N/A'
+output vaultName string = introDemo ? introModule.outputs.vaultName : 'N/A'
 
 // Vision outputs
 output visionEndpoint string = visionDemo ? visionModule.outputs.visionEndpoint : 'N/A'

@@ -49,3 +49,4 @@ resource vault 'Microsoft.KeyVault/vaults@2023-07-01' = {
 var key = account.listKeys().key1
 output endpoint string = account.properties.endpoint
 output key string = key
+output vaultName string = vault.name
