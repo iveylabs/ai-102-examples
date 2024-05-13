@@ -22,6 +22,7 @@ resource vault 'Microsoft.KeyVault/vaults@2023-07-01' = {
   name: 'kv${unique}'
   location: location
   properties: {
+    enableRbacAuthorization: true
     sku: {
       family: 'A'
       name: 'standard'
