@@ -3,6 +3,6 @@
     "description" : "Documents for search.",  
     "type" : "azureblob",
     "credentials" :
-    { "connectionString" : ""    },  
+    { "connectionString" : "" },  
     "container" : { "name" : "margies-travel" }
 } 

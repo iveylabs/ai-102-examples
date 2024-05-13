@@ -92,7 +92,7 @@
         "@odata.type": "#Microsoft.Skills.Text.TranslationSkill",
         "name": "#4",
         "description": null,
-        "context": "/document/merged_content",
+        "context": "/document",
         "defaultFromLanguageCode": null,
         "defaultToLanguageCode": "fr",
         "suggestedFrom": "en",
@@ -219,6 +219,6 @@
     ],
     "cognitiveServices": {
       "@odata.type": "#Microsoft.Azure.Search.CognitiveServicesByKey",
-      "key": "MULTI_ACCOUNT_KEY"
+      "key": "MULTI_SERVICE_KEY"
     }
   }
