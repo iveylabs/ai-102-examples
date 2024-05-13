@@ -37,7 +37,7 @@ param docIntelRGName = readEnvironmentVariable('DOCINTEL_RESOURCE_GROUP', 'docin
 // General parameters
 param defaultLocation = 'uksouth'
 
-param myObjectId = '80d52fb0-ac2f-43dd-b478-3856a826b254' // Get your Entra ID user object id
+param myObjectId = '' // Get your Entra ID user object id
 
 // Vision specific parameters
 param customVision = false // Set to false to skip creation of Custom Vision resources
