@@ -112,12 +112,14 @@ resource language 'Microsoft.CognitiveServices/accounts@2023-10-01-preview' = {
 }
 
 // Set up Storage Blob Data Owner permissions
-module roleAssignment 'languageroleassignment.bicep' = {
+module roleAssignment 'roleassignment.bicep' = {
   name: 'roleAssignment'
   params: {
     principalId: language.identity.principalId
     roleDefinitionId: roleDefinitionId
-    strName: str.name
+    resName: str.name
+    storageAccount: true
+    vault: false
   }
 }
 

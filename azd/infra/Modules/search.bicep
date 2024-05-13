@@ -30,7 +30,7 @@ resource str 'Microsoft.Storage/storageAccounts@2023-01-01' = {
   }
   resource blobServices 'blobServices@2023-01-01' = {
     name: 'default'
-    resource classContainer 'containers@2023-01-01' = {
+    resource margiesContainer 'containers@2023-01-01' = {
       name: 'margies-travel'
       properties: {
         publicAccess: 'Blob'

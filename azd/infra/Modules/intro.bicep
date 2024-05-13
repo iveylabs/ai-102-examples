@@ -3,6 +3,7 @@ param tenantId string
 param myObjectId string
 
 var unique = uniqueString(resourceGroup().id, subscription().id)
+var roleDefinitionId = '00482a5a-887f-4fb3-b363-3b7fe8e74483' // Key Vault Administrator
 
 // Language resource
 resource account 'Microsoft.CognitiveServices/accounts@2023-10-01-preview' = {
@@ -43,6 +44,19 @@ resource vault 'Microsoft.KeyVault/vaults@2023-07-01' = {
     properties: {
       value: account.listKeys().key1
     }
+  }
+}
+
+// Vault RBAC assignment
+// Set up Storage Blob Data Owner permissions
+module roleAssignment 'roleassignment.bicep' = {
+  name: 'roleAssignment'
+  params: {
+    principalId: myObjectId
+    roleDefinitionId: roleDefinitionId
+    resName: vault.name
+    storageAccount: false
+    vault: true
   }
 }
 
