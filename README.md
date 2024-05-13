@@ -13,6 +13,7 @@ Using `azd` allows you to set up an environment with multiple resources and reso
 
 ## Prerequisites
 - Ensure you already have the Azure Developer CLI installed (you can use `winget install Microsoft.Azd -s winget`) first.
+- After installing the Azure Developer CLI, authenticate using `azd auth login`.
 - You must also have PowerShell Core / PowerShell 7 (pwsh) installed before running the `azd up` command.
 - Ensure you already have the Azure CLI installed.
 
