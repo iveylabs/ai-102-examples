@@ -6,7 +6,7 @@ if ($env:INTRO_DEMO -eq "true") {
     if ($confirmation -eq 'y') {
         try {
             Write-Host "Creating service principal..." -ForegroundColor Cyan
-            $spOutput = (az ad sp create-for-rbac -n "introvaultsp" --role "Key Vault Secrets User" --scopes "/subscriptions/${end:AZURE_SUBSCRIPTION_ID}/resourceGroups/${env:INTRO_RESOURCE_GROUP}/providers/Microsoft.KeyVault/vaults/${env:vaultName}" -o json) | ConvertFrom-Json
+            $spOutput = (az ad sp create-for-rbac -n "introvaultsp" --role "Key Vault Secrets User" --scopes "/subscriptions/${env:AZURE_SUBSCRIPTION_ID}/resourceGroups/${env:INTRO_RESOURCE_GROUP}/providers/Microsoft.KeyVault/vaults/${env:vaultName}" -o json) | ConvertFrom-Json
             Write-Host "Service principal created successfully." -ForegroundColor Green
             $confirmation = Read-Host "Would you like to save the service principal credentials to the .env file? (y/n)"
             # Save the service principal credentials to the .env file
