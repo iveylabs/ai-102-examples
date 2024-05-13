@@ -32,7 +32,7 @@ Ocp-Apim-Subscription-Key:{{docIntelKey}}
   "description": "Just for a demo",
   "buildMode": "template",
   "azureBlobSource": {
-    "containerUrl": "https://iveyrestr.blob.core.windows.net/customtraining"
+    "containerUrl": "https://strfvce7nxeao5zs.blob.core.windows.net/customtraining"
   }
 }
 ####

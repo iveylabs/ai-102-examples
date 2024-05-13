@@ -1,4 +1,42 @@
 
+if ($env:INTRO_DEMO -eq "true") {
+    # Create the SP and assign permissions for demonstrating Key Vault access
+    $confirmation = Read-Host "Create the SP and assign permissions for demonstrating Key Vault access? (y/n)"
+
+    if ($confirmation -eq 'y') {
+        try {
+            Write-Host "Creating service principal..." -ForegroundColor Cyan
+            $spOutput = (az ad sp create-for-rbac -n "introvaultsp" --role "Key Vault Secrets User" --scopes "/subscriptions/${end:AZURE_SUBSCRIPTION_ID}/resourceGroups/${env:INTRO_RESOURCE_GROUP}/providers/Microsoft.KeyVault/vaults/${env:vaultName}" -o json) | ConvertFrom-Json
+            Write-Host "Service principal created successfully." -ForegroundColor Green
+            $confirmation = Read-Host "Would you like to save the service principal credentials to the .env file? (y/n)"
+            # Save the service principal credentials to the .env file
+            if($confirmation -eq 'y') {
+                try {
+                Write-Host "Service principal credentials saved to the .env file." -ForegroundColor Green
+                azd env set SP_APP_ID $spOutput.appId
+                azd env set SP_PASSWORD $spOutput.password
+                azd env set SP_TENANT_ID $spOutput.tenant
+                }
+                catch {
+                    Write-Host "Failed to save service principal credentials to the .env file." -ForegroundColor Red
+                    Write-Host $_.Exception.Message -ForegroundColor Red
+                    Write-Host $_.Exception.ItemName -ForegroundColor Red
+                }
+            }
+        }
+        catch {
+            Write-Host "Failed to create and/or assign RBAC permissions for the service principal." -ForegroundColor Red
+            Write-Host $_.Exception.Message -ForegroundColor Red
+            Write-Host $_.Exception.ItemName -ForegroundColor Red
+        }
+    }
+    else {
+        Write-Host "Service principal will not be created or configured.`n" -ForegroundColor Yellow
+    }
+
+}
+
+
 if ($env:VISION_DEMO -eq "true") {
     # Upload image classification images to Blob Storage
     $confirmation = Read-Host "Upload image classification images from the repo? (y/n)"
@@ -122,7 +160,7 @@ if ($env:DOCINTEL_DEMO -eq "true") {
     if ($confirmation -eq 'y') {
         try {
             $accountName = az storage account list --resource-group $env:DOCINTEL_RESOURCE_GROUP --query "[0].name" --output tsv
-            $sourcePath = "..\06-doc-intel\customtraining"
+            $sourcePath = "..\06-doc-intel\REST_Training"
 
             Write-Host "Uploading Doc Intel custom training files to Blob Storage..." -ForegroundColor Cyan
             az storage blob upload-batch -d "customtraining" -s $sourcePath --account-name $accountName --auth-mode login  --output none

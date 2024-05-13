@@ -13,6 +13,7 @@ Using `azd` allows you to set up an environment with multiple resources and reso
 
 ## Provisioning
 - Ensure you already have the Azure Developer CLI installed (you can use `winget install Microsoft.Azd -s winget`) first.
+- You must also have PowerShell Core / PowerShell 7 (pwsh) installed before running the `azd up` command.
 - Deployment should be done using the CLI and not using the VS Code extension because the extension often fails to execute required scripts.
 - To begin, simply run the `azd up` command (I've seen required scripts not always running when you use the `provision` command, so stick with `up`).
     - You will be prompted for an environment name, followed by your subscription and region (for the deployment itself, not for the specific resource deployments).
