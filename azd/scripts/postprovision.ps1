@@ -43,7 +43,13 @@ if ($env:VISION_DEMO -eq "true") {
 
     if ($confirmation -eq 'y') {
         try {
+            # Only proceed if the $env:VISION_RESOURCE_GROUP variable is set
+            if (-not $env:VISION_RESOURCE_GROUP) {
+                Write-Host "VISION_RESOURCE_GROUP environment variable is not set. Skipping image upload." -ForegroundColor Red
+                return
+            }
             $accountName = az storage account list --resource-group $env:VISION_RESOURCE_GROUP --query "[0].name" --output tsv
+            # If accountName is empty, the storage account hasn't been created yet
             $sourcePath = "..\02-vision\02-image-classification\training-images"
 
             Write-Host "Uploading image classification images to Blob Storage..." -ForegroundColor Cyan
@@ -65,6 +71,11 @@ if ($env:VISION_DEMO -eq "true") {
 
     if ($confirmation -eq 'y') {
         try {
+            # Only proceed if the $env:VISION_RESOURCE_GROUP variable is set
+            if (-not $env:VISION_RESOURCE_GROUP) {
+                Write-Host "VISION_RESOURCE_GROUP environment variable is not set. Skipping image upload." -ForegroundColor Red
+                return
+            }
             $accountName = az storage account list --resource-group $env:VISION_RESOURCE_GROUP --query "[0].name" --output tsv
             $sourcePath = "..\02-vision\03-object-detection\training-images"
 
@@ -89,6 +100,11 @@ if ($env:LANGUAGE_DEMO -eq "true") {
 
     if ($confirmation -eq 'y') {
         try {
+            # Only proceed if the $env:LANGUAGE_RESOURCE_GROUP variable is set
+            if (-not $env:LANGUAGE_RESOURCE_GROUP) {
+                Write-Host "LANGUAGE_RESOURCE_GROUP environment variable is not set. Skipping image upload." -ForegroundColor Red
+                return
+            }
             $accountName = az storage account list --resource-group $env:LANGUAGE_RESOURCE_GROUP --query "[0].name" --output tsv
             $sourcePath = "..\03-nlp\04-custom-classification\articles_train"
 
@@ -111,6 +127,11 @@ if ($env:LANGUAGE_DEMO -eq "true") {
 
     if ($confirmation -eq 'y') {
         try {
+            # Only proceed if the $env:LANGUAGE_RESOURCE_GROUP variable is set
+            if (-not $env:LANGUAGE_RESOURCE_GROUP) {
+                Write-Host "LANGUAGE_RESOURCE_GROUP environment variable is not set. Skipping image upload." -ForegroundColor Red
+                return
+            }
             $accountName = az storage account list --resource-group $env:LANGUAGE_RESOURCE_GROUP --query "[0].name" --output tsv
             $sourcePath = "..\03-nlp\05-custom-ner\ads_train"
 
@@ -135,6 +156,11 @@ if ($env:SEARCH_DEMO -eq "true") {
 
     if ($confirmation -eq 'y') {
         try {
+            # Only proceed if the $env:SEARCH_RESOURCE_GROUP variable is set
+            if (-not $env:SEARCH_RESOURCE_GROUP) {
+                Write-Host "SEARCH_RESOURCE_GROUP environment variable is not set. Skipping image upload." -ForegroundColor Red
+                return
+            }
             $accountName = az storage account list --resource-group $env:SEARCH_RESOURCE_GROUP --query "[0].name" --output tsv
             $sourcePath = "..\05-ai-search\001-MySetup\data"
 
@@ -159,6 +185,11 @@ if ($env:DOCINTEL_DEMO -eq "true") {
 
     if ($confirmation -eq 'y') {
         try {
+            # Only proceed if the $env:DOCINTEL_RESOURCE_GROUP variable is set
+            if (-not $env:DOCINTEL_RESOURCE_GROUP) {
+                Write-Host "DOCINTEL_RESOURCE_GROUP environment variable is not set. Skipping image upload." -ForegroundColor Red
+                return
+            }
             $accountName = az storage account list --resource-group $env:DOCINTEL_RESOURCE_GROUP --query "[0].name" --output tsv
             $sourcePath = "..\06-doc-intel\REST_Training"
 

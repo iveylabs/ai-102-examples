@@ -18,3 +18,8 @@ hooks:
     continueOnError: false
     interactive: true
     run: ./scripts/postprovision.ps1
+  postdown:
+    shell: pwsh
+    continueOnError: false
+    interactive: false
+    run: ./scripts/postdown.ps1
