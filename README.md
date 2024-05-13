@@ -11,10 +11,13 @@ The demos in this repository are intended to be modular and deployed to separate
 Make sure you execute **all** `azd` commands from within the `azd` folder.  
 Using `azd` allows you to set up an environment with multiple resources and resource groups when required, including having scripts execute before and after the provisioning of resources, then tear down the environment and remove relevant soft-deleted resources in the process. You can then rinse and repeat!
 
-## Provisioning
+## Prerequisites
 - Ensure you already have the Azure Developer CLI installed (you can use `winget install Microsoft.Azd -s winget`) first.
 - You must also have PowerShell Core / PowerShell 7 (pwsh) installed before running the `azd up` command.
-- Deployment should be done using the CLI and not using the VS Code extension because the extension often fails to execute required scripts.
+- Ensure you already have the Azure CLI installed.
+
+## Provisioning
+- Deployment should be done using the `azd` CLI and not using the VS Code extension because the extension often fails to execute required scripts.
 - To begin, simply run the `azd up` command (I've seen required scripts not always running when you use the `provision` command, so stick with `up`).
     - You will be prompted for an environment name, followed by your subscription and region (for the deployment itself, not for the specific resource deployments).
     - A pre-provision script will prompt you for any required information/values. This is designed so you can select all of the demos or only specific demos you'd like to provision the infrastructure for.
