@@ -7,6 +7,8 @@ builder.Services.AddSingleton(builder.Configuration);
 builder.Services.AddSingleton(builder.Configuration.GetValue<string>("LanguageEndpoint")!);
 builder.Services.AddSingleton(builder.Configuration.GetValue<string>("LanguageKey")!);
 builder.Services.AddSingleton(builder.Configuration.GetValue<string>("WeatherApiKey")!);
+builder.Services.AddSingleton(builder.Configuration.GetValue<string>("ProjectName")!);
+builder.Services.AddSingleton(builder.Configuration.GetValue<string>("DeploymentName")!);
 
 
 var app = builder.Build();

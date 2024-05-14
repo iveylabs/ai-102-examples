@@ -18,6 +18,8 @@ public class IndexModel : PageModel
     private readonly string _languageKey;
     private readonly string _languageEndpoint;
     private readonly string _weatherApiKey;
+    private readonly string _projectName;
+    private readonly string _deploymentName;
 
 
     public IndexModel(IConfiguration configuration)
@@ -26,6 +28,8 @@ public class IndexModel : PageModel
         _languageEndpoint = _configuration.GetValue<string>("LanguageEndpoint") ?? "KEY NOT SET";
         _languageKey = _configuration.GetValue<string>("LanguageKey") ?? "ENDPOINT NOT SET";
         _weatherApiKey = _configuration.GetValue<string>("WeatherApiKey") ?? "WEATHER API KEY NOT SET";
+        _projectName = _configuration.GetValue<string>("ProjectName") ?? "PROJECT NAME NOT SET";
+        _deploymentName = _configuration.GetValue<string>("DeploymentName") ?? "DEPLOYMENT NAME NOT SET";
     }
 
     public async Task<IActionResult> OnPostProcessInputAsync(string InputText, string submit)
@@ -40,8 +44,8 @@ public class IndexModel : PageModel
             AzureKeyCredential credential = new (_languageKey);
             ConversationAnalysisClient client = new (endpoint, credential);
 
-            var projectName = "AI-102CLUDemo";
-            var deploymentName = "AI102CLUDemoDeployment";
+            var projectName = _projectName;
+            var deploymentName = _deploymentName;
 
             var data = new
             {
@@ -232,8 +236,8 @@ public class IndexModel : PageModel
             },
             ["parameters"] = new JObject
             {
-                ["projectName"] = "AI-102CLUDemo",
-                ["deploymentName"] = "AI102CLUDemoDeployment",
+                ["projectName"] = _projectName,
+                ["deploymentName"] = _deploymentName,
                 ["stringIndexType"] = "Utf16CodeUnit"
             }
 
