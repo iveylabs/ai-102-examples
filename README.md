@@ -4,9 +4,6 @@ Note: Although several demos are web apps, web apps aren't currently deployed as
 
 The demos in this repository are intended to be modular and deployed to separate resource groups. This keeps things more organised and makes it easier to show resources for specific demos, rather than having many resources in a resource group that aren't relevant to what you're demonstrating. Having said that, there's nothing stopping you from cloning this repository and making whatever changes suit you 😊
 
-### IMPORTANT
-**You should first check the `azd/infra/main.bicepparams` file and fill in any hard-coded params, like your object ID, before trying to deploy anything.**
-
 ## AZD
 Make sure you execute **all** `azd` commands from within the `azd` folder.  
 Using `azd` allows you to set up an environment with multiple resources and resource groups when required, including having scripts execute before and after the provisioning of resources, then tear down the environment and remove relevant soft-deleted resources in the process. You can then rinse and repeat!
