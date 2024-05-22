@@ -13,6 +13,10 @@ if (-not $env:YOUR_OBJECT_ID) {
        azd env set YOUR_OBJECT_ID $UserObjectId
 }
 
+# Set the resource group name for the multi-service account (always deployed)
+$MultiResourceGroup = "multi-${env:AZURE_ENV_NAME}-rg"
+azd env set MULTI_RESOURCE_GROUP $MultiResourceGroup
+
 $ProvisionAllDemos = Read-Host "Provision all demos? (y/n)"
 if ($ProvisionAllDemos -eq 'y') {
        # Ensure the DEFAULT_LOCATION environment variable is set
@@ -25,7 +29,7 @@ if ($ProvisionAllDemos -eq 'y') {
        azd env set INTRO_DEMO "true"
        if (-not $env:INTRO_RESOURCE_GROUP) {
               # Ensure the INTRO_RESOURCE_GROUP environment variable is set
-              $IntroResourceGroup = Read-Host "Please enter the desired name for your Intro resource group"
+              $IntroResourceGroup = "intro-${env:AZURE_ENV_NAME}-rg"
               azd env set INTRO_RESOURCE_GROUP $IntroResourceGroup
        }
 
@@ -33,7 +37,7 @@ if ($ProvisionAllDemos -eq 'y') {
        azd env set VISION_DEMO "true"
        if (-not $env:VISION_RESOURCE_GROUP) {
               # Ensure the VISION_RESOURCE_GROUP environment variable is set
-              $VisionResourceGroup = Read-Host "Please enter the desired name for your Vision resource group"
+              $VisionResourceGroup = "vision-${env:AZURE_ENV_NAME}-rg"
               azd env set VISION_RESOURCE_GROUP $VisionResourceGroup
               
               # Ensure the VISION_LOCATION environment variable is set
@@ -48,7 +52,7 @@ if ($ProvisionAllDemos -eq 'y') {
        azd env set LANGUAGE_DEMO "true"
        # Ensure the LANGUAGE_RESOURCE_GROUP environment variable is set
        if (-not $env:LANGUAGE_RESOURCE_GROUP) {
-              $LanguageResourceGroup = Read-Host "Please enter the desired name for your Language resource group"
+              $LanguageResourceGroup = "language-${env:AZURE_ENV_NAME}-rg"
               azd env set LANGUAGE_RESOURCE_GROUP $LanguageResourceGroup
        }
 
@@ -56,7 +60,7 @@ if ($ProvisionAllDemos -eq 'y') {
        azd env set OPENAI_DEMO "true"
        if (-not $env:OPENAI_RESOURCE_GROUP) {
               # Ensure the OPENAI_RESOURCE_GROUP environment variable is set
-              $OpenAIResourceGroup = Read-Host "Please enter the desired name for your Azure OpenAI resource group"
+              $OpenAIResourceGroup = "aoai-${env:AZURE_ENV_NAME}-rg"
               azd env set OPENAI_RESOURCE_GROUP $OpenAIResourceGroup
               
               # Ensure the AOAI_LOCATION environment variable is set
@@ -70,14 +74,14 @@ if ($ProvisionAllDemos -eq 'y') {
        azd env set SEARCH_DEMO "true"
        # Ensure the SEARCH_RESOURCE_GROUP environment variable is set
        if (-not $env:SEARCH_RESOURCE_GROUP) {
-              $SearchResourceGroup = Read-Host "Please enter the desired name for your Search resource group"
+              $SearchResourceGroup = "search-${env:AZURE_ENV_NAME}-rg"
               azd env set SEARCH_RESOURCE_GROUP $SearchResourceGroup
        }
        # Doc Intel
        azd env set DOCINTEL_DEMO "true"
        # Ensure the DOCINTEL_RESOURCE_GROUP environment variable is set
        if (-not $env:DOCINTEL_RESOURCE_GROUP) {
-              $DocIntelResourceGroup = Read-Host "Please enter the desired name for your Document Intelligence resource group"
+              $DocIntelResourceGroup = "docintel-${env:AZURE_ENV_NAME}-rg"
               azd env set DOCINTEL_RESOURCE_GROUP $DocIntelResourceGroup
 
               # Ensure the DOCINTEL_LOCATION environment variable is set
@@ -99,7 +103,7 @@ else {
                      azd env set INTRO_DEMO "true"
                      if (-not $env:INTRO_RESOURCE_GROUP) {
                             # Ensure the INTRO_RESOURCE_GROUP environment variable is set
-                            $IntroResourceGroup = Read-Host "Please enter the desired name for your Intro resource group"
+                            $IntroResourceGroup = "intro-${env:AZURE_ENV_NAME}-rg"
                             azd env set INTRO_RESOURCE_GROUP $IntroResourceGroup
                      }
               }
@@ -115,7 +119,7 @@ else {
                      azd env set VISION_DEMO "true"
                      if (-not $env:VISION_RESOURCE_GROUP) {
                             # Ensure the VISION_RESOURCE_GROUP environment variable is set
-                            $VisionResourceGroup = Read-Host "Please enter the desired name for your Vision resource group"
+                            $VisionResourceGroup = "vision-${env:AZURE_ENV_NAME}-rg"
                             azd env set VISION_RESOURCE_GROUP $VisionResourceGroup
 
                             # Ensure the VISION_LOCATION environment variable is set
@@ -137,7 +141,7 @@ else {
                      azd env set LANGUAGE_DEMO "true"
                      # Ensure the LANGUAGE_RESOURCE_GROUP environment variable is set
                      if (-not $env:LANGUAGE_RESOURCE_GROUP) {
-                            $LanguageResourceGroup = Read-Host "Please enter the desired name for your Language resource group"
+                            $LanguageResourceGroup = "language-${env:AZURE_ENV_NAME}-rg"
                             azd env set LANGUAGE_RESOURCE_GROUP $LanguageResourceGroup
                      }
               }
@@ -153,7 +157,7 @@ else {
                      azd env set OPENAI_DEMO "true"
                      if (-not $env:OPENAI_RESOURCE_GROUP) {
                             # Ensure the OPENAI_RESOURCE_GROUP environment variable is set
-                            $OpenAIResourceGroup = Read-Host "Please enter the desired name for your Azure OpenAI resource group"
+                            $OpenAIResourceGroup = "aoai-${env:AZURE_ENV_NAME}-rg"
                             azd env set OPENAI_RESOURCE_GROUP $OpenAIResourceGroup
 
                             # Ensure the AOAI_LOCATION environment variable is set
@@ -175,7 +179,7 @@ else {
                      azd env set SEARCH_DEMO "true"
                      # Ensure the SEARCH_RESOURCE_GROUP environment variable is set
                      if (-not $env:SEARCH_RESOURCE_GROUP) {
-                            $SearchResourceGroup = Read-Host "Please enter the desired name for your Search resource group"
+                            $SearchResourceGroup = "search-${env:AZURE_ENV_NAME}-rg"
                             azd env set SEARCH_RESOURCE_GROUP $SearchResourceGroup
                      }
               }
@@ -191,7 +195,7 @@ else {
                      azd env set DOCINTEL_DEMO "true"
                      # Ensure the DOCINTEL_RESOURCE_GROUP environment variable is set
                      if (-not $env:DOCINTEL_RESOURCE_GROUP) {
-                            $DocIntelResourceGroup = Read-Host "Please enter the desired name for your Doc Intel resource group"
+                            $DocIntelResourceGroup = "docintel-${env:AZURE_ENV_NAME}-rg"
                             azd env set DOCINTEL_RESOURCE_GROUP $DocIntelResourceGroup
 
                             # Ensure the DOCINTEL_LOCATION environment variable is set

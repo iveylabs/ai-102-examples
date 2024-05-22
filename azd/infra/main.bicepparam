@@ -26,7 +26,7 @@ param searchDemo    = search == 'true' ? true : false
 param docIntelDemo  = docIntel == 'true' ? true : false
 
 // Resource group names
-param multiRGName     = 'multi-rg'
+param multiRGName     = readEnvironmentVariable('MULTI_RESOURCE_GROUP', 'multi-rg')
 param introRGName     = readEnvironmentVariable('INTRO_RESOURCE_GROUP', 'intro-rg')
 param visionRGName    = readEnvironmentVariable('VISION_RESOURCE_GROUP', 'vision-rg') // For the postprovision script
 param languageRGName  = readEnvironmentVariable('LANGUAGE_RESOURCE_GROUP', 'language-rg') // For the postprovision script
