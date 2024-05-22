@@ -1,0 +1,695 @@
+{
+  "images": [
+    {
+      "id": 1,
+      "width": 1024,
+      "height": 768,
+      "file_name": "IMG_20200229_164919.jpg",
+      "coco_url": "AmlDatastore://image_classification_datastore/IMG_20200229_164919.jpg",
+      "absolute_url": "https://strr4uwsyl2gpbxi.blob.core.windows.net/classification/IMG_20200229_164919.jpg",
+      "date_captured": "2024-05-14T07:07:33.686532Z"
+    },
+    {
+      "id": 2,
+      "width": 1024,
+      "height": 768,
+      "file_name": "IMG_20200229_164811.jpg",
+      "coco_url": "AmlDatastore://image_classification_datastore/IMG_20200229_164811.jpg",
+      "absolute_url": "https://strr4uwsyl2gpbxi.blob.core.windows.net/classification/IMG_20200229_164811.jpg",
+      "date_captured": "2024-05-14T07:07:33.6864688Z"
+    },
+    {
+      "id": 3,
+      "width": 1024,
+      "height": 768,
+      "file_name": "IMG_20200229_165047.jpg",
+      "coco_url": "AmlDatastore://image_classification_datastore/IMG_20200229_165047.jpg",
+      "absolute_url": "https://strr4uwsyl2gpbxi.blob.core.windows.net/classification/IMG_20200229_165047.jpg",
+      "date_captured": "2024-05-14T07:07:33.6864442Z"
+    },
+    {
+      "id": 4,
+      "width": 1024,
+      "height": 768,
+      "file_name": "IMG_20200229_164936.jpg",
+      "coco_url": "AmlDatastore://image_classification_datastore/IMG_20200229_164936.jpg",
+      "absolute_url": "https://strr4uwsyl2gpbxi.blob.core.windows.net/classification/IMG_20200229_164936.jpg",
+      "date_captured": "2024-05-14T07:07:33.6864562Z"
+    },
+    {
+      "id": 5,
+      "width": 1024,
+      "height": 768,
+      "file_name": "IMG_20200229_165016.jpg",
+      "coco_url": "AmlDatastore://image_classification_datastore/IMG_20200229_165016.jpg",
+      "absolute_url": "https://strr4uwsyl2gpbxi.blob.core.windows.net/classification/IMG_20200229_165016.jpg",
+      "date_captured": "2024-05-14T07:07:33.6865486Z"
+    },
+    {
+      "id": 6,
+      "width": 1024,
+      "height": 768,
+      "file_name": "IMG_20200229_164819.jpg",
+      "coco_url": "AmlDatastore://image_classification_datastore/IMG_20200229_164819.jpg",
+      "absolute_url": "https://strr4uwsyl2gpbxi.blob.core.windows.net/classification/IMG_20200229_164819.jpg",
+      "date_captured": "2024-05-14T07:07:33.6864901Z"
+    },
+    {
+      "id": 7,
+      "width": 1024,
+      "height": 768,
+      "file_name": "IMG_20200229_165108.jpg",
+      "coco_url": "AmlDatastore://image_classification_datastore/IMG_20200229_165108.jpg",
+      "absolute_url": "https://strr4uwsyl2gpbxi.blob.core.windows.net/classification/IMG_20200229_165108.jpg",
+      "date_captured": "2024-05-14T07:07:33.6865026Z"
+    },
+    {
+      "id": 8,
+      "width": 1024,
+      "height": 768,
+      "file_name": "IMG_20200229_165202.jpg",
+      "coco_url": "AmlDatastore://image_classification_datastore/IMG_20200229_165202.jpg",
+      "absolute_url": "https://strr4uwsyl2gpbxi.blob.core.windows.net/classification/IMG_20200229_165202.jpg",
+      "date_captured": "2024-05-14T07:07:33.6864511Z"
+    },
+    {
+      "id": 9,
+      "width": 1024,
+      "height": 768,
+      "file_name": "IMG_20200229_164932.jpg",
+      "coco_url": "AmlDatastore://image_classification_datastore/IMG_20200229_164932.jpg",
+      "absolute_url": "https://strr4uwsyl2gpbxi.blob.core.windows.net/classification/IMG_20200229_164932.jpg",
+      "date_captured": "2024-05-14T07:07:33.6865333Z"
+    },
+    {
+      "id": 10,
+      "width": 1024,
+      "height": 768,
+      "file_name": "IMG_20200229_164952.jpg",
+      "coco_url": "AmlDatastore://image_classification_datastore/IMG_20200229_164952.jpg",
+      "absolute_url": "https://strr4uwsyl2gpbxi.blob.core.windows.net/classification/IMG_20200229_164952.jpg",
+      "date_captured": "2024-05-14T07:07:33.6864976Z"
+    },
+    {
+      "id": 11,
+      "width": 1024,
+      "height": 768,
+      "file_name": "IMG_20200229_165232.jpg",
+      "coco_url": "AmlDatastore://image_classification_datastore/IMG_20200229_165232.jpg",
+      "absolute_url": "https://strr4uwsyl2gpbxi.blob.core.windows.net/classification/IMG_20200229_165232.jpg",
+      "date_captured": "2024-05-14T07:07:33.6864619Z"
+    },
+    {
+      "id": 12,
+      "width": 1024,
+      "height": 768,
+      "file_name": "IMG_20200229_165220.jpg",
+      "coco_url": "AmlDatastore://image_classification_datastore/IMG_20200229_165220.jpg",
+      "absolute_url": "https://strr4uwsyl2gpbxi.blob.core.windows.net/classification/IMG_20200229_165220.jpg",
+      "date_captured": "2024-05-14T07:07:33.6865194Z"
+    },
+    {
+      "id": 13,
+      "width": 1024,
+      "height": 768,
+      "file_name": "IMG_20200229_165008.jpg",
+      "coco_url": "AmlDatastore://image_classification_datastore/IMG_20200229_165008.jpg",
+      "absolute_url": "https://strr4uwsyl2gpbxi.blob.core.windows.net/classification/IMG_20200229_165008.jpg",
+      "date_captured": "2024-05-14T07:07:33.6865274Z"
+    },
+    {
+      "id": 14,
+      "width": 1024,
+      "height": 768,
+      "file_name": "IMG_20200229_165046.jpg",
+      "coco_url": "AmlDatastore://image_classification_datastore/IMG_20200229_165046.jpg",
+      "absolute_url": "https://strr4uwsyl2gpbxi.blob.core.windows.net/classification/IMG_20200229_165046.jpg",
+      "date_captured": "2024-05-14T07:07:33.6865406Z"
+    },
+    {
+      "id": 15,
+      "width": 1024,
+      "height": 768,
+      "file_name": "IMG_20200229_165020.jpg",
+      "coco_url": "AmlDatastore://image_classification_datastore/IMG_20200229_165020.jpg",
+      "absolute_url": "https://strr4uwsyl2gpbxi.blob.core.windows.net/classification/IMG_20200229_165020.jpg",
+      "date_captured": "2024-05-14T07:07:33.686481Z"
+    },
+    {
+      "id": 16,
+      "width": 1024,
+      "height": 768,
+      "file_name": "IMG_20200229_164804.jpg",
+      "coco_url": "AmlDatastore://image_classification_datastore/IMG_20200229_164804.jpg",
+      "absolute_url": "https://strr4uwsyl2gpbxi.blob.core.windows.net/classification/IMG_20200229_164804.jpg",
+      "date_captured": "2024-05-14T07:07:33.6864834Z"
+    },
+    {
+      "id": 17,
+      "width": 1024,
+      "height": 768,
+      "file_name": "IMG_20200229_165152.jpg",
+      "coco_url": "AmlDatastore://image_classification_datastore/IMG_20200229_165152.jpg",
+      "absolute_url": "https://strr4uwsyl2gpbxi.blob.core.windows.net/classification/IMG_20200229_165152.jpg",
+      "date_captured": "2024-05-14T07:07:33.6865218Z"
+    },
+    {
+      "id": 18,
+      "width": 1024,
+      "height": 768,
+      "file_name": "IMG_20200229_165126.jpg",
+      "coco_url": "AmlDatastore://image_classification_datastore/IMG_20200229_165126.jpg",
+      "absolute_url": "https://strr4uwsyl2gpbxi.blob.core.windows.net/classification/IMG_20200229_165126.jpg",
+      "date_captured": "2024-05-14T07:07:33.6865087Z"
+    },
+    {
+      "id": 19,
+      "width": 1024,
+      "height": 768,
+      "file_name": "IMG_20200229_165033.jpg",
+      "coco_url": "AmlDatastore://image_classification_datastore/IMG_20200229_165033.jpg",
+      "absolute_url": "https://strr4uwsyl2gpbxi.blob.core.windows.net/classification/IMG_20200229_165033.jpg",
+      "date_captured": "2024-05-14T07:07:33.6865387Z"
+    },
+    {
+      "id": 20,
+      "width": 1024,
+      "height": 768,
+      "file_name": "IMG_20200229_164918.jpg",
+      "coco_url": "AmlDatastore://image_classification_datastore/IMG_20200229_164918.jpg",
+      "absolute_url": "https://strr4uwsyl2gpbxi.blob.core.windows.net/classification/IMG_20200229_164918.jpg",
+      "date_captured": "2024-05-14T07:07:33.6865138Z"
+    },
+    {
+      "id": 21,
+      "width": 1024,
+      "height": 768,
+      "file_name": "IMG_20200229_165112.jpg",
+      "coco_url": "AmlDatastore://image_classification_datastore/IMG_20200229_165112.jpg",
+      "absolute_url": "https://strr4uwsyl2gpbxi.blob.core.windows.net/classification/IMG_20200229_165112.jpg",
+      "date_captured": "2024-05-14T07:07:33.686525Z"
+    },
+    {
+      "id": 22,
+      "width": 1024,
+      "height": 768,
+      "file_name": "IMG_20200229_165002.jpg",
+      "coco_url": "AmlDatastore://image_classification_datastore/IMG_20200229_165002.jpg",
+      "absolute_url": "https://strr4uwsyl2gpbxi.blob.core.windows.net/classification/IMG_20200229_165002.jpg",
+      "date_captured": "2024-05-14T07:07:33.6864538Z"
+    },
+    {
+      "id": 23,
+      "width": 1024,
+      "height": 768,
+      "file_name": "IMG_20200229_165027.jpg",
+      "coco_url": "AmlDatastore://image_classification_datastore/IMG_20200229_165027.jpg",
+      "absolute_url": "https://strr4uwsyl2gpbxi.blob.core.windows.net/classification/IMG_20200229_165027.jpg",
+      "date_captured": "2024-05-14T07:07:33.6864954Z"
+    },
+    {
+      "id": 24,
+      "width": 1024,
+      "height": 768,
+      "file_name": "IMG_20200229_165115.jpg",
+      "coco_url": "AmlDatastore://image_classification_datastore/IMG_20200229_165115.jpg",
+      "absolute_url": "https://strr4uwsyl2gpbxi.blob.core.windows.net/classification/IMG_20200229_165115.jpg",
+      "date_captured": "2024-05-14T07:07:33.6864928Z"
+    },
+    {
+      "id": 25,
+      "width": 1024,
+      "height": 768,
+      "file_name": "IMG_20200229_165223.jpg",
+      "coco_url": "AmlDatastore://image_classification_datastore/IMG_20200229_165223.jpg",
+      "absolute_url": "https://strr4uwsyl2gpbxi.blob.core.windows.net/classification/IMG_20200229_165223.jpg",
+      "date_captured": "2024-05-14T07:07:33.68612Z"
+    },
+    {
+      "id": 26,
+      "width": 1024,
+      "height": 768,
+      "file_name": "IMG_20200229_164830.jpg",
+      "coco_url": "AmlDatastore://image_classification_datastore/IMG_20200229_164830.jpg",
+      "absolute_url": "https://strr4uwsyl2gpbxi.blob.core.windows.net/classification/IMG_20200229_164830.jpg",
+      "date_captured": "2024-05-14T07:07:33.6864764Z"
+    },
+    {
+      "id": 27,
+      "width": 1024,
+      "height": 768,
+      "file_name": "IMG_20200229_164823.jpg",
+      "coco_url": "AmlDatastore://image_classification_datastore/IMG_20200229_164823.jpg",
+      "absolute_url": "https://strr4uwsyl2gpbxi.blob.core.windows.net/classification/IMG_20200229_164823.jpg",
+      "date_captured": "2024-05-14T07:07:33.6864593Z"
+    },
+    {
+      "id": 28,
+      "width": 1024,
+      "height": 768,
+      "file_name": "IMG_20200229_165236.jpg",
+      "coco_url": "AmlDatastore://image_classification_datastore/IMG_20200229_165236.jpg",
+      "absolute_url": "https://strr4uwsyl2gpbxi.blob.core.windows.net/classification/IMG_20200229_165236.jpg",
+      "date_captured": "2024-05-14T07:07:33.6865305Z"
+    },
+    {
+      "id": 29,
+      "width": 1024,
+      "height": 768,
+      "file_name": "IMG_20200229_165147.jpg",
+      "coco_url": "AmlDatastore://image_classification_datastore/IMG_20200229_165147.jpg",
+      "absolute_url": "https://strr4uwsyl2gpbxi.blob.core.windows.net/classification/IMG_20200229_165147.jpg",
+      "date_captured": "2024-05-14T07:07:33.6865473Z"
+    },
+    {
+      "id": 30,
+      "width": 1024,
+      "height": 768,
+      "file_name": "IMG_20200229_164851.jpg",
+      "coco_url": "AmlDatastore://image_classification_datastore/IMG_20200229_164851.jpg",
+      "absolute_url": "https://strr4uwsyl2gpbxi.blob.core.windows.net/classification/IMG_20200229_164851.jpg",
+      "date_captured": "2024-05-14T07:07:33.6865164Z"
+    },
+    {
+      "id": 31,
+      "width": 1024,
+      "height": 768,
+      "file_name": "IMG_20200229_164926jpg.jpg",
+      "coco_url": "AmlDatastore://image_classification_datastore/IMG_20200229_164926jpg.jpg",
+      "absolute_url": "https://strr4uwsyl2gpbxi.blob.core.windows.net/classification/IMG_20200229_164926jpg.jpg",
+      "date_captured": "2024-05-14T07:07:33.686474Z"
+    },
+    {
+      "id": 32,
+      "width": 1024,
+      "height": 768,
+      "file_name": "IMG_20200229_165132.jpg",
+      "coco_url": "AmlDatastore://image_classification_datastore/IMG_20200229_165132.jpg",
+      "absolute_url": "https://strr4uwsyl2gpbxi.blob.core.windows.net/classification/IMG_20200229_165132.jpg",
+      "date_captured": "2024-05-14T07:07:33.6865237Z"
+    },
+    {
+      "id": 33,
+      "width": 1024,
+      "height": 768,
+      "file_name": "IMG_20200229_165021.jpg",
+      "coco_url": "AmlDatastore://image_classification_datastore/IMG_20200229_165021.jpg",
+      "absolute_url": "https://strr4uwsyl2gpbxi.blob.core.windows.net/classification/IMG_20200229_165021.jpg",
+      "date_captured": "2024-05-14T07:07:33.6865347Z"
+    },
+    {
+      "id": 34,
+      "width": 1024,
+      "height": 768,
+      "file_name": "IMG_20200229_164901.jpg",
+      "coco_url": "AmlDatastore://image_classification_datastore/IMG_20200229_164901.jpg",
+      "absolute_url": "https://strr4uwsyl2gpbxi.blob.core.windows.net/classification/IMG_20200229_164901.jpg",
+      "date_captured": "2024-05-14T07:07:33.686542Z"
+    },
+    {
+      "id": 35,
+      "width": 1024,
+      "height": 768,
+      "file_name": "IMG_20200229_164958.jpg",
+      "coco_url": "AmlDatastore://image_classification_datastore/IMG_20200229_164958.jpg",
+      "absolute_url": "https://strr4uwsyl2gpbxi.blob.core.windows.net/classification/IMG_20200229_164958.jpg",
+      "date_captured": "2024-05-14T07:07:33.6865052Z"
+    },
+    {
+      "id": 36,
+      "width": 1024,
+      "height": 768,
+      "file_name": "IMG_20200229_164957.jpg",
+      "coco_url": "AmlDatastore://image_classification_datastore/IMG_20200229_164957.jpg",
+      "absolute_url": "https://strr4uwsyl2gpbxi.blob.core.windows.net/classification/IMG_20200229_164957.jpg",
+      "date_captured": "2024-05-14T07:07:33.686546Z"
+    },
+    {
+      "id": 37,
+      "width": 1024,
+      "height": 768,
+      "file_name": "IMG_20200229_164760.jpg",
+      "coco_url": "AmlDatastore://image_classification_datastore/IMG_20200229_164760.jpg",
+      "absolute_url": "https://strr4uwsyl2gpbxi.blob.core.windows.net/classification/IMG_20200229_164760.jpg",
+      "date_captured": "2024-05-14T07:07:33.6865Z"
+    },
+    {
+      "id": 38,
+      "width": 1024,
+      "height": 768,
+      "file_name": "IMG_20200229_164947.jpg",
+      "coco_url": "AmlDatastore://image_classification_datastore/IMG_20200229_164947.jpg",
+      "absolute_url": "https://strr4uwsyl2gpbxi.blob.core.windows.net/classification/IMG_20200229_164947.jpg",
+      "date_captured": "2024-05-14T07:07:33.6865433Z"
+    },
+    {
+      "id": 39,
+      "width": 1024,
+      "height": 768,
+      "file_name": "IMG_20200229_165026.jpg",
+      "coco_url": "AmlDatastore://image_classification_datastore/IMG_20200229_165026.jpg",
+      "absolute_url": "https://strr4uwsyl2gpbxi.blob.core.windows.net/classification/IMG_20200229_165026.jpg",
+      "date_captured": "2024-05-14T07:07:33.6864787Z"
+    },
+    {
+      "id": 40,
+      "width": 1024,
+      "height": 768,
+      "file_name": "IMG_20200229_165001.jpg",
+      "coco_url": "AmlDatastore://image_classification_datastore/IMG_20200229_165001.jpg",
+      "absolute_url": "https://strr4uwsyl2gpbxi.blob.core.windows.net/classification/IMG_20200229_165001.jpg",
+      "date_captured": "2024-05-14T07:07:33.6864872Z"
+    },
+    {
+      "id": 41,
+      "width": 1024,
+      "height": 768,
+      "file_name": "IMG_20200229_165157.jpg",
+      "coco_url": "AmlDatastore://image_classification_datastore/IMG_20200229_165157.jpg",
+      "absolute_url": "https://strr4uwsyl2gpbxi.blob.core.windows.net/classification/IMG_20200229_165157.jpg",
+      "date_captured": "2024-05-14T07:07:33.6865113Z"
+    },
+    {
+      "id": 42,
+      "width": 1024,
+      "height": 768,
+      "file_name": "IMG_20200229_164759.jpg",
+      "coco_url": "AmlDatastore://image_classification_datastore/IMG_20200229_164759.jpg",
+      "absolute_url": "https://strr4uwsyl2gpbxi.blob.core.windows.net/classification/IMG_20200229_164759.jpg",
+      "date_captured": "2024-05-14T07:07:33.6864659Z"
+    },
+    {
+      "id": 43,
+      "width": 1024,
+      "height": 768,
+      "file_name": "IMG_20200229_165234.jpg",
+      "coco_url": "AmlDatastore://image_classification_datastore/IMG_20200229_165234.jpg",
+      "absolute_url": "https://strr4uwsyl2gpbxi.blob.core.windows.net/classification/IMG_20200229_165234.jpg",
+      "date_captured": "2024-05-14T07:07:33.6864713Z"
+    },
+    {
+      "id": 44,
+      "width": 1024,
+      "height": 768,
+      "file_name": "IMG_20200229_165219.jpg",
+      "coco_url": "AmlDatastore://image_classification_datastore/IMG_20200229_165219.jpg",
+      "absolute_url": "https://strr4uwsyl2gpbxi.blob.core.windows.net/classification/IMG_20200229_165219.jpg",
+      "date_captured": "2024-05-14T07:07:33.6865446Z"
+    },
+    {
+      "id": 45,
+      "width": 1024,
+      "height": 768,
+      "file_name": "IMG_20200229_164925.jpg",
+      "coco_url": "AmlDatastore://image_classification_datastore/IMG_20200229_164925.jpg",
+      "absolute_url": "https://strr4uwsyl2gpbxi.blob.core.windows.net/classification/IMG_20200229_164925.jpg",
+      "date_captured": "2024-05-14T07:07:33.6865288Z"
+    }
+  ],
+  "annotations": [
+    {
+      "id": 1,
+      "category_id": 1,
+      "image_id": 1,
+      "area": 0.0
+    },
+    {
+      "id": 2,
+      "category_id": 1,
+      "image_id": 2,
+      "area": 0.0
+    },
+    {
+      "id": 3,
+      "category_id": 2,
+      "image_id": 3,
+      "area": 0.0
+    },
+    {
+      "id": 4,
+      "category_id": 1,
+      "image_id": 4,
+      "area": 0.0
+    },
+    {
+      "id": 5,
+      "category_id": 2,
+      "image_id": 5,
+      "area": 0.0
+    },
+    {
+      "id": 6,
+      "category_id": 1,
+      "image_id": 6,
+      "area": 0.0
+    },
+    {
+      "id": 7,
+      "category_id": 3,
+      "image_id": 7,
+      "area": 0.0
+    },
+    {
+      "id": 8,
+      "category_id": 3,
+      "image_id": 8,
+      "area": 0.0
+    },
+    {
+      "id": 9,
+      "category_id": 1,
+      "image_id": 9,
+      "area": 0.0
+    },
+    {
+      "id": 10,
+      "category_id": 2,
+      "image_id": 10,
+      "area": 0.0
+    },
+    {
+      "id": 11,
+      "category_id": 3,
+      "image_id": 11,
+      "area": 0.0
+    },
+    {
+      "id": 12,
+      "category_id": 3,
+      "image_id": 12,
+      "area": 0.0
+    },
+    {
+      "id": 13,
+      "category_id": 2,
+      "image_id": 13,
+      "area": 0.0
+    },
+    {
+      "id": 14,
+      "category_id": 2,
+      "image_id": 14,
+      "area": 0.0
+    },
+    {
+      "id": 15,
+      "category_id": 2,
+      "image_id": 15,
+      "area": 0.0
+    },
+    {
+      "id": 16,
+      "category_id": 1,
+      "image_id": 16,
+      "area": 0.0
+    },
+    {
+      "id": 17,
+      "category_id": 3,
+      "image_id": 17,
+      "area": 0.0
+    },
+    {
+      "id": 18,
+      "category_id": 3,
+      "image_id": 18,
+      "area": 0.0
+    },
+    {
+      "id": 19,
+      "category_id": 2,
+      "image_id": 19,
+      "area": 0.0
+    },
+    {
+      "id": 20,
+      "category_id": 1,
+      "image_id": 20,
+      "area": 0.0
+    },
+    {
+      "id": 21,
+      "category_id": 3,
+      "image_id": 21,
+      "area": 0.0
+    },
+    {
+      "id": 22,
+      "category_id": 2,
+      "image_id": 22,
+      "area": 0.0
+    },
+    {
+      "id": 23,
+      "category_id": 2,
+      "image_id": 23,
+      "area": 0.0
+    },
+    {
+      "id": 24,
+      "category_id": 3,
+      "image_id": 24,
+      "area": 0.0
+    },
+    {
+      "id": 25,
+      "category_id": 3,
+      "image_id": 25,
+      "area": 0.0
+    },
+    {
+      "id": 26,
+      "category_id": 1,
+      "image_id": 26,
+      "area": 0.0
+    },
+    {
+      "id": 27,
+      "category_id": 1,
+      "image_id": 27,
+      "area": 0.0
+    },
+    {
+      "id": 28,
+      "category_id": 3,
+      "image_id": 28,
+      "area": 0.0
+    },
+    {
+      "id": 29,
+      "category_id": 3,
+      "image_id": 29,
+      "area": 0.0
+    },
+    {
+      "id": 30,
+      "category_id": 1,
+      "image_id": 30,
+      "area": 0.0
+    },
+    {
+      "id": 31,
+      "category_id": 1,
+      "image_id": 31,
+      "area": 0.0
+    },
+    {
+      "id": 32,
+      "category_id": 3,
+      "image_id": 32,
+      "area": 0.0
+    },
+    {
+      "id": 33,
+      "category_id": 2,
+      "image_id": 33,
+      "area": 0.0
+    },
+    {
+      "id": 34,
+      "category_id": 1,
+      "image_id": 34,
+      "area": 0.0
+    },
+    {
+      "id": 35,
+      "category_id": 2,
+      "image_id": 35,
+      "area": 0.0
+    },
+    {
+      "id": 36,
+      "category_id": 2,
+      "image_id": 36,
+      "area": 0.0
+    },
+    {
+      "id": 37,
+      "category_id": 1,
+      "image_id": 37,
+      "area": 0.0
+    },
+    {
+      "id": 38,
+      "category_id": 2,
+      "image_id": 38,
+      "area": 0.0
+    },
+    {
+      "id": 39,
+      "category_id": 2,
+      "image_id": 39,
+      "area": 0.0
+    },
+    {
+      "id": 40,
+      "category_id": 2,
+      "image_id": 40,
+      "area": 0.0
+    },
+    {
+      "id": 41,
+      "category_id": 3,
+      "image_id": 41,
+      "area": 0.0
+    },
+    {
+      "id": 42,
+      "category_id": 1,
+      "image_id": 42,
+      "area": 0.0
+    },
+    {
+      "id": 43,
+      "category_id": 3,
+      "image_id": 43,
+      "area": 0.0
+    },
+    {
+      "id": 44,
+      "category_id": 3,
+      "image_id": 44,
+      "area": 0.0
+    },
+    {
+      "id": 45,
+      "category_id": 1,
+      "image_id": 45,
+      "area": 0.0
+    }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "name": "Apple"
+    },
+    {
+      "id": 2,
+      "name": "Banana"
+    },
+    {
+      "id": 3,
+      "name": "Orange"
+    }
+  ]
+}
