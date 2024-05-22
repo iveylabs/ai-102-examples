@@ -106,7 +106,7 @@ if ($env:LANGUAGE_DEMO -eq "true") {
                 return
             }
             $accountName = az storage account list --resource-group $env:LANGUAGE_RESOURCE_GROUP --query "[0].name" --output tsv
-            $sourcePath = "..\03-nlp\04-custom-classification\articles_train"
+            $sourcePath = "..\03-nlp\03-custom-classification\articles_train"
 
             Write-Host "Uploading custom text classification files to Blob Storage..." -ForegroundColor Cyan
             az storage blob upload-batch -d "classification" -s $sourcePath --account-name $accountName --auth-mode login  --output none
@@ -133,7 +133,7 @@ if ($env:LANGUAGE_DEMO -eq "true") {
                 return
             }
             $accountName = az storage account list --resource-group $env:LANGUAGE_RESOURCE_GROUP --query "[0].name" --output tsv
-            $sourcePath = "..\03-nlp\05-custom-ner\ads_train"
+            $sourcePath = "..\03-nlp\04-custom-ner\ads_train"
 
             Write-Host "Uploading custom NER files to Blob Storage..." -ForegroundColor Cyan
             az storage blob upload-batch -d "entityrecognition" -s $sourcePath --account-name $accountName --auth-mode login  --output none

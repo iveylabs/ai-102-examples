@@ -1,5 +1,5 @@
 Write-Host "IMPORTANT! `nIf you previously deployed the Vision demo, you must delete the soft-deleted AML Workspace to avoid conflicts." -ForegroundColor Magenta
-Write-Host "Ensure that any relevant soft-deleted AML Workspaces have been permanently deleted before continuing. `nazd down does NOT permanently delete AML Workspaces." -ForegroundColor Magenta
+Write-Host "Ensure that any relevant soft-deleted AML Workspaces and Key Vaults have been permanently deleted before continuing. `nazd down does NOT permanently delete AML Workspaces." -ForegroundColor Magenta
 Read-Host "Press ENTER to continue..."
 
 Write-Host "Running pre-provision script..."
