@@ -6,9 +6,15 @@ Write-Host "Running pre-provision script..."
 # Get object ID of the current user if the env var is not already set
 if (-not $env:YOUR_OBJECT_ID) {
        $UserObjectId = az ad signed-in-user show --query id -o tsv
-       $CorrectObjectId = Read-Host "Is this your Object ID? $UserObjectId (y/n)"
-       if ($CorrectObjectId -eq 'n') {
+       if(-not $UserObjectId) {
+              Write-Host "Unable to obtain your Entra ID user object ID." -ForegroundColor Red
               $UserObjectId = Read-Host "Please enter your Object ID and press ENTER"
+       }
+       else {
+              $CorrectObjectId = Read-Host "Is this your Object ID? $UserObjectId (y/n)"
+              if ($CorrectObjectId -eq 'n') {
+                     $UserObjectId = Read-Host "Please enter your Object ID and press ENTER"
+              }
        }
        azd env set YOUR_OBJECT_ID $UserObjectId
 }
