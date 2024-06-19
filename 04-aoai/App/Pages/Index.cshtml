@@ -1,0 +1,46 @@
+
+@page
+@model IndexModel
+@using Newtonsoft.Json
+@{
+
+    ViewData["Title"] = "OpenAI Example";
+}
+<p>
+<form method="post" asp-page-handler="ProcessInput">
+    <p class="form-group">
+        <label for="systemText">System Message:</label>
+        <textarea class="form-control" id="systemText" name="systemText" rows="2" oninput="checkInput(); resizeTextarea()">You have some truly unique ideas and imaginative concepts that are out of the box and may challenge traditional thinking</textarea>
+</ br>
+        <label for="inputText">User Prompt:</label>
+        <textarea class="form-control" id="UserText" name="UserText" rows="2" oninput="checkInput(); resizeTextarea()">I need to change a tyre</textarea>
+    </p>
+    <button type="submit" name="submit" id="submit" class="btn btn-primary">Submit</button>
+</form>
+</p>
+<!-- Orignal text -->
+@if (ViewData["userMessage"] != null)
+{
+    <p class="alert alert-primary" role="alert">
+        <b>System Message text:</b> <br> @ViewData["systemMessage"]
+    </p>
+    <p class="alert alert-primary" role="alert">
+        <b>User Prompt:</b> <br> @ViewData["userMessage"]
+    </p>
+}
+
+@if (ViewData["Completion"] != null)
+{
+    <p>OpenAI Response:</p>
+    <p>@ViewData["Completion"]</p>
+}
+
+
+<script>
+    var inputTextElement = document.getElementById("UserText");
+    function resizeTextarea() {
+    const textarea = document.getElementById('UserText');
+    textarea.style.height = 'auto';
+    textarea.style.height = textarea.scrollHeight + 'px';
+    }
+</script>

@@ -1,0 +1,19 @@
+# Analyse Image
+POST {{Api-Url-Face}}/vision/v3.2/analyze?visualFeatures=Adult%2CCategories%2CColor%2CDescription%2CFaces%2CImageType%2CObjects%2CTags
+Content-Type: application/json
+Ocp-Apim-Subscription-Key: {{Api-Key-Face}}
+
+{
+    "url": "https://live-production.wcms.abc-cdn.net.au/a18bd5c1653ea77152a4eab66e8f7d4e?impolicy=wcms_crop_resize&cropH=2688&cropW=4032&xPos=0&yPos=168&width=862&height=575"
+}
+###
+
+
+#  Detect Object
+POST {{Api-Url-Face}}/vision/v3.2/detect?model-version=latest
+Content-Type: application/json
+Ocp-Apim-Subscription-Key: {{Api-Key-Face}}
+
+{
+    "url": "https://github.com/Azure-Samples/cognitive-services-sample-data-files/blob/master/ComputerVision/Images/dog.jpg?raw=true"
+}

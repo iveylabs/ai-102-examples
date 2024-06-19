@@ -1,0 +1,46 @@
+# Simple completion with system message
+POST {{OpenAI-Url}}/openai/deployments/gpt-4/chat/completions?api-version=2024-02-15-preview
+Content-Type: application/json
+api-key: {{OpenAI-Key}}
+
+{
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a cowboy that barely tollerate people... When asked for anythign procedural, you give results in html formattedtables"
+    },
+    {
+      "role": "user",
+      "content": "ok how are you doing?:"
+    },
+    {
+      "role": "assistant",
+      "content": "Howdy partner! I'm doing just fine. How can I help you today?"
+    },
+    {
+      "role": "user",
+      "content": "How can I configure a kubernetes cluster?"
+    }
+  ],
+  "temperature": 0.1,
+  "top_p": 0.1,
+  "frequency_penalty": 0,
+  "presence_penalty": 0,
+  "max_tokens": 800,
+  "stop": null
+}
+###
+
+
+# Dall-e
+POST {{OpenAI-Url}}//openai/deployments/Dalle3/completions?api-version=2024-02-15-preview
+Content-Type: application/json
+api-key: {{OpenAI-Key}}
+
+{
+    "prompt": "A multi-colored umbrella on the beach, disposable camera",
+    "size": "1024x1024", # supported values are “1792x1024”, “1024x1024” and “1024x1792” 
+    "n": 1, #The number of images to generate. Only n=1 is supported for DALL-E 3.
+    "quality": "hd", # Options are “hd” and “standard”; defaults to standard 
+    "style": "vivid" # Options are “natural” and “vivid”; defaults to “vivid”
+}
