@@ -1,4 +1,4 @@
-﻿
+
 @page
 @model IndexModel
 @using Newtonsoft.Json
@@ -10,12 +10,12 @@
 <form method="post" asp-page-handler="ProcessInput">
     <p class="form-group">
         <label for="systemText">System Message:</label>
-        <textarea class="form-control" id="systemText" name="systemText" rows="2" oninput="checkInput(); resizeTextarea()">You are a real nutcase with crazy ideas</textarea>
+        <textarea class="form-control" id="systemText" name="systemText" rows="2" oninput="checkInput(); resizeTextarea()">You have some truly unique ideas and imaginative concepts that are out of the box and may challenge traditional thinking</textarea>
 </ br>
         <label for="inputText">User Prompt:</label>
         <textarea class="form-control" id="UserText" name="UserText" rows="2" oninput="checkInput(); resizeTextarea()">I need to change a tyre</textarea>
     </p>
-    <button type="submit" name="submit" id="submit" class="btn btn-primary" disabled>Submit</button>
+    <button type="submit" name="submit" id="submit" class="btn btn-primary">Submit</button>
 </form>
 </p>
 <!-- Orignal text -->
@@ -38,16 +38,6 @@
 
 <script>
     var inputTextElement = document.getElementById("UserText");
-    var submitElement = document.getElementById("submit");
-    function checkInput() {
-        var inputText = inputTextElement.value;
-        if (inputText.trim().length > 0) {
-            submitElement.disabled = false;
-        } else {
-            submitElement.disabled = true;
-        }
-    }
-
     function resizeTextarea() {
     const textarea = document.getElementById('UserText');
     textarea.style.height = 'auto';
