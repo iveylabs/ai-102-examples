@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Newtonsoft.Json.Linq;
 using System.Text;
@@ -24,7 +24,7 @@ public class IndexModel : PageModel
         _configuration = configuration;
         _serviceKey = _configuration.GetValue<string>("ServiceKey") ?? "KEY NOT SET";
         _serviceEndpoint = _configuration.GetValue<string>("ServiceEndpoint") ?? "ENDPOINT NOT SET";
-        _serviceDeployment = _configuration.GetValue<string>("modelname") ?? "DEPLOYMENT NOT SET";
+        _serviceDeployment = _configuration.GetValue<string>("DeploymentName") ?? "DEPLOYMENT NOT SET";
     }
 
     public async Task<IActionResult> OnPostProcessInputAsync(string UserText, string SystemText)
