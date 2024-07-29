@@ -1,0 +1,32 @@
+# This CI workflow will run any time any of the files within the 01-services directory get updated
+name: 01 Services CI
+
+on:
+  push:
+    branches: [ "main" ]
+    paths: 
+      - "01-services/**"
+  pull_request:
+    branches: [ "main" ]
+    paths:
+      - "01-services/**"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        proj: [ 01-services/01-GettingStarted/GettingStarted.csproj, 01-services/02-Security/Security.csproj, 01-services/03-Container/Container.csproj ]
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 8.0.x
+        
+    - name: Restore dependencies
+      run: dotnet restore ${{ matrix.proj }}
+      
+    - name: Build
+      run: dotnet build --no-restore ${{ matrix.proj }}
