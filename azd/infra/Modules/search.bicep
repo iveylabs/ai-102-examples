@@ -1,6 +1,8 @@
 param location string
+param myObjectId string
 
 var unique = uniqueString(resourceGroup().id, subscription().id)
+var roleDefinitionId = 'ba92f5b4-2d11-453d-a403-e96b0029c9fe' // Storage Blob Data Contributor
 
 // Search resource
 resource search 'Microsoft.Search/searchServices@2024-03-01-preview' = {
@@ -38,6 +40,19 @@ resource str 'Microsoft.Storage/storageAccounts@2023-01-01' = {
     }
   }
 }
+
+// Set up Storage Blob Data Contributor permissions
+module roleAssignment 'roleassignment.bicep' = {
+  name: 'roleAssignment'
+  params: {
+    principalId: myObjectId
+    roleDefinitionId: roleDefinitionId
+    resName: str.name
+    storageAccount: true
+    vault: false
+  }
+}
+
 
 // Outputs
 var searchKey = search.listAdminKeys().primaryKey

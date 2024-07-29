@@ -207,3 +207,32 @@ if ($env:DOCINTEL_DEMO -eq "true") {
         Write-Host "Doc Intel custom training files won't be uploaded.`n" -ForegroundColor Yellow
     }
 }
+
+if ($env:OPENAI_DEMO -eq "true") {
+    # Upload AOAI RAG files to Blob Storage
+    $confirmation = Read-Host "Upload RAG files from the repo? (y/n)"
+
+    if ($confirmation -eq 'y') {
+        try {
+            # Only proceed if the $env:OPENAI_RESOURCE_GROUP variable is set
+            if (-not $env:OPENAI_RESOURCE_GROUP) {
+                Write-Host "OPENAI_RESOURCE_GROUP environment variable is not set. Skipping image upload." -ForegroundColor Red
+                return
+            }
+            $accountName = az storage account list --resource-group $env:OPENAI_RESOURCE_GROUP --query "[0].name" --output tsv
+            $sourcePath = "..\04-aoai\02-own-data"
+
+            Write-Host "Uploading RAG files to Blob Storage..." -ForegroundColor Cyan
+            az storage blob upload-batch -d "rag" -s $sourcePath --account-name $accountName --auth-mode login  --output none
+            Write-Host "RAG files uploaded successfully." -ForegroundColor Green
+        }
+        catch {
+            Write-Host "Failed to upload RAG files." -ForegroundColor Red
+            Write-Host $_.Exception.Message -ForegroundColor Red
+            Write-Host $_.Exception.ItemName -ForegroundColor Red
+        }
+    }
+    else {
+        Write-Host "RAG files won't be uploaded.`n" -ForegroundColor Yellow
+    }
+}

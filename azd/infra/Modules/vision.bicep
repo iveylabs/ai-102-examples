@@ -4,6 +4,7 @@ param tenantId string
 param myObjectId string
 
 var unique = uniqueString(resourceGroup().id, subscription().id)
+var roleDefinitionId = 'ba92f5b4-2d11-453d-a403-e96b0029c9fe' // Storage Blob Data Contributor
 
 // Custom vision resources (if you want to do a brief demo)
 resource customTraining 'Microsoft.CognitiveServices/accounts@2023-10-01-preview' = if (customVision) {
@@ -54,6 +55,18 @@ resource str 'Microsoft.Storage/storageAccounts@2023-01-01' = {
         publicAccess: 'Blob'
       }
     }
+  }
+}
+
+// Set up Storage Blob Data Contributor permissions
+module roleAssignment 'roleassignment.bicep' = {
+  name: 'roleAssignment'
+  params: {
+    principalId: myObjectId
+    roleDefinitionId: roleDefinitionId
+    resName: str.name
+    storageAccount: true
+    vault: false
   }
 }
 

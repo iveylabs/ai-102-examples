@@ -56,6 +56,7 @@ module multiModule 'Modules/multi.bicep' = if(introDemo || visionDemo || languag
 
 // Intro resources
 // You still need to create an app registration and assign the required permissions on the vault
+// The postprovision script should handle this
 module introRG 'Modules/resourcegroup.bicep' = if (introDemo) {
   name: 'introRG'
   params: {
@@ -133,6 +134,7 @@ module openAIModule 'Modules/openai.bicep' = if (openAIDemo) {
   name: 'openAIModule'
   params: {
     location: openAILocation
+    myObjectId: myObjectId
   }
   dependsOn: [
     openAIRG
@@ -153,6 +155,7 @@ module searchModule 'Modules/search.bicep' = if (searchDemo) {
   name: 'searchModule'
   params: {
     location: defaultLocation
+    myObjectId: myObjectId
   }
   dependsOn: [
     searchRG
@@ -173,6 +176,7 @@ module docIntelModule 'Modules/docintel.bicep' = if (docIntelDemo) {
   name: 'docIntelModule'
   params: {
     location: docIntelLocation
+    myObjectId: myObjectId
   }
   dependsOn: [
     docIntelRG
