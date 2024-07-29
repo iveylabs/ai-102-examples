@@ -1,3 +1,6 @@
+[![01 Services CI](https://github.com/iveylabs/ai-102-examples/actions/workflows/01-services-ci.yml/badge.svg)](https://github.com/iveylabs/ai-102-examples/actions/workflows/01-services-ci.yml)
+[![02 Vision CI](https://github.com/iveylabs/ai-102-examples/actions/workflows/02-vision-ci.yml/badge.svg)](https://github.com/iveylabs/ai-102-examples/actions/workflows/02-vision-ci.yml)
+
 # My AI-102 Demos
 If you would like to run any of the demos from this repo, you can use the Azure Developer CLI (`azd`) to provision the infrastructure.  
 Note: Although several demos are web apps, web apps aren't currently deployed as part of the `azd` deployment. There's something to be said for demonstrating that you can leverage AI capabilities from anywhere, even running on your own machine!  
