@@ -1,23 +1,23 @@
-# This CI workflow will run any time any of the files code within the 01-services directory get updated
+# This CI workflow will run any time any of the code files within the 02-vision directory get updated
 name: 01 Services CI
 
 on:
   push:
     branches: [ "main" ]
     paths: 
-      - "01-services/**"
+      - "02-vision/**"
   pull_request:
     branches: [ "main" ]
     paths:
-      - "01-services/**"
+      - "02-vision/**"
   workflow_dispatch:
-
+    
 jobs:
   build:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        proj: [ 01-services/01-GettingStarted/GettingStarted.csproj, 01-services/02-Security/Security.csproj, 01-services/03-Container/Container.csproj ]
+        proj: [ 02-vision/01-analyse-images/01-analyse-images.csproj, 02-vision/04-faces/computer-vision/detect-people.csproj, 02-vision/04-faces/face-api/analyze-faces.csproj ]
     steps:
     - uses: actions/checkout@v4
     
