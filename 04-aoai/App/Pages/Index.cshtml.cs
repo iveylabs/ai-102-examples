@@ -1,10 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Newtonsoft.Json.Linq;
-using System.Text;
-using System.Text.Json;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Configuration.Json;
 using Azure;
 
 // Add Azure OpenAI package
@@ -38,9 +33,8 @@ public class IndexModel : PageModel
         ViewData["systemMessage"] = systemPrompt;
         ViewData["userMessage"] = userPrompt;
 
-
         // Create a new OpenAI client
-        OpenAIClient client = new OpenAIClient(new Uri(_serviceEndpoint), new AzureKeyCredential(_serviceKey));
+        OpenAIClient client = new(new Uri(_serviceEndpoint), new AzureKeyCredential(_serviceKey));
         
         // Create a new chat completions options object
         var chatCompletionsOptions = new ChatCompletionsOptions()
