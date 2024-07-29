@@ -1,5 +1,5 @@
 # This CI workflow will run any time any of the code files within the 02-vision directory get updated
-name: 01 Services CI
+name: 02 Vision CI
 
 on:
   push:
