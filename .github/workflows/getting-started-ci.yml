@@ -23,7 +23,7 @@ jobs:
         dotnet-version: 8.0.x
         
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore 01-services/01-GettingStarted/GettingStarted.csproj
       
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build --no-restore 01-services/01-GettingStarted/GettingStarted.csproj
