@@ -1,0 +1,22 @@
+# This CI workflow will run any time any of the code files within the 03-nlp directory get updated
+name: 03 NLP CI
+
+on:
+  push:
+    branches: [ "main" ]
+    paths: 
+      - "03-nlp/**"
+  pull_request:
+    branches: [ "main" ]
+    paths:
+      - "03-nlp/**"
+  workflow_dispatch:
+    
+jobs:
+  build:
+    strategy:
+      matrix:
+        proj: [ 03-nlp/01-TranslateText/TranslateText.csproj, 03-nlp/02-CLU/CLU.csproj, 03-nlp/05-speaking-clock/speaking-clock.csproj, 03-nlp/06-translator/translator.csproj ]
+    uses: ./.github/workflows/00-reusable-ci.yml
+    with:
+      project: ${{ matrix.proj }}

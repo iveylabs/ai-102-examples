@@ -14,20 +14,9 @@ on:
     
 jobs:
   build:
-    runs-on: ubuntu-latest
     strategy:
       matrix:
         proj: [ 02-vision/01-analyse-images/01-analyse-images.csproj, 02-vision/04-faces/computer-vision/detect-people.csproj, 02-vision/04-faces/face-api/analyze-faces.csproj ]
-    steps:
-    - uses: actions/checkout@v4
-    
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v4
-      with:
-        dotnet-version: 8.0.x
-        
-    - name: Restore dependencies
-      run: dotnet restore ${{ matrix.proj }}
-      
-    - name: Build
-      run: dotnet build --no-restore ${{ matrix.proj }}
+    uses: ./.github/workflows/00-reusable-ci.yml
+    with:
+      project: ${{ matrix.proj }}

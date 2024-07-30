@@ -1,0 +1,19 @@
+# This CI workflow will run any time any of the code files within the 04-aoai directory get updated
+name: 04 AOAI CI
+
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - "04-aoai/**"
+  pull_request:
+    branches: [ "main" ]
+    paths:
+      - "04-aoai/**"
+  workflow_dispatch:
+    
+jobs:
+  build:
+    uses: ./.github/workflows/00-reusable-ci.yml
+    with:
+      project: 04-aoai/App/App.csproj
