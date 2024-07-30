@@ -14,27 +14,9 @@ on:
     
 jobs:
   ci:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-    
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v4
-      with:
-        dotnet-version: 8.0.x
-    
-    - name: CD into 03-nlp directory
-      run: cd 03-nlp
-    
-    - name: CD into 01-TranslateText directory
-      run: cd 01-TranslateText
-    
-    - name: List files in current directory
-      run: ls -la
-        
-    - name: Restore dependencies
-      run: dotnet restore 03-nlp/01-TranslateText/TranslateText.csproj
-      
-    - name: Build
-      run: dotnet build --no-restore 03-nlp/01-TranslateText/TranslateText.csproj
+    strategy:
+      matrix:
+        proj: [ 03-nlp/01-TranslateText/TranslateText.csproj, 03-nlp/02-CLU/CLU.csproj, 03-nlp/05-speaking-clock/speaking-clock.csproj, 03-nlp/06-translator/translator.csproj ]
+    uses: ./.github/workflows/00-reusable-ci.yml
+    with:
+      project: ${{ matrix.proj }}
