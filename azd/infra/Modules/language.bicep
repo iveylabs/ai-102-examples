@@ -1,4 +1,5 @@
 param location string
+param myObjectId string
 
 var roleDefinitionId = 'b7e6dc6d-f1e8-4753-8033-0f276bb0955b'
 var unique = uniqueString(resourceGroup().id, subscription().id)
@@ -116,6 +117,16 @@ module roleAssignment 'roleassignment.bicep' = {
   name: 'roleAssignment'
   params: {
     principalId: language.identity.principalId
+    roleDefinitionId: roleDefinitionId
+    resName: str.name
+    storageAccount: true
+    vault: false
+  }
+}
+module roleAssignmentUser 'roleassignment.bicep' = {
+  name: 'roleAssignmentUser'
+  params: {
+    principalId: myObjectId
     roleDefinitionId: roleDefinitionId
     resName: str.name
     storageAccount: true

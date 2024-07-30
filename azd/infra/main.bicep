@@ -114,6 +114,7 @@ module languageModule 'Modules/language.bicep' = if (languageDemo) {
   name: 'languageModule'
   params: {
     location: defaultLocation
+    myObjectId: myObjectId
   }
   dependsOn: [
     languageRG
