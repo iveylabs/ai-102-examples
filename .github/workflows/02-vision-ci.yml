@@ -13,7 +13,7 @@ on:
   workflow_dispatch:
     
 jobs:
-  build:
+  ci:
     strategy:
       matrix:
         proj: [ 02-vision/01-analyse-images/01-analyse-images.csproj, 02-vision/04-faces/computer-vision/detect-people.csproj, 02-vision/04-faces/face-api/analyze-faces.csproj ]

@@ -13,7 +13,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  ci:
     strategy:
       matrix:
         proj: [ 01-services/01-GettingStarted/GettingStarted.csproj, 01-services/02-Security/Security.csproj, 01-services/03-Container/Container.csproj ]
