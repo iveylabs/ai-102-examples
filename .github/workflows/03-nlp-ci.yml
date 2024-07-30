@@ -19,4 +19,4 @@ jobs:
     #     proj: [ 03-nlp/01-TranslateText/TranslateText.csproj]
     uses: ./.github/workflows/00-reusable-ci.yml
     with:
-      project: 03-nlp/01-TranslateText/TranslateText.csproj
+      project: 04-aoai/App/App.csproj
