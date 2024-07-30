@@ -1,4 +1,4 @@
-name: Reusable CI workflow
+name: 00 Reusable CI workflow
 
 on:
   workflow_call:
