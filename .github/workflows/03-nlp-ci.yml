@@ -14,9 +14,18 @@ on:
     
 jobs:
   ci:
-    # strategy:
-    #   matrix:
-    #     proj: [ 03-nlp/01-TranslateText/TranslateText.csproj]
-    uses: ./.github/workflows/00-reusable-ci.yml
-    with:
-      project: 03-nlp/01-TranslateText/TranslateText.csproj
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 8.0.x
+        
+    - name: Restore dependencies
+      run: dotnet restore 03-nlp/01-TranslateText/TranslateText.csproj
+      
+    - name: Build
+      run: dotnet build --no-restore 03-nlp/01-TranslateText/TranslateText.csproj
