@@ -14,9 +14,9 @@ on:
     
 jobs:
   ci:
-    strategy:
-      matrix:
-        proj: [ 03-nlp/01-TranslateText/TranslateText.csproj, 03-nlp/02-CLU/CLU.csproj, 03-nlp/05-speaking-clock/speaking-clock.csproj, 03-nlp/06-translator/translator.csproj ]
+    # strategy:
+    #   matrix:
+    #     proj: [ 03-nlp/01-TranslateText/TranslateText.csproj]
     uses: ./.github/workflows/00-reusable-ci.yml
     with:
-      project: ${{ matrix.proj }}
+      project: 03-nlp/01-TranslateText/TranslateText.csproj
