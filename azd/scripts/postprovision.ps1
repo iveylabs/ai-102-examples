@@ -40,7 +40,7 @@ function Get-Confirmation {
     }
 }
 
-Write-Host "Running post-provision script..."
+Write-Host "Running post-provision script..." -ForegroundColor Cyan
 
 if ($env:INTRO_DEMO -eq "true") {
     # Create the SP and assign permissions for demonstrating Key Vault access
