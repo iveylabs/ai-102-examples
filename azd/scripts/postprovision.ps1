@@ -1,21 +1,59 @@
+<#
+.SYNOPSIS
+Prompts the user for confirmation before an action is performed, returning $true or $false as applicable.
+
+.DESCRIPTION
+The `Get-Confirmation` function prompts the user to respond to a y/n prompt. The user can press ENTER to use the default value of Y. The function validates the response and loops until a valid response of y, n, or ENTER is received.
+
+.PARAMETER message
+The message to be displayed when prompting for a response. As the only parameter, you can either just put the message or specify the -message parameter followed by the message.
+
+.EXAMPLE
+Get-Confirmation "Would you like to do the thing? (Y/n)"
+
+This example prompts the user and returns $true or $false depending on the response from the user.
+
+.NOTES
+- The function will prompt the user respond with either a y, n, or pressing ENTER.
+- The function will loop until a response is received.
+- The function returns $true or $false depending on the response received. If ENTER or y is received, $true is returned. Otherwise, $false is returned.
+#>
+function Get-Confirmation {
+    param (
+        [Parameter(Mandatory=$true)]
+        [string]$message
+    )
+    while ($true) {
+        $confirmation = Read-Host $message
+        # $true
+        if ([string]::IsNullOrWhiteSpace($confirmation) -or $confirmation -eq 'y' ) {
+            return $true
+        }
+        # $false
+        elseif ($confirmation -eq 'n') {
+            return $false
+        }
+        # Invalid entry
+        else {
+            Write-Host "Invalid selection. Please enter y or n." -ForegroundColor Yellow
+        }
+    }
+}
 
 if ($env:INTRO_DEMO -eq "true") {
     # Create the SP and assign permissions for demonstrating Key Vault access
-    $confirmation = Read-Host "Create the SP and assign permissions for demonstrating Key Vault access? (y/n)"
-
-    if ($confirmation -eq 'y') {
+    if (Get-Confirmation "Create the SP and assign permissions for demonstrating Key Vault access? (Y/n)") {
         try {
             Write-Host "Creating service principal..." -ForegroundColor Cyan
             $spOutput = (az ad sp create-for-rbac -n "introvaultsp" --role "Key Vault Secrets User" --scopes "/subscriptions/${env:AZURE_SUBSCRIPTION_ID}/resourceGroups/${env:INTRO_RESOURCE_GROUP}/providers/Microsoft.KeyVault/vaults/${env:vaultName}" -o json) | ConvertFrom-Json
             Write-Host "Service principal created successfully." -ForegroundColor Green
-            $confirmation = Read-Host "Would you like to save the service principal credentials to the .env file? (y/n)"
             # Save the service principal credentials to the .env file
-            if($confirmation -eq 'y') {
+            if (Get-Confirmation "Would you like to save the service principal credentials to the .env file? (Y/n)") {
                 try {
-                Write-Host "Service principal credentials saved to the .env file." -ForegroundColor Green
-                azd env set SP_APP_ID $spOutput.appId
-                azd env set SP_PASSWORD $spOutput.password
-                azd env set SP_TENANT_ID $spOutput.tenant
+                    Write-Host "Service principal credentials saved to the .env file." -ForegroundColor Green
+                    azd env set SP_APP_ID $spOutput.appId
+                    azd env set SP_PASSWORD $spOutput.password
+                    azd env set SP_TENANT_ID $spOutput.tenant
                 }
                 catch {
                     Write-Host "Failed to save service principal credentials to the .env file." -ForegroundColor Red
@@ -36,12 +74,9 @@ if ($env:INTRO_DEMO -eq "true") {
 
 }
 
-
 if ($env:VISION_DEMO -eq "true") {
     # Upload image classification images to Blob Storage
-    $confirmation = Read-Host "Upload image classification images from the repo? (y/n)"
-
-    if ($confirmation -eq 'y') {
+    if (Get-Confirmation "Upload image classification images from the repo? (Y/n)") {
         try {
             # Only proceed if the $env:VISION_RESOURCE_GROUP variable is set
             if (-not $env:VISION_RESOURCE_GROUP) {
@@ -76,9 +111,7 @@ if ($env:VISION_DEMO -eq "true") {
     }
 
     # Upload object detection images to Blob Storage
-    $confirmation = Read-Host "Upload object detection images from the repo? (y/n)"
-
-    if ($confirmation -eq 'y') {
+    if (Get-Confirmation "Upload object detection images from the repo? (Y/n)") {
         try {
             # Only proceed if the $env:VISION_RESOURCE_GROUP variable is set
             if (-not $env:VISION_RESOURCE_GROUP) {
@@ -91,7 +124,7 @@ if ($env:VISION_DEMO -eq "true") {
             Write-Host "Uploading object detection images to Blob Storage..." -ForegroundColor Cyan
 
             try {
-                $output = az storage blob upload-batch -d "detection" -s $sourcePath --account-name $accountName --auth-mode login login 2>&1
+                $output = az storage blob upload-batch -d "detection" -s $sourcePath --account-name $accountName --auth-mode login 2>&1
                 if (-not $?) {
                     throw $output
                 }
@@ -114,9 +147,7 @@ if ($env:VISION_DEMO -eq "true") {
 
 if ($env:LANGUAGE_DEMO -eq "true") {
     # Upload custom text classification files to Blob Storage
-    $confirmation = Read-Host "Upload custom text classification files from the repo? (y/n)"
-
-    if ($confirmation -eq 'y') {
+    if (Get-Confirmation "Upload custom text classification files from the repo? (Y/n)") {
         try {
             # Only proceed if the $env:LANGUAGE_RESOURCE_GROUP variable is set
             if (-not $env:LANGUAGE_RESOURCE_GROUP) {
@@ -151,9 +182,7 @@ if ($env:LANGUAGE_DEMO -eq "true") {
     }
 
     # Upload custom NER files to Blob Storage
-    $confirmation = Read-Host "Upload custom NER files from the repo? (y/n)"
-
-    if ($confirmation -eq 'y') {
+    if (Get-Confirmation "Upload custom NER files from the repo? (Y/n)") {
         try {
             # Only proceed if the $env:LANGUAGE_RESOURCE_GROUP variable is set
             if (-not $env:LANGUAGE_RESOURCE_GROUP) {
@@ -189,9 +218,7 @@ if ($env:LANGUAGE_DEMO -eq "true") {
 
 if ($env:SEARCH_DEMO -eq "true") {
     # Upload Search files to Blob Storage
-    $confirmation = Read-Host "Upload Search files from the repo? (y/n)"
-
-    if ($confirmation -eq 'y') {
+    if (Get-Confirmation "Upload Search files from the repo? (Y/n)") {
         try {
             # Only proceed if the $env:SEARCH_RESOURCE_GROUP variable is set
             if (-not $env:SEARCH_RESOURCE_GROUP) {
@@ -227,9 +254,7 @@ if ($env:SEARCH_DEMO -eq "true") {
 
 if ($env:DOCINTEL_DEMO -eq "true") {
     # Upload Doc Intel custom training files to Blob Storage
-    $confirmation = Read-Host "Upload Doc Intel custom training files from the repo? (y/n)"
-
-    if ($confirmation -eq 'y') {
+    if (Get-Confirmation "Upload Doc Intel custom training files from the repo? (Y/n)") {
         try {
             # Only proceed if the $env:DOCINTEL_RESOURCE_GROUP variable is set
             if (-not $env:DOCINTEL_RESOURCE_GROUP) {
@@ -265,9 +290,7 @@ if ($env:DOCINTEL_DEMO -eq "true") {
 
 if ($env:OPENAI_DEMO -eq "true") {
     # Upload AOAI RAG files to Blob Storage
-    $confirmation = Read-Host "Upload RAG files from the repo? (y/n)"
-
-    if ($confirmation -eq 'y') {
+    if (Get-Confirmation "Upload RAG files from the repo? (Y/n)") {
         try {
             # Only proceed if the $env:OPENAI_RESOURCE_GROUP variable is set
             if (-not $env:OPENAI_RESOURCE_GROUP) {
