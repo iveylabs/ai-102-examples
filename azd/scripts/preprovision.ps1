@@ -78,6 +78,47 @@ function Set-ResourceGroupLocation {
         }
     }
 }
+<#
+.SYNOPSIS
+Prompts the user for confirmation before an action is performed, returning $true or $false as applicable.
+
+.DESCRIPTION
+The `Get-Confirmation` function prompts the user to respond to a y/n prompt. The user can press ENTER to use the default value of Y. The function validates the response and loops until a valid response of y, n, or ENTER is received.
+
+.PARAMETER message
+The message to be displayed when prompting for a response. As the only parameter, you can either just put the message or specify the -message parameter followed by the message.
+
+.EXAMPLE
+Get-Confirmation "Would you like to do the thing? (Y/n)"
+
+This example prompts the user and returns $true or $false depending on the response from the user.
+
+.NOTES
+- The function will prompt the user respond with either a y, n, or pressing ENTER.
+- The function will loop until a response is received.
+- The function returns $true or $false depending on the response received. If ENTER or y is received, $true is returned. Otherwise, $false is returned.
+#>
+function Get-Confirmation {
+    param (
+        [Parameter(Mandatory=$true)]
+        [string]$message
+    )
+    while ($true) {
+        $confirmation = Read-Host $message
+        # $true
+        if ([string]::IsNullOrWhiteSpace($confirmation) -or $confirmation -eq 'y' ) {
+            return $true
+        }
+        # $false
+        elseif ($confirmation -eq 'n') {
+            return $false
+        }
+        # Invalid entry
+        else {
+            Write-Host "Invalid selection. Please enter y or n." -ForegroundColor Yellow
+        }
+    }
+}
 
 # Main script logic
 Write-Host "IMPORTANT! `nIf you previously deployed the Vision demo, you must delete the soft-deleted AML Workspace to avoid conflicts." -ForegroundColor Magenta
@@ -93,8 +134,8 @@ if (-not $env:YOUR_OBJECT_ID) {
         $UserObjectId = Read-Host "Please enter your Object ID and press ENTER"
     }
     else {
-        $CorrectObjectId = Read-Host "Is this your Object ID? $UserObjectId (y/n)"
-        if ($CorrectObjectId -eq 'n') {
+        # $CorrectObjectId = Read-Host "Is this your Object ID? $UserObjectId (y/n)"
+        if (-not (Get-Confirmation "Is this your Object ID? $UserObjectId (Y/n)")) {
             $UserObjectId = Read-Host "Please enter your Object ID and press ENTER"
         }
     }
@@ -141,8 +182,8 @@ else {
 }
 
 # Provision all demos or ask the user which demos to provision
-$ProvisionAllDemos = Read-Host "Provision all demos? (y/n)"
-if ($ProvisionAllDemos -eq 'y') {
+# $ProvisionAllDemos = Read-Host "Provision all demos? (y/n)"
+if (Get-Confirmation "Provision all demos? (Y/n)") {
     # Intro
     azd env set INTRO_DEMO "true"
     if (-not $env:INTRO_RESOURCE_GROUP) {
@@ -210,8 +251,8 @@ else {
     # Provision only the selected demos
 
     # Ensure the INTRO_DEMO environment variable is set
-    $IntroDemo = Read-Host "Provision Intro Demo? (y/n)"
-    if ($IntroDemo -eq 'y') {
+    # $IntroDemo = Read-Host "Provision Intro Demo? (y/n)"
+    if (Get-Confirmation "Provision Intro Demo? (Y/n)") {
         azd env set INTRO_DEMO "true"
         if (-not $env:INTRO_RESOURCE_GROUP) {
             # Ensure the INTRO_RESOURCE_GROUP environment variable is set
@@ -224,8 +265,8 @@ else {
     }
 
     # Ensure the VISION_DEMO environment variable is set
-    $VisionDemo = Read-Host "Provision Vision Demo? (y/n)"
-    if ($VisionDemo -eq 'y') {
+    # $VisionDemo = Read-Host "Provision Vision Demo? (y/n)"
+    if (Get-Confirmation "Provision Vision Demo? (Y/n)") {
         azd env set VISION_DEMO "true"
         if (-not $env:VISION_RESOURCE_GROUP) {
             # Ensure the VISION_RESOURCE_GROUP environment variable is set
@@ -243,8 +284,8 @@ else {
     }
 
     # Ensure the LANGUAGE_DEMO environment variable is set
-    $LanguageDemo = Read-Host "Provision Language Demo? (y/n)"
-    if ($LanguageDemo -eq 'y') {
+    # $LanguageDemo = Read-Host "Provision Language Demo? (y/n)"
+    if (Get-Confirmation "Provision Language Demo? (Y/n)") {
         azd env set LANGUAGE_DEMO "true"
         # Ensure the LANGUAGE_RESOURCE_GROUP environment variable is set
         if (-not $env:LANGUAGE_RESOURCE_GROUP) {
@@ -257,8 +298,8 @@ else {
     }
 
     # Ensure the OPENAI_DEMO environment variable is set
-    $OpenAIDemo = Read-Host "Provision Azure OpenAI Demo? (y/n)"
-    if ($OpenAIDemo -eq 'y') {
+    # $OpenAIDemo = Read-Host "Provision Azure OpenAI Demo? (y/n)"
+    if (Get-Confirmation "Provision Azure OpenAI Demo? (Y/n)") {
         azd env set OPENAI_DEMO "true"
         if (-not $env:OPENAI_RESOURCE_GROUP) {
             # Ensure the OPENAI_RESOURCE_GROUP environment variable is set
@@ -276,8 +317,8 @@ else {
     }
 
     # Ensure the SEARCH_DEMO environment variable is set
-    $SearchDemo = Read-Host "Provision Search Demo? (y/n)"
-    if ($SearchDemo -eq 'y') {
+    # $SearchDemo = Read-Host "Provision Search Demo? (y/n)"
+    if (Get-Confirmation "Provision Search Demo? (Y/n)") {
         azd env set SEARCH_DEMO "true"
         # Ensure the SEARCH_RESOURCE_GROUP environment variable is set
         if (-not $env:SEARCH_RESOURCE_GROUP) {
@@ -290,8 +331,8 @@ else {
     }
 
     # Ensure the DOCINTEL_DEMO environment variable is set
-    $DocIntelDemo = Read-Host "Provision Document Intelligence Demo? (y/n)"
-    if ($DocIntelDemo -eq 'y') {
+    # $DocIntelDemo = Read-Host "Provision Document Intelligence Demo? (y/n)"
+    if (Get-Confirmation "Provision Document Intelligence Demo? (Y/n)") {
         azd env set DOCINTEL_DEMO "true"
         # Ensure the DOCINTEL_RESOURCE_GROUP environment variable is set
         if (-not $env:DOCINTEL_RESOURCE_GROUP) {
