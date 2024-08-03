@@ -40,6 +40,8 @@ function Get-Confirmation {
     }
 }
 
+Write-Host "Running post-provision script..."
+
 if ($env:INTRO_DEMO -eq "true") {
     # Create the SP and assign permissions for demonstrating Key Vault access
     if (Get-Confirmation "Create the SP and assign permissions for demonstrating Key Vault access? (Y/n)") {
@@ -323,3 +325,4 @@ if ($env:OPENAI_DEMO -eq "true") {
         Write-Host "RAG files won't be uploaded.`n" -ForegroundColor Yellow
     }
 }
+Write-Host "Post-provision script complete." -ForegroundColor Green
