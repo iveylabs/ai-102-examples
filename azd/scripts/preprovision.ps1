@@ -120,12 +120,7 @@ function Get-Confirmation {
     }
 }
 
-# Main script logic
-Write-Host "IMPORTANT! `nIf you previously deployed the Vision demo, you must delete the soft-deleted AML Workspace to avoid conflicts." -ForegroundColor Magenta
-Write-Host "Ensure that any relevant soft-deleted AML Workspaces have been permanently deleted before continuing. `nazd down does NOT permanently delete AML Workspaces." -ForegroundColor Magenta
-Read-Host "Press ENTER to continue or CTRL+C to cancel..."
-
-Write-Host "Running pre-provision script..."
+Write-Host "Running pre-provision script..." -ForegroundColor Cyan
 # Get object ID of the current user if the env var is not already set
 if (-not $env:YOUR_OBJECT_ID) {
     $UserObjectId = az ad signed-in-user show --query id -o tsv
