@@ -33,5 +33,5 @@ Using `azd` allows you to set up an environment with multiple resources and reso
 ## Deleting
 - You can use the `azd down` command to delete everything deployed to the relevant environment (it uses the `azd-env-name` tag to determine this).
 - If you'd like to delete everything deployed to the environment, not be prompted for confirmation, and purge anything that gets soft-deleted, you can use the `azd down --force --purge` command.
-- It doesn't delete AML workspaces that have been soft-deleted, so you will likely want to purge those yourself to avoid conflicts.   
-    <img src="readmeimages/azddown.png" alt="azd down purge output" width="500" height="300">
+- All Azure OpenAI deployments for Azure OpenAI resources in the relevant resource group will be deleted automatically before the `azd down` action is performed.
+- All Azure Machine Learning Workspaces and dependent resources associated with the workspace will be deleted and purged before the `azd down` action is performed.
