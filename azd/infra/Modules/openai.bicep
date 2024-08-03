@@ -39,6 +39,21 @@ resource str 'Microsoft.Storage/storageAccounts@2023-01-01' = {
   }
 }
 
+// Search resource
+resource search 'Microsoft.Search/searchServices@2024-03-01-preview' = {
+  name: 'search${unique}'
+  location: location
+  sku: {
+    name: 'basic'
+  }
+  properties: {
+    replicaCount: 1
+    partitionCount: 1
+    hostingMode: 'default'
+    publicNetworkAccess: 'enabled'
+  }
+}
+
 // Set up Storage Blob Data Contributor permissions
 module roleAssignment 'roleassignment.bicep' = {
   name: 'roleAssignment'

@@ -121,6 +121,7 @@ function Get-Confirmation {
 }
 
 Write-Host "Running pre-provision script..." -ForegroundColor Cyan
+
 # Get object ID of the current user if the env var is not already set
 if (-not $env:YOUR_OBJECT_ID) {
     $UserObjectId = az ad signed-in-user show --query id -o tsv
