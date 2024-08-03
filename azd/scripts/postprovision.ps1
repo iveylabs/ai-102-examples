@@ -50,14 +50,23 @@ if ($env:VISION_DEMO -eq "true") {
             }
             $accountName = az storage account list --resource-group $env:VISION_RESOURCE_GROUP --query "[0].name" --output tsv
             # If accountName is empty, the storage account hasn't been created yet
-            $sourcePath = "..\02-vision\02-image-classification\training-images"
+            $sourcePath = "../02-vision/02-image-classification/training-images"
 
             Write-Host "Uploading image classification images to Blob Storage..." -ForegroundColor Cyan
-            az storage blob upload-batch -d "classification" -s $sourcePath --account-name $accountName --auth-mode login  --output none
-            Write-Host "Image classification images uploaded successfully." -ForegroundColor Green
+
+            try {
+                $output = az storage blob upload-batch -d "classification" -s $sourcePath --account-name $accountName --auth-mode login 2>&1
+                if (-not $?) {
+                    throw $output
+                }
+                Write-Host "Image classification images uploaded successfully." -ForegroundColor Green
+            }
+            catch {
+                Write-Host "Failed to upload image classification images. $output" -ForegroundColor Red
+            }
         }
         catch {
-            Write-Host "Failed to upload object detection images." -ForegroundColor Red
+            Write-Host "Failed to upload image classification images." -ForegroundColor Red
             Write-Host $_.Exception.Message -ForegroundColor Red
             Write-Host $_.Exception.ItemName -ForegroundColor Red
         }
@@ -77,14 +86,23 @@ if ($env:VISION_DEMO -eq "true") {
                 return
             }
             $accountName = az storage account list --resource-group $env:VISION_RESOURCE_GROUP --query "[0].name" --output tsv
-            $sourcePath = "..\02-vision\03-object-detection\training-images"
+            $sourcePath = "../02-vision/03-object-detection/training-images"
 
             Write-Host "Uploading object detection images to Blob Storage..." -ForegroundColor Cyan
-            az storage blob upload-batch -d "detection" -s $sourcePath --account-name $accountName --auth-mode login  --output none
-            Write-Host "Object detection images uploaded successfully." -ForegroundColor Green
+
+            try {
+                $output = az storage blob upload-batch -d "detection" -s $sourcePath --account-name $accountName --auth-mode login login 2>&1
+                if (-not $?) {
+                    throw $output
+                }
+                Write-Host "Object detection images uploaded successfully." -ForegroundColor Green
+            }
+            catch {
+                Write-Host "Failed to upload object detection images. $output" -ForegroundColor Red
+            }
         }
         catch {
-            Write-Host "Failed to upload object detection images." -ForegroundColor Red
+            Write-Host "Failed to upload custom object detection images." -ForegroundColor Red
             Write-Host $_.Exception.Message -ForegroundColor Red
             Write-Host $_.Exception.ItemName -ForegroundColor Red
         }
@@ -106,11 +124,21 @@ if ($env:LANGUAGE_DEMO -eq "true") {
                 return
             }
             $accountName = az storage account list --resource-group $env:LANGUAGE_RESOURCE_GROUP --query "[0].name" --output tsv
-            $sourcePath = "..\03-nlp\03-custom-classification\articles_train"
+            $sourcePath = "../03-nlp/03-custom-classification/articles_train"
 
             Write-Host "Uploading custom text classification files to Blob Storage..." -ForegroundColor Cyan
-            az storage blob upload-batch -d "classification" -s $sourcePath --account-name $accountName --auth-mode login  --output none
-            Write-Host "Custom text classification files uploaded successfully." -ForegroundColor Green
+
+            try {
+                $output = az storage blob upload-batch -d "classification" -s $sourcePath --account-name $accountName --auth-mode login 2>&1
+                if (-not $?) {
+                    throw $output
+                }
+                Write-Host "Custom text classification files uploaded successfully." -ForegroundColor Green
+            }
+            catch {
+                Write-Host "Failed to upload custom text classification files. $output" -ForegroundColor Red
+            }
+            
         }
         catch {
             Write-Host "Failed to upload custom text classification files." -ForegroundColor Red
@@ -133,11 +161,20 @@ if ($env:LANGUAGE_DEMO -eq "true") {
                 return
             }
             $accountName = az storage account list --resource-group $env:LANGUAGE_RESOURCE_GROUP --query "[0].name" --output tsv
-            $sourcePath = "..\03-nlp\04-custom-ner\ads_train"
+            $sourcePath = "../03-nlp/04-custom-ner/ads_train"
 
             Write-Host "Uploading custom NER files to Blob Storage..." -ForegroundColor Cyan
-            az storage blob upload-batch -d "entityrecognition" -s $sourcePath --account-name $accountName --auth-mode login  --output none
-            Write-Host "Custom NER files uploaded successfully." -ForegroundColor Green
+
+            try {
+                $output = az storage blob upload-batch -d "entityrecognition" -s $sourcePath --account-name $accountName --auth-mode login 2>&1
+                if (-not $?) {
+                    throw $output
+                }
+                Write-Host "Custom NER files uploaded successfully." -ForegroundColor Green
+            }
+            catch {
+                Write-Host "Failed to upload custom NER files. $output" -ForegroundColor Red
+            }
         }
         catch {
             Write-Host "Failed to upload custom NER files." -ForegroundColor Red
@@ -162,11 +199,20 @@ if ($env:SEARCH_DEMO -eq "true") {
                 return
             }
             $accountName = az storage account list --resource-group $env:SEARCH_RESOURCE_GROUP --query "[0].name" --output tsv
-            $sourcePath = "..\05-ai-search\001-MySetup\data"
+            $sourcePath = "../05-ai-search/001-MySetup/data"
 
             Write-Host "Uploading Search files to Blob Storage..." -ForegroundColor Cyan
-            az storage blob upload-batch -d "margies-travel" -s $sourcePath --account-name $accountName --auth-mode login  --output none
-            Write-Host "Search uploaded successfully." -ForegroundColor Green
+
+            try {
+                $output = az storage blob upload-batch -d "margies-travel" -s $sourcePath --account-name $accountName --auth-mode login 2>&1
+                if (-not $?) {
+                    throw $output
+                }
+                Write-Host "Search files uploaded successfully." -ForegroundColor Green
+            }
+            catch {
+                Write-Host "Failed to upload Search files. $output" -ForegroundColor Red
+            }
         }
         catch {
             Write-Host "Failed to upload Search files." -ForegroundColor Red
@@ -191,11 +237,20 @@ if ($env:DOCINTEL_DEMO -eq "true") {
                 return
             }
             $accountName = az storage account list --resource-group $env:DOCINTEL_RESOURCE_GROUP --query "[0].name" --output tsv
-            $sourcePath = "..\06-doc-intel\REST_Training"
+            $sourcePath = "../06-doc-intel/REST_Training"
 
             Write-Host "Uploading Doc Intel custom training files to Blob Storage..." -ForegroundColor Cyan
-            az storage blob upload-batch -d "customtraining" -s $sourcePath --account-name $accountName --auth-mode login  --output none
-            Write-Host "Doc Intel custom training files uploaded successfully." -ForegroundColor Green
+
+            try {
+                $output = az storage blob upload-batch -d "customtraining" -s $sourcePath --account-name $accountName --auth-mode login 2>&1
+                if (-not $?) {
+                    throw $output
+                }
+                Write-Host "Doc Intel custom training files uploaded successfully." -ForegroundColor Green
+            }
+            catch {
+                Write-Host "Failed to upload Doc Intel custom training files. $output" -ForegroundColor Red
+            }
         }
         catch {
             Write-Host "Failed to upload Doc Intel custom training files." -ForegroundColor Red
@@ -220,11 +275,20 @@ if ($env:OPENAI_DEMO -eq "true") {
                 return
             }
             $accountName = az storage account list --resource-group $env:OPENAI_RESOURCE_GROUP --query "[0].name" --output tsv
-            $sourcePath = "..\04-aoai\02-own-data"
+            $sourcePath = "../04-aoai/02-own-data"
 
             Write-Host "Uploading RAG files to Blob Storage..." -ForegroundColor Cyan
-            az storage blob upload-batch -d "rag" -s $sourcePath --account-name $accountName --auth-mode login  --output none
-            Write-Host "RAG files uploaded successfully." -ForegroundColor Green
+
+            try {
+                $output = az storage blob upload-batch -d "rag" -s $sourcePath --account-name $accountName --auth-mode login 2>&1
+                if (-not $?) {
+                    throw $output
+                }
+                Write-Host "RAG files uploaded successfully." -ForegroundColor Green
+            }
+            catch {
+                Write-Host "Failed to upload RAG files. $output" -ForegroundColor Red
+            }
         }
         catch {
             Write-Host "Failed to upload RAG files." -ForegroundColor Red
