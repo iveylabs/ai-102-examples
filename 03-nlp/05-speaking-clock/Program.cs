@@ -49,7 +49,7 @@ namespace speaking_clock
             
             // Configure speech recognition
             using AudioConfig audioConfig = AudioConfig.FromDefaultMicrophoneInput();
-            using SpeechRecognizer speechRecognizer = new SpeechRecognizer(speechConfig, audioConfig);
+            using SpeechRecognizer speechRecognizer = new (speechConfig, audioConfig);
             Console.WriteLine("Speak now...");
             
             // If using a file instead of mic
@@ -88,7 +88,7 @@ namespace speaking_clock
                         
             // Configure speech synthesis
             speechConfig.SpeechSynthesisVoiceName = "en-GB-LibbyNeural";
-            using SpeechSynthesizer speechSynthesizer = new SpeechSynthesizer(speechConfig);
+            using SpeechSynthesizer speechSynthesizer = new (speechConfig);
 
             // Synthesize spoken output
             SpeechSynthesisResult speak = await speechSynthesizer.SpeakTextAsync(responseText);

@@ -63,11 +63,10 @@ namespace speech_translation
 
         static async Task Translate(string targetLanguage)
         {
-            string translation = "";
 
             // Translate speech
             using AudioConfig audioConfig = AudioConfig.FromDefaultMicrophoneInput();
-            using TranslationRecognizer translator = new TranslationRecognizer(translationConfig, audioConfig);
+            using TranslationRecognizer translator = new (translationConfig, audioConfig);
             
             Console.WriteLine("Speak now...");
 
@@ -75,7 +74,7 @@ namespace speech_translation
 
             Console.WriteLine($"Translating '{result.Text}'");
 
-            translation = result.Translations[targetLanguage];
+           string translation = result.Translations[targetLanguage];
             Console.OutputEncoding = Encoding.UTF8;
             Console.WriteLine(translation);
 
@@ -101,7 +100,7 @@ namespace speech_translation
                                 ["fil"] = "fil-PH-AngeloNeural"
                             };
             speechConfig.SpeechSynthesisVoiceName = voices[targetLanguage];
-            using SpeechSynthesizer speechSynthesizer = new SpeechSynthesizer(speechConfig);
+            using SpeechSynthesizer speechSynthesizer = new (speechConfig);
             SpeechSynthesisResult speak = await speechSynthesizer.SpeakTextAsync(translation);
             if (speak.Reason != ResultReason.SynthesizingAudioCompleted)
             {
