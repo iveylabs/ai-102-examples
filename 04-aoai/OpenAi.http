@@ -1,5 +1,5 @@
 # Simple completion with system message
-POST {{openAIEndpoint}}/openai/deployments/gpt-4/chat/completions?api-version=2024-02-15-preview
+POST {{openAIEndpoint}}/openai/deployments/{{openAIModel}}/chat/completions?api-version=2024-02-15-preview
 Content-Type: application/json
 api-key: {{openAIKey}}
 
