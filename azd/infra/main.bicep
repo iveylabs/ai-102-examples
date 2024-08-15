@@ -1,8 +1,5 @@
 targetScope = 'subscription'
 
-// For unique deployment names
-param suffix string = utcNow()
-
 // For azd deployments
 param envName string
 
@@ -39,7 +36,7 @@ param docIntelLocation string
 
 // Multi-service account
 module multiRG 'Modules/resourcegroup.bicep' = if(introDemo || visionDemo || languageDemo || openAIDemo || searchDemo || docIntelDemo) {
-  name: 'multiRG-${suffix}'
+  name: 'multiRG${defaultLocation}'
   params: {
     name: multiRGName
     location: defaultLocation
@@ -47,7 +44,7 @@ module multiRG 'Modules/resourcegroup.bicep' = if(introDemo || visionDemo || lan
   }
 }
 module multiModule 'Modules/multi.bicep' = if(introDemo || visionDemo || languageDemo || openAIDemo || searchDemo || docIntelDemo) {
-  name: 'multiModule-${suffix}'
+  name: 'multiModule${defaultLocation}'
   params: {
     location: defaultLocation
   }
@@ -61,7 +58,7 @@ module multiModule 'Modules/multi.bicep' = if(introDemo || visionDemo || languag
 // You still need to create an app registration and assign the required permissions on the vault
 // The postprovision script should handle this
 module introRG 'Modules/resourcegroup.bicep' = if (introDemo) {
-  name: 'introRG-${suffix}'
+  name: 'introRG${defaultLocation}'
   params: {
     name: introRGName
     location: defaultLocation
@@ -69,7 +66,7 @@ module introRG 'Modules/resourcegroup.bicep' = if (introDemo) {
   }
 }
 module introModule 'Modules/intro.bicep' = if (introDemo) {
-  name: 'introModule-${suffix}'
+  name: 'introModule${defaultLocation}'
   params: {
     location: defaultLocation
     tenantId: tenantId
@@ -83,7 +80,7 @@ module introModule 'Modules/intro.bicep' = if (introDemo) {
 
 // Vision resources
 module visionRG 'Modules/resourcegroup.bicep' = if (visionDemo) {
-  name: 'visionRG-${suffix}'
+  name: 'visionRG${visionLocation}'
   params: {
     name: visionRGName
     location: visionLocation
@@ -91,7 +88,7 @@ module visionRG 'Modules/resourcegroup.bicep' = if (visionDemo) {
   }
 }
 module visionModule 'Modules/vision.bicep' = if (visionDemo) {
-  name: 'visionModule-${suffix}'
+  name: 'visionModule${visionLocation}'
   params: {
     location: visionLocation
     customVision: customVision
@@ -106,7 +103,7 @@ module visionModule 'Modules/vision.bicep' = if (visionDemo) {
 
 // Language resources
 module languageRG 'Modules/resourcegroup.bicep' = if (languageDemo) {
-  name: 'languageRG-${suffix}'
+  name: 'languageRG${defaultLocation}'
   params: {
     name: languageRGName
     location: defaultLocation
@@ -114,7 +111,7 @@ module languageRG 'Modules/resourcegroup.bicep' = if (languageDemo) {
   }
 }
 module languageModule 'Modules/language.bicep' = if (languageDemo) {
-  name: 'languageModule-${suffix}'
+  name: 'languageModule${defaultLocation}'
   params: {
     location: defaultLocation
     myObjectId: myObjectId
@@ -127,7 +124,7 @@ module languageModule 'Modules/language.bicep' = if (languageDemo) {
 
 // OpenAI resources
 module openAIRG 'Modules/resourcegroup.bicep' = if (openAIDemo) {
-  name: 'openAIRG-${suffix}'
+  name: 'openAIRG${openAILocation}'
   params: {
     name: openAIRGName
     location: openAILocation
@@ -135,7 +132,7 @@ module openAIRG 'Modules/resourcegroup.bicep' = if (openAIDemo) {
   }
 }
 module openAIModule 'Modules/openai.bicep' = if (openAIDemo) {
-  name: 'openAIModule-${suffix}'
+  name: 'openAIModule${openAILocation}'
   params: {
     location: openAILocation
     myObjectId: myObjectId
@@ -148,7 +145,7 @@ module openAIModule 'Modules/openai.bicep' = if (openAIDemo) {
 
 // Search resources
 module searchRG 'Modules/resourcegroup.bicep' = if (searchDemo) {
-  name: 'searchRG-${suffix}'
+  name: 'searchRG${defaultLocation}'
   params: {
     name: searchRGName
     location: defaultLocation
@@ -156,7 +153,7 @@ module searchRG 'Modules/resourcegroup.bicep' = if (searchDemo) {
   }
 }
 module searchModule 'Modules/search.bicep' = if (searchDemo) {
-  name: 'searchModule-${suffix}'
+  name: 'searchModule${defaultLocation}'
   params: {
     location: defaultLocation
     myObjectId: myObjectId
@@ -169,7 +166,7 @@ module searchModule 'Modules/search.bicep' = if (searchDemo) {
 
 // Documend Intelligence resources
 module docIntelRG 'Modules/resourcegroup.bicep' = if (docIntelDemo) {
-  name: 'docIntelRG-${suffix}'
+  name: 'docIntelRG${docIntelLocation}'
   params: {
     name: docIntelRGName
     location: docIntelLocation
@@ -177,7 +174,7 @@ module docIntelRG 'Modules/resourcegroup.bicep' = if (docIntelDemo) {
   }
 }
 module docIntelModule 'Modules/docintel.bicep' = if (docIntelDemo) {
-  name: 'docIntelModule-${suffix}'
+  name: 'docIntelModule${docIntelLocation}'
   params: {
     location: docIntelLocation
     myObjectId: myObjectId
