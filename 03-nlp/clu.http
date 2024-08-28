@@ -1,0 +1,23 @@
+### CLU
+POST {{ language endpoint }}/language/:analyze-conversations?api-version=2022-10-01-preview 
+Content-Type: application/json
+Ocp-Apim-Subscription-Key: {{ Language-Key }}
+
+{
+"kind": "Conversation",
+    "analysisInput": {
+      "conversationItem": {
+        "id": "1",
+        "text": "book flight to Seattle",
+        "modality": "text",
+        "language": "en",
+        "participantId": "1"
+      }
+    },
+    "parameters": {
+      "projectName": "Flight",
+      "verbose": true,
+      "deploymentName": "flight",
+      "stringIndexType": "TextElement_V8"
+    }
+}
