@@ -169,41 +169,6 @@ Ocp-Apim-Subscription-Key: {{ Language-Key }}
   }
 }
 
-### Custom QnA
-POST {{ language endpoint }}/language/:query-knowledgebases?projectName=customqna&api-version=2021-10-01&deploymentName=production HTTP/1.1
-Content-Type: application/json
-Ocp-Apim-Subscription-Key: {{ Language-Key }}
-
-{
-  "question": "Hello, I want to repair my surface",
-  "confidenceScoreThreshold": "0.7",
-}'
-
-### CLU
-POST {{ language endpoint }}/language/:analyze-conversations?api-version=2022-10-01-preview 
-Content-Type: application/json
-Ocp-Apim-Subscription-Key: {{ Language-Key }}
-
-{
-"kind": "Conversation",
-    "analysisInput": {
-      "conversationItem": {
-        "id": "1",
-        "text": "book flight to Seattle",
-        "modality": "text",
-        "language": "en",
-        "participantId": "1"
-      }
-    },
-    "parameters": {
-      "projectName": "Flight",
-      "verbose": true,
-      "deploymentName": "flight",
-      "stringIndexType": "TextElement_V8"
-    }
-}
-
-
 ### Conversation Summarisation
 POST {{ language endpoint }}/language/analyze-conversations/jobs?api-version=2023-04-15-preview HTTP/1.1
 Host: 58101-demo.cognitiveservices.azure.com
