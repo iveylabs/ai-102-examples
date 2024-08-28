@@ -39,7 +39,7 @@ public class TranslateModel : PageModel
 
         // Make a GET request to the Text Translation API to get a list of all supported languages
         string endpoint = $"{translatorEndpoint}/languages?api-version=3.0&scope=translation";
-        
+
         HttpResponseMessage response = await _httpClient.GetAsync(endpoint);
         response.EnsureSuccessStatusCode();
         string responseBody = await response.Content.ReadAsStringAsync();
@@ -55,7 +55,7 @@ public class TranslateModel : PageModel
 
         foreach (var language in languageData.Translation)
         {
-            Languages.Add(new SelectListItem { Value = language.Key.ToString(), Text = $"{language.Value["name"]} ({language.Value["nativeName"]})"});
+            Languages.Add(new SelectListItem { Value = language.Key.ToString(), Text = $"{language.Value["name"]} ({language.Value["nativeName"]})" });
         }
     }
 
@@ -67,7 +67,7 @@ public class TranslateModel : PageModel
         string originalText = InputText;
 
         // If FromLanguage is Default, detect the language
-        if(FromLanguage == "default")
+        if (FromLanguage == "default")
         {
             try
             {
@@ -75,7 +75,7 @@ public class TranslateModel : PageModel
                 var requestBody = JsonSerializer.Serialize(body);
                 using var client = new HttpClient();
                 using var request = new HttpRequestMessage();
-                
+
                 // Build the request
                 string path = "/detect?api-version=3.0";
                 request.Method = HttpMethod.Post;
@@ -86,7 +86,7 @@ public class TranslateModel : PageModel
 
                 // Send the request and get response
                 HttpResponseMessage response = await client.SendAsync(request).ConfigureAwait(false);
-                
+
                 // Read the response as a string
                 string result = await response.Content.ReadAsStringAsync();
 
@@ -103,11 +103,10 @@ public class TranslateModel : PageModel
             {
                 FromLanguage = "en";
             }
-            
         }
 
         // If ToLanguage is Default, set it to en
-        if(ToLanguage == "default")
+        if (ToLanguage == "default")
         {
             ToLanguage = "en";
         }
@@ -115,10 +114,9 @@ public class TranslateModel : PageModel
         // Build the translation request
         // If MaskProfanity is true, mask profanity
         string route = $"/translate?api-version=3.0&from={FromLanguage}&to={ToLanguage}";
-        if(MaskProfanity)
+        if (MaskProfanity)
         {
             route = $"/translate?api-version=3.0&from={FromLanguage}&to={ToLanguage}&profanityAction=Marked";
-
         }
         object[] translateBody = new object[] { new { Text = originalText } };
         var translateRequestBody = JsonSerializer.Serialize(translateBody);
@@ -135,21 +133,54 @@ public class TranslateModel : PageModel
 
         // Read the response as a string
         string translateResult = await translateResponse.Content.ReadAsStringAsync();
-        
-        // Parse the JSON response and get the translated text
-        JArray translateJson = JArray.Parse(translateResult);
-        JObject responseJson = JObject.Parse(translateJson[0].ToString());
-        string translatedText = translateJson[0]["translations"][0]["text"].ToString();
-        
+        Console.WriteLine("API Response: " + translateResult);
+
+        if (string.IsNullOrEmpty(translateResult))
+        {
+            ViewData["TranslatedText"] = "Translation response is empty.";
+        }
+        else
+        {
+            // Check if the JSON is an array or an object
+            if (translateResult.Trim().StartsWith("["))
+            {
+                // Parse the JSON response and get the translated text
+                JArray translateJson = JArray.Parse(translateResult);
+                if (translateJson[0]["translations"] != null)
+                {
+                    string translatedText = translateJson[0]["translations"][0]["text"].ToString();
+                    ViewData["TranslatedText"] = translatedText;
+                    ViewData["TranslateResponse"] = translateJson;
+                }
+                else
+                {
+                    ViewData["TranslatedText"] = "No translations found in the response.";
+                }
+            }
+            else
+            {
+                // Handle the case where the JSON is an object
+                JObject translateJson = JObject.Parse(translateResult);
+                if (translateJson["translations"] != null)
+                {
+                    string translatedText = translateJson["translations"][0]["text"].ToString();
+                    ViewData["TranslatedText"] = translatedText;
+                    ViewData["TranslateResponse"] = translateJson;
+                }
+                else
+                {
+                    ViewData["TranslatedText"] = "No translations found in the response.";
+                }
+            }
+        }
+
         ViewData["TranslateMethod"] = translateRequest.Method;
         ViewData["TranslateUri"] = translateRequest.RequestUri;
-        ViewData["TranslateBody"] = translateRequest.Content.ReadAsStringAsync().Result.ToString();;
-        ViewData["TranslateResponse"] = responseJson;
+        ViewData["TranslateBody"] = translateRequest.Content.ReadAsStringAsync().Result.ToString();
 
         ViewData["OriginalText"] = originalText;
         ViewData["FromLanguage"] = FromLanguage;
         ViewData["ToLanguage"] = ToLanguage;
-        ViewData["TranslatedText"] = translatedText;
 
         await OnGetAsync();
         return Page();
