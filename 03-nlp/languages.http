@@ -176,6 +176,7 @@ Ocp-Apim-Subscription-Key: {{ languageKey }}
 ### 
 
 # Conversation Summarisation
+# @name analyzeConversation
 POST {{ languageEndpoint }}/language/analyze-conversations/jobs?api-version=2023-04-15-preview HTTP/1.1
 Host: 58101-demo.cognitiveservices.azure.com
 Content-Type: application/json
@@ -257,5 +258,5 @@ Ocp-Apim-Subscription-Key: {{ languageKey }}
 ### 
 
 # GET conversation summarization result
-GET {{ languageEndpoint }}/language/analyze-conversations/jobs/502ef456-3dbd-486a-a668-7994a7e2c04a?api-version=2023-04-15-preview
+GET {{analyzeConversation.response.headers.Operation-Location}} HTTP/1.1
 Ocp-Apim-Subscription-Key: {{ languageKey }}
