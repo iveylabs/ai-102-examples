@@ -1,7 +1,7 @@
 Reference: https://learn.microsoft.com/en-gb/rest/api/language/text-analysis-runtime/analyze-text?view=rest-language-2023-04-01&tabs=HTTP
 
 # Language Detection
-POST {{ languageEndpoint }} /language/:analyze-text?api-version=2023-04-01 HTTP/1.1
+POST {{ languageEndpoint }}/language/:analyze-text?api-version=2023-04-01 HTTP/1.1
 Content-Type: application/json
 Ocp-Apim-Subscription-Key: {{ languageKey }}
 
@@ -34,7 +34,7 @@ Ocp-Apim-Subscription-Key: {{ languageKey }}
 ###
 
 # Entity Linking
-POST {{ languageEndpoint }} /language/:analyze-text?api-version=2023-04-01 HTTP/1.1
+POST {{ languageEndpoint }}/language/:analyze-text?api-version=2023-04-01 HTTP/1.1
 Content-Type: application/json
 Ocp-Apim-Subscription-Key: {{ languageKey }}
 
