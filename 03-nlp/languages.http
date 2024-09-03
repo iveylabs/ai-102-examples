@@ -1,9 +1,9 @@
 Reference: https://learn.microsoft.com/en-gb/rest/api/language/text-analysis-runtime/analyze-text?view=rest-language-2023-04-01&tabs=HTTP
 
-### Language Detection
-POST {{ language endpoint }} /language/:analyze-text?api-version=2023-04-01 HTTP/1.1
+# Language Detection
+POST {{ languageEndpoint }} /language/:analyze-text?api-version=2023-04-01 HTTP/1.1
 Content-Type: application/json
-Ocp-Apim-Subscription-Key: {{ Language-Key }}
+Ocp-Apim-Subscription-Key: {{ languageKey }}
 
 {
   "kind": "LanguageDetection",
@@ -31,11 +31,12 @@ Ocp-Apim-Subscription-Key: {{ Language-Key }}
     ]
   }
 }
+###
 
-### Entity Linking
-POST {{ language endpoint }} /language/:analyze-text?api-version=2023-04-01 HTTP/1.1
+# Entity Linking
+POST {{ languageEndpoint }} /language/:analyze-text?api-version=2023-04-01 HTTP/1.1
 Content-Type: application/json
-Ocp-Apim-Subscription-Key: {{ Language-Key }}
+Ocp-Apim-Subscription-Key: {{ languageKey }}
 
 {
   "kind": "EntityLinking",
@@ -57,11 +58,12 @@ Ocp-Apim-Subscription-Key: {{ Language-Key }}
     ]
   }
 }
+### 
 
-### Sentiment Analysis
-POST {{ language endpoint }}/language/:analyze-text?api-version=2023-04-01 HTTP/1.1
+# Sentiment Analysis
+POST {{ languageEndpoint }}/language/:analyze-text?api-version=2023-04-01 HTTP/1.1
 Content-Type: application/json
-Ocp-Apim-Subscription-Key: {{ Language-Key }}
+Ocp-Apim-Subscription-Key: {{ languageKey }}
 {
   "kind": "SentimentAnalysis",
   "parameters": {
@@ -77,12 +79,13 @@ Ocp-Apim-Subscription-Key: {{ Language-Key }}
     ]
   }
 }
+### 
 
-### Key Phrase Extraction
-POST {{ language endpoint }}/language/:analyze-text?api-version=2023-04-01 HTTP/1.1
+# Key Phrase Extraction
+POST {{ languageEndpoint }}/language/:analyze-text?api-version=2023-04-01 HTTP/1.1
 Host: 67121-demo.cognitiveservices.azure.com
 Content-Type: application/json
-Ocp-Apim-Subscription-Key: {{ Language-Key }}
+Ocp-Apim-Subscription-Key: {{ languageKey }}
 
 {
   "kind": "KeyPhraseExtraction",
@@ -109,12 +112,13 @@ Ocp-Apim-Subscription-Key: {{ Language-Key }}
     ]
   }
 }
+### 
 
-### Named Entity Recognition (NER)
-POST {{ language endpoint }}/language/:analyze-text?api-version=2023-04-01 HTTP/1.1
+# Named Entity Recognition (NER)
+POST {{ languageEndpoint }}/language/:analyze-text?api-version=2023-04-01 HTTP/1.1
 Host: 67121-demo.cognitiveservices.azure.com
 Content-Type: application/json
-Ocp-Apim-Subscription-Key: {{ Language-Key }}
+Ocp-Apim-Subscription-Key: {{ languageKey }}
 
 {
   "kind": "EntityRecognition",
@@ -136,12 +140,13 @@ Ocp-Apim-Subscription-Key: {{ Language-Key }}
     ]
   }
 }
+### 
 
-### PII Detection
-POST {{ language endpoint }}/language/:analyze-text?api-version=2023-04-01 HTTP/1.1
+# PII Detection
+POST {{ languageEndpoint }}/language/:analyze-text?api-version=2023-04-01 HTTP/1.1
 Host: 67121-demo.cognitiveservices.azure.com
 Content-Type: application/json
-Ocp-Apim-Subscription-Key: {{ Language-Key }}
+Ocp-Apim-Subscription-Key: {{ languageKey }}
 
 {
   "kind": "PiiEntityRecognition",
@@ -168,12 +173,13 @@ Ocp-Apim-Subscription-Key: {{ Language-Key }}
     ]
   }
 }
+### 
 
-### Conversation Summarisation
-POST {{ language endpoint }}/language/analyze-conversations/jobs?api-version=2023-04-15-preview HTTP/1.1
+# Conversation Summarisation
+POST {{ languageEndpoint }}/language/analyze-conversations/jobs?api-version=2023-04-15-preview HTTP/1.1
 Host: 58101-demo.cognitiveservices.azure.com
 Content-Type: application/json
-Ocp-Apim-Subscription-Key: {{ Language-Key }}
+Ocp-Apim-Subscription-Key: {{ languageKey }}
 
 {
   "displayName": "Conversation Task Example",
@@ -248,8 +254,8 @@ Ocp-Apim-Subscription-Key: {{ Language-Key }}
     }
   ]
 }
+### 
 
-
-### GET conversation summarization result
-GET {{ language endpoint }}/language/analyze-conversations/jobs/502ef456-3dbd-486a-a668-7994a7e2c04a?api-version=2023-04-15-preview
-Ocp-Apim-Subscription-Key: {{ Language-Key }}
+# GET conversation summarization result
+GET {{ languageEndpoint }}/language/analyze-conversations/jobs/502ef456-3dbd-486a-a668-7994a7e2c04a?api-version=2023-04-15-preview
+Ocp-Apim-Subscription-Key: {{ languageKey }}
