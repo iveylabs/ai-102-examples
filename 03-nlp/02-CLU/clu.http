@@ -1,23 +1,23 @@
 # CLU
-POST {{ languageEndpoint }}/language/:analyze-conversations?api-version=2022-10-01-preview 
+POST {{languageEndpoint}}language/:analyze-conversations?api-version=2022-10-01-preview
 Content-Type: application/json
-Ocp-Apim-Subscription-Key: {{ languageKey }}
+Ocp-Apim-Subscription-Key: {{languageKey}}
 
 {
 "kind": "Conversation",
     "analysisInput": {
       "conversationItem": {
         "id": "1",
-        "text": "book flight to Seattle",
+        "text": "Do you know what the date's going to be on Sunday?",
         "modality": "text",
         "language": "en",
         "participantId": "1"
       }
     },
     "parameters": {
-      "projectName": "Flight",
+      "projectName": "{{CLUProject}}",
       "verbose": true,
-      "deploymentName": "flight",
+      "deploymentName": "{{CLUDeployment}}",
       "stringIndexType": "TextElement_V8"
     }
 }
