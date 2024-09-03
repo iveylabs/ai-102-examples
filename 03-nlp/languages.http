@@ -1,9 +1,9 @@
 # Reference: https://learn.microsoft.com/en-gb/rest/api/language/text-analysis-runtime/analyze-text?view=rest-language-2023-04-01&tabs=HTTP
 
 # Language Detection
-POST {{ languageEndpoint }}/language/:analyze-text?api-version=2023-04-01 
+POST {{languageEndpoint}}language/:analyze-text?api-version=2023-04-01
 Content-Type: application/json
-Ocp-Apim-Subscription-Key: {{ languageKey }}
+Ocp-Apim-Subscription-Key: {{languageKey}}
 
 {
   "kind": "LanguageDetection",
@@ -34,9 +34,9 @@ Ocp-Apim-Subscription-Key: {{ languageKey }}
 ###
 
 # Entity Linking
-POST {{ languageEndpoint }}/language/:analyze-text?api-version=2023-04-01 
+POST {{languageEndpoint}}language/:analyze-text?api-version=2023-04-01
 Content-Type: application/json
-Ocp-Apim-Subscription-Key: {{ languageKey }}
+Ocp-Apim-Subscription-Key: {{languageKey}}
 
 {
   "kind": "EntityLinking",
@@ -61,9 +61,10 @@ Ocp-Apim-Subscription-Key: {{ languageKey }}
 ### 
 
 # Sentiment Analysis
-POST {{ languageEndpoint }}/language/:analyze-text?api-version=2023-04-01 
+POST {{languageEndpoint}}language/:analyze-text?api-version=2023-04-01
 Content-Type: application/json
-Ocp-Apim-Subscription-Key: {{ languageKey }}
+Ocp-Apim-Subscription-Key: {{languageKey}}
+
 {
   "kind": "SentimentAnalysis",
   "parameters": {
@@ -82,10 +83,9 @@ Ocp-Apim-Subscription-Key: {{ languageKey }}
 ### 
 
 # Key Phrase Extraction
-POST {{ languageEndpoint }}/language/:analyze-text?api-version=2023-04-01 
-Host: 67121-demo.cognitiveservices.azure.com
+POST {{languageEndpoint}}language/:analyze-text?api-version=2023-04-01
 Content-Type: application/json
-Ocp-Apim-Subscription-Key: {{ languageKey }}
+Ocp-Apim-Subscription-Key: {{languageKey}}
 
 {
   "kind": "KeyPhraseExtraction",
@@ -102,7 +102,7 @@ Ocp-Apim-Subscription-Key: {{ languageKey }}
       {
         "id": "2",
         "language": "en",
-        "text": "Text Analytics is one of the Azure Cognitive Services."
+        "text": "Text Analytics is one of the Azure AI Services."
       },
       {
         "id": "3",
@@ -115,10 +115,9 @@ Ocp-Apim-Subscription-Key: {{ languageKey }}
 ### 
 
 # Named Entity Recognition (NER)
-POST {{ languageEndpoint }}/language/:analyze-text?api-version=2023-04-01 
-Host: 67121-demo.cognitiveservices.azure.com
+POST {{languageEndpoint}}language/:analyze-text?api-version=2023-04-01
 Content-Type: application/json
-Ocp-Apim-Subscription-Key: {{ languageKey }}
+Ocp-Apim-Subscription-Key: {{languageKey}}
 
 {
   "kind": "EntityRecognition",
@@ -143,10 +142,9 @@ Ocp-Apim-Subscription-Key: {{ languageKey }}
 ### 
 
 # PII Detection
-POST {{ languageEndpoint }}/language/:analyze-text?api-version=2023-04-01 
-Host: 67121-demo.cognitiveservices.azure.com
+POST {{languageEndpoint}}language/:analyze-text?api-version=2023-04-01
 Content-Type: application/json
-Ocp-Apim-Subscription-Key: {{ languageKey }}
+Ocp-Apim-Subscription-Key: {{languageKey}}
 
 {
   "kind": "PiiEntityRecognition",
@@ -177,10 +175,9 @@ Ocp-Apim-Subscription-Key: {{ languageKey }}
 
 # Conversation Summarisation
 # @name analyzeConversation
-POST {{ languageEndpoint }}/language/analyze-conversations/jobs?api-version=2023-04-15-preview 
-Host: 58101-demo.cognitiveservices.azure.com
+POST {{languageEndpoint}}language/analyze-conversations/jobs?api-version=2023-04-15-preview
 Content-Type: application/json
-Ocp-Apim-Subscription-Key: {{ languageKey }}
+Ocp-Apim-Subscription-Key: {{languageKey}}
 
 {
   "displayName": "Conversation Task Example",
@@ -258,5 +255,5 @@ Ocp-Apim-Subscription-Key: {{ languageKey }}
 ### 
 
 # GET conversation summarization result
-GET {{analyzeConversation.response.headers.Operation-Location}} HTTP/1.1
-Ocp-Apim-Subscription-Key: {{ languageKey }}
+GET {{analyzeConversation.response.headers.Operation-Location}}
+Ocp-Apim-Subscription-Key: {{languageKey}}
