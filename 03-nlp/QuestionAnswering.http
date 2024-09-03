@@ -6,7 +6,8 @@ POST {{qnaEndpoint}}language/:query-knowledgebases
 Ocp-Apim-Subscription-Key: {{qnaKey}}
 
 {
-    "question": "Learn about my favourite trainer"
+    "question": "Learn about my favourite trainer",
+    "confidenceScoreThreshold": "0.7",
 }
 ###
 
