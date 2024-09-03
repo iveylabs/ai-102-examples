@@ -1,7 +1,7 @@
-### CLU
-POST {{ language endpoint }}/language/:analyze-conversations?api-version=2022-10-01-preview 
+# CLU
+POST {{ languageEndpoint }}/language/:analyze-conversations?api-version=2022-10-01-preview 
 Content-Type: application/json
-Ocp-Apim-Subscription-Key: {{ Language-Key }}
+Ocp-Apim-Subscription-Key: {{ languageKey }}
 
 {
 "kind": "Conversation",
