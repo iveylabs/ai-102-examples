@@ -1,8 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Azure;
-
-// Add Azure OpenAI package
 using Azure.AI.OpenAI;
 
 namespace App.Pages;

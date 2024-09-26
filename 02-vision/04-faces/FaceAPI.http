@@ -30,7 +30,7 @@ Ocp-Apim-Subscription-Key: {{faceKey}}
 ###
 
 # Get person
-GET{{faceEndpoint}}face/v1.0/persongroups/{{personGroupName}}/persons/{{person.response.body.personId}}
+GET {{faceEndpoint}}face/v1.0/persongroups/{{personGroupName}}/persons/{{person.response.body.personId}}
 Ocp-Apim-Subscription-Key: {{faceKey}}
 ###
 
